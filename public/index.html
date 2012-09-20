@@ -2,36 +2,66 @@
 <html>
     <head>
         <title>Information Dashboard</title>
-        <link type="text/css" rel="stylesheet" media="screen" href="/impress.js/css/impress-demo.css"/>
+        <link type="text/css" rel="stylesheet" media="screen" href="stylesheets/impress-demo.css"/>
+        <link type="text/css" rel="stylesheet" media="screen" href="stylesheets/dashboard.css">
         <script src="javascripts/jquery.js" language=""></script>
         <script type="text/javascript">
-            function something() {
+            function autoScroll(){
+                impress().next();
+                setTimeout(autoScroll,2000);
+            }
+
+            function setupSlides() {
                 var impressDiv = $("#impress");
+
+                function getXCoOrdinate(theta) {
+                    return 1100 * Math.cos(theta * Math.PI / 180);
+                }
+
+                function getYCoOrdinated(theta) {
+                    return 1100 * Math.sin(theta * Math.PI / 180);
+                }
+
+                function setupSlides(response) {
+                    for (var i = 0; i < response.length; i++) {
+                        var title = $('<div>');
+                        title.append(response[i]["title"])
+                        title.addClass("title");
+
+                        var slide = $('<div>');
+                        slide.addClass('step');
+                        slide.addClass('slide');
+
+                        var theta = (359 * i) / response.length;
+
+                        slide[0].setAttribute('data-x', getXCoOrdinate(theta));
+                        slide[0].setAttribute('data-y', getYCoOrdinated(theta));
+                        slide[0].setAttribute('data-rotate-z', theta);
+
+                        slide.append(title);
+                        impressDiv.append(slide);
+                    }
+                }
+
                 $.ajax({
                     url: '/all_news',
                     dataType: 'json',
                     success: function(response) {
-                        for(var i = 0 ; i < response.length ; i++){
-                            var slide = $('<div>');
-                            slide.addClass('step');
-                            slide.addClass('slide');
-                            slide.append(response[i]["title"]);
-                            slide[0].setAttribute('data-x', 1000 * i);
-                            impressDiv.append(slide);
-                        }
-                       impress().init();
+                        setupSlides(response);
+                        impress().init();
+                        setTimeout(autoScroll,2000);
                     }
                 })
 
             }
             $(document).ready(function () {
-                something();
+                setupSlides();
             })
         </script>
     </head>
 
     <body class="impress-supported impress-enabled impress-on-bored">
         <div id="impress"></div>
-        <script type="text/javascript" src="/impress.js/js/impress.js"></script>
+        <script type="text/javascript" src="javascripts/impress.js"></script>
     </body>
 </html>
