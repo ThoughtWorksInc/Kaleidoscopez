@@ -1,0 +1,10 @@
+.news_item{
+    background-color: #000 ;
+}
+.news_item .title{
+    background-color: #fff;
+}
+
+body{
+    background-color: #333;
+}
