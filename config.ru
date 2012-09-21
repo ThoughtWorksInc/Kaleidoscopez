@@ -1,3 +1,3 @@
-require File.dirname(__FILE__) + "/radiator"
+require File.dirname(__FILE__) + '/config/boot'
 
 run Radiator
