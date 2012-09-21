@@ -22,6 +22,7 @@ function setupDisplay() {
     }
 
     function setupSlides(response) {
+        radiusOfSlideCircle = response.length*100;
         for (var slideIndex = 0; slideIndex < response.length; slideIndex++) {
             var title = $('<div>');
             title.append(response[slideIndex]["title"])
