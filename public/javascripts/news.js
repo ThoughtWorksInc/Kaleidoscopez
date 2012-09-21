@@ -1,9 +1,10 @@
-var MilliSecPerSlide = 2000;
+var milliSecPerSlide = 5000;
 var radiusOfSlideCircle = 6000;
 
 function autoScroll() {
     impress().next();
-    setTimeout(autoScroll, MilliSecPerSlide);
+    $('body').css("background-color","#aa33ff");
+    setTimeout(autoScroll, milliSecPerSlide);
 }
 
 function convertToRadians(degrees) {
@@ -27,10 +28,9 @@ function setupDisplay() {
             title.append(response[slideIndex]["title"])
             title.addClass("title");
 
-            var source = $('<div>')
+            var source = $('<div>');
             source.append("-Hacker News") ;
             source.addClass("source");
-
 
             var slide = $('<div>');
             slide.addClass('step');
@@ -55,7 +55,7 @@ function setupDisplay() {
         success:function (response) {
             setupSlides(response);
             impress().init();
-            setTimeout(autoScroll, 2000);
+            setTimeout(autoScroll, milliSecPerSlide);
         }
     })
 

@@ -7,4 +7,11 @@
 
 body{
     background-color: #7fffd4;
+    -webkit-transition-property: background-color;
+    -webkit-transition-duration: 2s;
+}
+
+.source{
+    font-size: medium;
+    text-shadow: none;
 }
