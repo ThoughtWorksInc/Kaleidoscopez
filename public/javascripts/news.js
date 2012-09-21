@@ -3,7 +3,6 @@ var radiusOfSlideCircle = 6000;
 
 function autoScroll() {
     impress().next();
-    $('body').css("background-color","#aa33ff");
     setTimeout(autoScroll, milliSecPerSlide);
 }
 
