@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'feed.rb'
 
 describe Feed do
   it {should respond_to :title}
