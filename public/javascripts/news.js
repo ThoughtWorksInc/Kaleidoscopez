@@ -1,5 +1,5 @@
 var MilliSecPerSlide = 2000;
-var radiusOfSlideCircle = 1100;
+var radiusOfSlideCircle = 6000;
 
 function autoScroll() {
     impress().next();
@@ -27,6 +27,11 @@ function setupDisplay() {
             title.append(response[slideIndex]["title"])
             title.addClass("title");
 
+            var source = $('<div>')
+            source.append("-Hacker News") ;
+            source.addClass("source");
+
+
             var slide = $('<div>');
             slide.addClass('step');
             slide.addClass('slide');
@@ -39,6 +44,7 @@ function setupDisplay() {
             slide[0].setAttribute('data-rotate-x', slideIndex * 90);
 
             slide.append(title);
+            slide.append(source);
             impressDiv.append(slide);
         }
     }
