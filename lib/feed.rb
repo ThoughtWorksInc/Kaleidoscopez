@@ -5,4 +5,5 @@ class Feed
   field :title
   field :url
   field :author
+
 end

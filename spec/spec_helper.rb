@@ -4,4 +4,8 @@ RSpec.configure do |config|
   config.filter_run :focus
 
   config.order = 'random'
+
+  config.before(:each) do
+    Mongoid.database.collections.each { |collection| collection.remove }
+  end
 end
