@@ -11,9 +11,12 @@ Dir["./scripts/**/*.rb"].each { |f| require f }
 require './radiator.rb'
 
 configure do
-  db_config = Mongoid.load!('config/mongoid.yml')
+  config = Mongoid.load!('config/mongoid.yml')
+  uri = config["uri"]
+  name = URI.parse(uri).path.gsub(/^\//, '')
+
   Mongoid.configure do |config|
-    config.master = Mongo::Connection.new.db(db_config["database"])
+    config.master = Mongo::Connection.from_uri(uri).db(name)
     config.persist_in_safe_mode = false
   end
 end
