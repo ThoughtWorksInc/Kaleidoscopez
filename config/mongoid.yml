@@ -1,0 +1,6 @@
+development:
+  database: "kaleidoscope_dev"
+test:
+  database: "test"
+production:
+  database: "kaleidoscope"
