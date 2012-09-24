@@ -7,6 +7,6 @@ class Radiator < Sinatra::Base
   end
 
   get '/all_news' do
-    Feed.all.to_a.to_json
+    FeedSource.all.to_a.to_json
   end
 end
