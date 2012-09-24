@@ -1,6 +1,6 @@
 development:
-  database: "kaleidoscope_dev"
+  uri: mongodb://localhost:27017/kaleidoscope_dev
 test:
-  database: "test"
+  uri: mongodb://localhost:27017/test
 production:
-  database: "kaleidoscope"
+  uri: <%= ENV['MONGOLAB_URI'] %>
