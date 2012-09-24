@@ -23,4 +23,20 @@ describe FeedFetcher do
     Feed.all[1].url.should == "test1.url"
     Feed.all[1].author.should == "Daven Thomas"
   end
+
+  it "should fetch and save feeds for all Feed Sources" do
+    feed_sources = [FeedSource.new, FeedSource.new]
+    feed_sources[0].name = "Name 1"
+    feed_sources[0].url = "URL 1"
+    feed_sources[1].name = "Name 2"
+    feed_sources[1].url = "URL 2"
+
+    FeedSource.should_receive(:all).and_return(feed_sources)
+
+    feed_sources.each do |feed_source|
+      FeedFetcher.should_receive(:get_feed).with(feed_source.url)
+    end
+
+    FeedFetcher.get_all_feeds()
+  end
 end
