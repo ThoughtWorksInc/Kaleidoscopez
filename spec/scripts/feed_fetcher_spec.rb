@@ -24,10 +24,12 @@ describe FeedFetcher do
     feed_source.feeds[0].title.should == "First Post"
     feed_source.feeds[0].url.should == "test.url"
     feed_source.feeds[0].author.should == "Dave Thomas"
+    feed_source.feeds[0].feed_source.should == feed_source
 
     feed_source.feeds[1].title.should == "Second Post"
     feed_source.feeds[1].url.should == "test1.url"
     feed_source.feeds[1].author.should == "Daven Thomas"
+    feed_source.feeds[1].feed_source.should == feed_source
   end
 
   it "should fetch and save feeds for all Feed Sources" do

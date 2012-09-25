@@ -19,20 +19,13 @@ function setupDisplay() {
     var impressDiv = $("#impress");
 
     function setupSlides(response) {
-        var totalFeedIndex = 0;
-        var totalNoOfFeeds = calcTotalNoOfFeeds();
+        var feeds = response["feeds"];
+        var sources = response["sources"];
+        var totalNoOfFeeds = feeds.length;
         radiusOfSlideCircle = totalNoOfFeeds*100;
 
-        function calcTotalNoOfFeeds(){
-            var someVar=0
-            for(var sourceIndex = 0; sourceIndex< response.length; sourceIndex++){
-                someVar+=response[sourceIndex]["feeds"].length;
-            }
-            return someVar
-        }
-
-        function calcRotationAngle(totalFeedIndex) {
-            return (359 * totalFeedIndex) / totalNoOfFeeds;     //Some issue with 360, 359 works ! JS Sucks at Math >_<
+        function calcRotationAngle(feedIndex) {
+            return (359 * feedIndex) / totalNoOfFeeds;     //Some issue with 360, 359 works ! JS Sucks at Math >_<
         }
 
         function getXCoOrdinate(theta) {
@@ -50,9 +43,9 @@ function setupDisplay() {
             return title;
         }
 
-        function prepareSource(feedSource) {
+        function prepareSource(source_id) {
             var source = $('<div>');
-            source.append(feedSource["name"]);
+            source.append(sources[source_id]);
             source.addClass("source");
             return source;
         }
@@ -64,8 +57,8 @@ function setupDisplay() {
             return slide;
         }
 
-        function setupRotationOfSlide(slide,feedIndex,totalFeedIndex) {
-            var theta = calcRotationAngle(totalFeedIndex);
+        function setupRotationOfSlide(slide, feedIndex) {
+            var theta = calcRotationAngle(feedIndex);
             slide.setAttribute('data-x', getXCoOrdinate(theta));
             slide.setAttribute('data-y', getYCoOrdinate(theta));
             slide.setAttribute('data-rotate-z', theta);
@@ -78,22 +71,18 @@ function setupDisplay() {
             impressDiv.append(slide);
         }
 
-        for (var sourceIndex = 0; sourceIndex < response.length; sourceIndex++) {
-            var feedSource = response[sourceIndex];
-            for(var feedIndex=0; feedIndex< feedSource["feeds"].length; feedIndex++){
+        for(var feedIndex=0; feedIndex< totalNoOfFeeds; feedIndex++){
 
-                var feed = feedSource["feeds"][feedIndex];
+            var feed = feeds[feedIndex];
 
-                var title = prepareTitle();
-                var source = prepareSource(feedSource);
-                var slide = prepareEmptySlide();
+            var title = prepareTitle();
+            var source = prepareSource(feed["feed_source_id"]);
+            var slide = prepareEmptySlide();
 
-                setupRotationOfSlide(slide[0],feedIndex,totalFeedIndex);
-                assembleSlide();
-
-                totalFeedIndex++;
-            }
+            setupRotationOfSlide(slide[0], feedIndex);
+            assembleSlide();
         }
+
     }
 
     $.ajax({

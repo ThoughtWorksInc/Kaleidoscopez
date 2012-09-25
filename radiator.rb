@@ -6,7 +6,17 @@ class Radiator < Sinatra::Base
     send_file 'public/index.html'
   end
 
+
   get '/all_news' do
-    FeedSource.all.to_a.to_json
+    get_all_news
+  end
+
+  def get_all_news
+    feeds = Feed.all.to_a.shuffle
+    sources = {}
+    FeedSource.all.to_a.each do |feed_source|
+      sources[feed_source._id]=feed_source.name
+    end
+    {"feeds"=>feeds,"sources"=>sources}.to_json
   end
 end

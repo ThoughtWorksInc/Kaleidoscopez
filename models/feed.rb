@@ -5,5 +5,5 @@ class Feed
   field :title
   field :url
   field :author
-  embedded_in :feed_source
+  belongs_to :feed_source
 end
