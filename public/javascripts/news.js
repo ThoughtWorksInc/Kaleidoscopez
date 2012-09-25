@@ -3,6 +3,11 @@ var radiusOfSlideCircle = 6000;
 
 function autoScroll() {
     impress().next();
+    var hue = (Math.random()*360).toFixed();
+    var saturation = (Math.random()*100).toFixed();
+    var value = 80 + (Math.random()*20).toFixed();
+    var hsvColor = {h: hue ,s: saturation,v: value};
+    $('body').css('background-color',tinycolor(hsvColor).toRgbString() )
     setTimeout(autoScroll, milliSecPerSlide);
 }
 
@@ -75,8 +80,8 @@ function setupDisplay() {
 
         for (var sourceIndex = 0; sourceIndex < response.length; sourceIndex++) {
             var feedSource = response[sourceIndex];
-
             for(var feedIndex=0; feedIndex< feedSource["feeds"].length; feedIndex++){
+
                 var feed = feedSource["feeds"][feedIndex];
 
                 var title = prepareTitle();
