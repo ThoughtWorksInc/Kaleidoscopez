@@ -6,9 +6,11 @@ class FeedFetcher
 
   def self.get_feed(feed_source)
     blog = Feedzirra::Feed.fetch_and_parse(feed_source.url)
-    feed_source.save
-    blog.entries.each do |entry|
-      feed_source.feeds.create({:title => entry.title, :url => entry.url, :author => entry.author})
+    if(!blog.entries.nil?)
+      Feed.delete_all(conditions: {:url => feed_source.url})
+      blog.entries.each do |entry|
+        feed_source.feeds.create({:title => entry.title, :url => entry.url, :author => entry.author})
+      end
     end
   end
 

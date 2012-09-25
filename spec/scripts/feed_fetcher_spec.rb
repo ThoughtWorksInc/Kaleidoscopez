@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe FeedFetcher do
 
-  it "should fetch and save feeds for given feed url" do
+  it "should fetch and save feeds from given feed url and delete existing feeds from the same source" do
     blog = Feedzirra::Parser::Atom.new
     blog.entries = [Feedzirra::Parser::AtomEntry.new, Feedzirra::Parser::AtomEntry.new]
     blog.entries[0].title = "First Post"
@@ -15,8 +15,10 @@ describe FeedFetcher do
     feed_source = FeedSource.new
     feed_source.name = "Dummy Source"
     feed_source.url = "feeds.dummy.com"
+    feed_source.save
 
     Feedzirra::Feed.should_receive(:fetch_and_parse).with(feed_source.url).and_return(blog)
+    Feed.should_receive(:delete_all).with(conditions: {:url => feed_source.url})
 
 
     FeedFetcher.get_feed(feed_source)
