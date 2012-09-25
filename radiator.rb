@@ -3,7 +3,7 @@ require_relative 'models/feed'
 
 class Radiator < Sinatra::Base
   get '/' do
-    "Hello World !"
+    send_file 'public/index.html'
   end
 
   get '/all_news' do
