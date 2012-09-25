@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require_relative 'models/feed'
+require_relative 'models/post'
 
 class Radiator < Sinatra::Base
   get '/' do

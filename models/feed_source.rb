@@ -3,5 +3,7 @@ class FeedSource
   include Mongoid::Document
   field :name
   field :url
-  embeds_many :feeds
+  has_many :posts
+
+  validates :url, uniqueness: true, presence: true
 end

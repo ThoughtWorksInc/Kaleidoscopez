@@ -16,7 +16,7 @@ describe FeedFetcher do
     feed_source.name = "Dummy Source"
     feed_source.url = "feeds.dummy.com"
 
-    Feedzirra::Feed.should_receive(:fetch_and_parse).with(feed_source.url).and_return(blog)
+    Feedzirra::Post.should_receive(:fetch_and_parse).with(feed_source.url).and_return(blog)
 
 
     FeedFetcher.get_feed(feed_source)

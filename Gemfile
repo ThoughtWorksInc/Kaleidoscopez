@@ -12,4 +12,5 @@ end
 
 group :test do
   gem "rspec"
+  gem "mongoid-rspec"
 end
