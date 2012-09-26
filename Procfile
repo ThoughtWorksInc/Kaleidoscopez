@@ -1,2 +1,2 @@
 web: bundle exec rackup config.ru -p $PORT
-cron: clockwork clock.rb
+cron: bundle exec clockwork clock.rb
