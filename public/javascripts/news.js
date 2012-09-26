@@ -48,6 +48,13 @@ function setupDisplay() {
             return source;
         }
 
+        function prepareAuthor(source_id) {
+            var author = $('<div>');
+            author.append(feed["author"])
+            author.addClass("author");
+            return author;
+        }
+
         function prepareEmptySlide() {
             var slide = $('<div>');
             slide.addClass('step');
@@ -66,6 +73,7 @@ function setupDisplay() {
         function assembleSlide() {
             slide.append(title);
             slide.append(source);
+            slide.append(author);
             impressDiv.append(slide);
         }
 
@@ -74,6 +82,7 @@ function setupDisplay() {
             var feed = feeds[feedIndex];
 
             var title = prepareTitle();
+            var author = prepareAuthor();
             var source = prepareSource(feed["feed_source_id"]);
             var slide = prepareEmptySlide();
 

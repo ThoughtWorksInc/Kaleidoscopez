@@ -9,6 +9,11 @@ body{
     text-shadow: none;
 }
 
+.author{
+    font-size: 50px;
+    text-shadow: none;
+}
+
 .step {
     opacity: 0.1;
     -webkit-transition-property: opacity;

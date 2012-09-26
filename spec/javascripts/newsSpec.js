@@ -79,6 +79,13 @@ describe("news", function(){
                 }
             })
 
+            it("should create all slides with author",function(){
+                for(var i=0;i<steps.length;i++){
+                    var expectedFeedAuthor = response["feeds"][i]["author"];
+                    expect($(steps[i]).find('.author').html()).toBe(expectedFeedAuthor);
+                }
+            })
+
             it("should set all slides to rotate", function(){
                for(var i=0;i<steps.length;i++){
                    var expected_theta_degrees = 359*i/steps.length;
