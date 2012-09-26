@@ -1,5 +1,4 @@
 var milliSecPerSlide = 5000;
-var radiusOfSlideCircle = 6000;
 
 function autoScroll() {
     impress().next();
@@ -8,7 +7,6 @@ function autoScroll() {
     var value = 80 + (Math.random()*20).toFixed();
     var hsvColor = {h: hue ,s: saturation,v: value};
     $('body').css('background-color',tinycolor(hsvColor).toRgbString() )
-    setTimeout(autoScroll, milliSecPerSlide);
 }
 
 function convertToRadians(degrees) {
@@ -22,7 +20,7 @@ function setupDisplay() {
         var feeds = response["feeds"];
         var sources = response["sources"];
         var totalNoOfFeeds = feeds.length;
-        radiusOfSlideCircle = totalNoOfFeeds*100;
+        var radiusOfSlideCircle = totalNoOfFeeds*100;
 
         function calcRotationAngle(feedIndex) {
             return (359 * feedIndex) / totalNoOfFeeds;     //Some issue with 360, 359 works ! JS Sucks at Math >_<
@@ -88,14 +86,17 @@ function setupDisplay() {
     $.ajax({
         url:'/all_news',
         dataType:'json',
-        success:function (response) {
+        success: function(response) {
             setupSlides(response);
             impress().init();
-            setTimeout(autoScroll, milliSecPerSlide);
         }
     })
-
 }
-$(document).ready(function () {
+function startup() {
+    setInterval(autoScroll, milliSecPerSlide);
     setupDisplay();
+}
+
+$(document).ready(function () {
+    startup();
 })

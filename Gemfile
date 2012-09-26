@@ -6,6 +6,7 @@ gem "mongoid", "2.4.0"
 gem "bson_ext"
 gem "feedzirra"
 gem "clockwork"
+gem "jasmine"
 
 group :development do
   gem "shotgun"
