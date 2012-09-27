@@ -1,5 +1,5 @@
 require "feedzirra"
-require './models/feed'
+require './app/models/feed'
 
 class RssFeedBurner < Feed
 

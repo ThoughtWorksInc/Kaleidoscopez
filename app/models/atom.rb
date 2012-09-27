@@ -1,4 +1,4 @@
-require './models/feed'
+require './app/models/feed'
 require "feedzirra"
 
 class Atom < Feed
