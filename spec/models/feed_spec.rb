@@ -1,8 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Feed do
-  it {should respond_to :title}
+  it {should respond_to :name}
   it {should respond_to :url}
-  it {should respond_to :author}
-  it {should respond_to :feed_source}
+  it {should respond_to :items}
 end

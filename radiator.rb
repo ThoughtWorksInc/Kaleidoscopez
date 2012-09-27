@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require_relative 'models/feed'
+require_relative 'models/item'
 
 class Radiator < Sinatra::Base
   get '/' do
@@ -12,9 +12,9 @@ class Radiator < Sinatra::Base
   end
 
   def get_all_news
-    feeds = Feed.all.to_a.shuffle
+    feeds = Item.all.to_a.shuffle
     sources = {}
-    FeedSource.all.to_a.each do |feed_source|
+    Feed.all.to_a.each do |feed_source|
       sources[feed_source._id]=feed_source.name
     end
     {"feeds"=>feeds,"sources"=>sources}.to_json

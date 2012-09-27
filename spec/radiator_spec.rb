@@ -3,22 +3,22 @@ require "spec_helper"
 describe Radiator do
 
   it "should fetch all news in array" do
-    Feed.all.to_a.to_json
+    Item.all.to_a.to_json
     feeds = ['a','b','c','d','e','f','g','h','i','j','k','l','m']
 
-    Feed.should_receive(:all).and_return(feeds)
+    Item.should_receive(:all).and_return(feeds)
     feeds.should_receive(:to_a).and_return(feeds)
 
-    feed_source1 = FeedSource.new
+    feed_source1 = Feed.new
     feed_source1._id = BSON::ObjectId.new
     feed_source1.name = "abcd"
 
-    feed_source2 = FeedSource.new
+    feed_source2 = Feed.new
     feed_source1._id = BSON::ObjectId.new
     feed_source1.name = "pqrs"
 
     feed_sources = [feed_source1, feed_source2]
-    FeedSource.should_receive(:all).and_return(feed_sources)
+    Feed.should_receive(:all).and_return(feed_sources)
 
     all_news_json = Radiator.new!.get_all_news
     (all_news_json.is_a? String).should == true

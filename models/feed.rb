@@ -1,9 +1,7 @@
-require 'mongoid'
-
+require "mongoid"
 class Feed
   include Mongoid::Document
-  field :title
+  field :name
   field :url
-  field :author
-  belongs_to :feed_source
+  has_many :items
 end

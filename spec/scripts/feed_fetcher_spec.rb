@@ -12,39 +12,39 @@ describe FeedFetcher do
     blog.entries[1].url = "test1.url"
     blog.entries[1].author = "Daven Thomas"
 
-    feed_source = FeedSource.new
-    feed_source.name = "Dummy Source"
-    feed_source.url = "feeds.dummy.com"
-    feed_source.save
+    feed = Feed.new
+    feed.name = "Dummy Source"
+    feed.url = "feeds.dummy.com"
+    feed.save
 
-    Feedzirra::Feed.should_receive(:fetch_and_parse).with(feed_source.url).and_return(blog)
-    Feed.should_receive(:delete_all).with(conditions: {:url => feed_source.url})
+    Feedzirra::Feed.should_receive(:fetch_and_parse).with(feed.url).and_return(blog)
+    Item.should_receive(:delete_all).with(conditions: {:url => feed.url})
 
 
-    FeedFetcher.get_feed(feed_source)
-    feed_source.feeds.count.should == 2
-    feed_source.feeds[0].title.should == "First Post"
-    feed_source.feeds[0].url.should == "test.url"
-    feed_source.feeds[0].author.should == "Dave Thomas"
-    feed_source.feeds[0].feed_source.should == feed_source
+    FeedFetcher.get_feed(feed)
+    feed.items.count.should == 2
+    feed.items[0].title.should == "First Post"
+    feed.items[0].url.should == "test.url"
+    feed.items[0].author.should == "Dave Thomas"
+    feed.items[0].feed.should == feed
 
-    feed_source.feeds[1].title.should == "Second Post"
-    feed_source.feeds[1].url.should == "test1.url"
-    feed_source.feeds[1].author.should == "Daven Thomas"
-    feed_source.feeds[1].feed_source.should == feed_source
+    feed.items[1].title.should == "Second Post"
+    feed.items[1].url.should == "test1.url"
+    feed.items[1].author.should == "Daven Thomas"
+    feed.items[1].feed.should == feed
   end
 
-  it "should fetch and save feeds for all Feed Sources" do
-    feed_sources = [FeedSource.new, FeedSource.new]
-    feed_sources[0].name = "Name 1"
-    feed_sources[0].url = "URL 1"
-    feed_sources[1].name = "Name 2"
-    feed_sources[1].url = "URL 2"
+  it "should fetch and save feeds for all Item Sources" do
+    feed = [Feed.new, Feed.new]
+    feed[0].name = "Name 1"
+    feed[0].url = "URL 1"
+    feed[1].name = "Name 2"
+    feed[1].url = "URL 2"
 
-    FeedSource.should_receive(:all).and_return(feed_sources)
+    Feed.should_receive(:all).and_return(feed)
 
-    feed_sources.each do |feed_source|
-      FeedFetcher.should_receive(:get_feed).with(feed_source)
+    feed.each do |feed|
+      FeedFetcher.should_receive(:get_feed).with(feed)
     end
 
     FeedFetcher.get_all_feeds()
