@@ -5,4 +5,5 @@ class Feed
   field :name
   field :url
   has_many :items
+
 end
