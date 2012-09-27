@@ -1,11 +1,10 @@
 require 'sinatra/base'
-require_relative 'models/item'
+require_relative 'app/models/item'
 
-class Radiator < Sinatra::Base
+class App < Sinatra::Base
   get '/' do
     send_file 'public/index.html'
   end
-
 
   get '/all_news' do
     get_all_news

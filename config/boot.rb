@@ -5,10 +5,10 @@ require 'bundler'
 Bundler.setup
 Bundler.require(:default, ENV["RACK_ENV"].to_sym)
 
-Dir["./models/**/*.rb"].each { |f| require f }
+Dir["./app/models/**/*.rb"].each { |f| require f }
 Dir["./scripts/**/*.rb"].each { |f| require f }
 
-require './radiator.rb'
+require_relative '../app'
 
 configure do
   config = Mongoid.load!('config/mongoid.yml')

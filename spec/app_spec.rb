@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Radiator do
+describe App do
 
   it "should fetch all news in array" do
     Item.all.to_a.to_json
@@ -20,7 +20,7 @@ describe Radiator do
     feed_sources = [feed_source1, feed_source2]
     Feed.should_receive(:all).and_return(feed_sources)
 
-    all_news_json = Radiator.new!.get_all_news
+    all_news_json = App.new!.get_all_news
     (all_news_json.is_a? String).should == true
 
     all_news_map = JSON.parse all_news_json

@@ -1,4 +1,5 @@
 require "mongoid"
+
 class Feed
   include Mongoid::Document
   field :name
