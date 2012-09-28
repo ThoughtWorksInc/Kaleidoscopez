@@ -29,10 +29,6 @@ Vagrant::Config.run do |config|
                     :users => [
                         {:user_name => 'vagrant'}
                     ]
-                },
-                :mongodb => {
-                    :dbpath => "/data/db"
-                }
                }
 
   end
