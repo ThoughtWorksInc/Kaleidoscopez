@@ -11,11 +11,11 @@ class App < Sinatra::Base
   end
 
   def get_all_news
-    feeds = Item.all.to_a.shuffle
+    items = Item.all.to_a.shuffle
     sources = {}
-    Feed.all.to_a.each do |feed_source|
-      sources[feed_source._id]=feed_source.name
+    Feed.all.to_a.each do |feed|
+      sources[feed._id]=feed.name
     end
-    {"feeds"=>feeds,"sources"=>sources}.to_json
+    {"feeds"=>items,"sources"=>sources}.to_json
   end
 end
