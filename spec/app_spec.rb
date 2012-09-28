@@ -1,39 +1,39 @@
 require "spec_helper"
+require './app'
+require 'rack/test'
 
 describe App do
+  include Rack::Test::Methods
 
-  it "should fetch all news in array" do
-    Item.all.to_a.to_json
-    feeds = ['a','b','c','d','e','f','g','h','i','j','k','l','m']
+  def app
+    App
+  end
 
-    Item.should_receive(:all).and_return(feeds)
-    feeds.should_receive(:to_a).and_return(feeds)
+  it "should fetch and return all the items in a json" do
+    feed = Feed.create(:name => "IMDB")
+    item_one = Item.create(:title => "James Bond", :feed => feed)
+    item_two = Item.create(:title => "Rowdy Rathore", :feed => feed)
+    expected_json_response = {:items => [
+        {
+            :_id => item_one.id,
+            :title => item_one.title,
+            :feed_id => item_one.feed.id,
+            :source => item_one.feed.name
+        },
+        {
+            :_id => item_two.id,
+            :title => item_two.title,
+            :feed_id => item_two.feed.id,
+            :source => item_two.feed.name
+        }
+    ]}.to_json
+    expected_response = JSON::parse(expected_json_response)
 
-    feed_source1 = Feed.new
-    feed_source1._id = BSON::ObjectId.new
-    feed_source1.name = "abcd"
+    get '/all_news'
 
-    feed_source2 = Feed.new
-    feed_source1._id = BSON::ObjectId.new
-    feed_source1.name = "pqrs"
-
-    feed_sources = [feed_source1, feed_source2]
-    Feed.should_receive(:all).and_return(feed_sources)
-
-    all_news_json = App.new!.get_all_news
-    (all_news_json.is_a? String).should == true
-
-    all_news_map = JSON.parse all_news_json
-
-    all_feeds = all_news_map["feeds"]
-    feeds.should_not == all_feeds
-    feeds.each do |feed|
-      (all_feeds.include? feed).should == true
-    end
-
-    all_sources = all_news_map["sources"]
-    feed_sources.each do |feed_source|
-      all_sources[feed_source._id.to_s].should == feed_source.name
-    end
- end
+    last_response.should be_ok
+    last_response.original_headers["Content-Type"].should include("application/json")
+    parsed_response = JSON::parse(last_response.body)
+    parsed_response["items"].should =~ expected_response["items"]
+  end
 end

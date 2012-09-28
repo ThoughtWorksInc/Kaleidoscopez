@@ -9,4 +9,5 @@ RSpec.configure do |config|
       collection.remove unless collection.name =~ /^system\./
     end
   end
+
 end
