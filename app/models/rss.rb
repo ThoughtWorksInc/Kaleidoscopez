@@ -11,7 +11,7 @@ class Rss < Feed
   def create_item(fz_rss)
     Item.delete_all(conditions: {:url => url})
     fz_rss.entries.each do |feed_entry|
-      self.items.create({:title => feed_entry.title, :url => feed_entry.url, :author => feed_entry.author})
+      self.items.create({:title => feed_entry.title, :url => feed_entry.url, :author => feed_entry.author, :date => nil})
     end
   end
 

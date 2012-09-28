@@ -11,7 +11,8 @@ class Atom < Feed
   def create_item(fz_atom)
     Item.delete_all(conditions: {:url => url})
     fz_atom.entries.each do |feed_entry|
-      self.items.create({:title => feed_entry.title, :url => feed_entry.url, :author => feed_entry.author})
+      date = feed_entry.published.strftime("%Y-%m-%d")
+      self.items.create({:title => feed_entry.title, :url => feed_entry.url, :author => feed_entry.author, :date => date})
     end
   end
 

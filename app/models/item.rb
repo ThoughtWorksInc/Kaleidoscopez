@@ -5,5 +5,6 @@ class Item
   field :title
   field :url
   field :author
+  field :date
   belongs_to :feed
 end
