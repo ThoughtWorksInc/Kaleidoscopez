@@ -40,6 +40,13 @@ function setupDisplay() {
             return title;
         }
 
+        function prepareDate(item) {
+            var date = $('<div>');
+            date.append(item["date"])
+            date.addClass("date");
+            return date
+        }
+
         function prepareSource(item) {
             var source = $('<div>');
             source.append(item["source"]);
@@ -73,6 +80,7 @@ function setupDisplay() {
             slide.append(title);
             slide.append(source);
             slide.append(author);
+            slide.append(date);
             impressDiv.append(slide);
         }
 
@@ -83,6 +91,7 @@ function setupDisplay() {
             var title = prepareTitle(item);
             var author = prepareAuthor(item);
             var source = prepareSource(item);
+            var date = prepareDate(item);
             var slide = prepareEmptySlide();
 
             setupRotationOfSlide(slide[0], itemIndex);

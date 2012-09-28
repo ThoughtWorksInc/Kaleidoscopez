@@ -19,13 +19,15 @@ describe("news", function(){
                     title: "item1_title",
                     url: "item1_url",
                     author: "item1_author",
-                    source: "abcd"
+                    source: "abcd",
+                    date: "2012-09-29"
                 },
                 {
                     title: "item2_title",
                     url: "item2_url",
                     author: "item2_author",
-                    source: "pqrs"
+                    source: "pqrs",
+                    date: "2011-09-29"
                 }
             ]
         };
@@ -64,6 +66,12 @@ describe("news", function(){
                 var items = response["items"];
                 expect($(steps[0]).find('.title').html()).toBe(items[0]["title"]);
                 expect($(steps[1]).find('.title').html()).toBe(items[1]["title"]);
+            })
+
+            it("should create all slides with date", function() {
+                var items = response["items"];
+                expect($(steps[0]).find('.date').html()).toBe(items[0]["date"]);
+                expect($(steps[1]).find('.date').html()).toBe(items[1]["date"]);
             })
 
             it("should create all slides with source",function(){
