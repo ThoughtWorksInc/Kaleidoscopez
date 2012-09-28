@@ -3,10 +3,10 @@ var milliSecPerSlide = 5000;
 function autoScroll() {
     impress().next();
     var hue = (Math.random()*360).toFixed();
-    var saturation = (Math.random()*100).toFixed();
-    var value = 80 + (Math.random()*20).toFixed();
-    var hsvColor = {h: hue ,s: saturation,v: value};
-    $('body').css('background-color',tinycolor(hsvColor).toRgbString() )
+    var saturation = (Math.random() * 100).toFixed();
+    var value = 80 + (Math.random() * 20).toFixed();
+    var hsvColor = {h: hue, s: saturation, v: value};
+    $('body').css('background-color', tinycolor(hsvColor).toRgbString() )
 }
 
 function convertToRadians(degrees) {
@@ -17,13 +17,12 @@ function setupDisplay() {
     var impressDiv = $("#impress");
 
     function setupSlides(response) {
-        var feeds = response["feeds"];
-        var sources = response["sources"];
-        var totalNoOfFeeds = feeds.length;
-        var radiusOfSlideCircle = totalNoOfFeeds*100;
+        var items = response["items"];
+        var totalNoOfItems = items.length;
+        var radiusOfSlideCircle = totalNoOfItems * 100;
 
-        function calcRotationAngle(feedIndex) {
-            return (359 * feedIndex) / totalNoOfFeeds;     //Some issue with 360, 359 works ! JS Sucks at Math >_<
+        function calcRotationAngle(itemIndex) {
+            return (359 * itemIndex) / totalNoOfItems;     //Some issue with 360, 359 works ! JS Sucks at Math >_<
         }
 
         function getXCoOrdinate(theta) {
@@ -34,23 +33,23 @@ function setupDisplay() {
             return radiusOfSlideCircle * Math.sin(convertToRadians(theta));
         }
 
-        function prepareTitle() {
+        function prepareTitle(item) {
             var title = $('<div>');
-            title.append(feed["title"])
+            title.append(item["title"])
             title.addClass("title");
             return title;
         }
 
-        function prepareSource(source_id) {
+        function prepareSource(item) {
             var source = $('<div>');
-            source.append(sources[source_id]);
+            source.append(item["source"]);
             source.addClass("source");
             return source;
         }
 
-        function prepareAuthor(source_id) {
+        function prepareAuthor(item) {
             var author = $('<div>');
-            author.append(feed["author"])
+            author.append(item["author"])
             author.addClass("author");
             return author;
         }
@@ -62,12 +61,12 @@ function setupDisplay() {
             return slide;
         }
 
-        function setupRotationOfSlide(slide, feedIndex) {
-            var theta = calcRotationAngle(feedIndex);
+        function setupRotationOfSlide(slide, itemIndex) {
+            var theta = calcRotationAngle(itemIndex);
             slide.setAttribute('data-x', getXCoOrdinate(theta));
             slide.setAttribute('data-y', getYCoOrdinate(theta));
             slide.setAttribute('data-rotate-z', theta);
-            slide.setAttribute('data-rotate-x', feedIndex * 90);
+            slide.setAttribute('data-rotate-x', itemIndex * 90);
         }
 
         function assembleSlide() {
@@ -77,16 +76,16 @@ function setupDisplay() {
             impressDiv.append(slide);
         }
 
-        for(var feedIndex=0; feedIndex< totalNoOfFeeds; feedIndex++){
+        for(var itemIndex = 0; itemIndex < totalNoOfItems; itemIndex++){
 
-            var feed = feeds[feedIndex];
+            var item = items[itemIndex];
 
-            var title = prepareTitle();
-            var author = prepareAuthor();
-            var source = prepareSource(feed["feed_source_id"]);
+            var title = prepareTitle(item);
+            var author = prepareAuthor(item);
+            var source = prepareSource(item);
             var slide = prepareEmptySlide();
 
-            setupRotationOfSlide(slide[0], feedIndex);
+            setupRotationOfSlide(slide[0], itemIndex);
             assembleSlide();
         }
 
