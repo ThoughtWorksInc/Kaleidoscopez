@@ -29,6 +29,7 @@ Vagrant::Config.run do |config|
                     :users => [
                         {:user_name => 'vagrant'}
                     ]
+                }
                }
 
   end
