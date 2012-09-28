@@ -14,9 +14,10 @@ describe FeedFetcher do
     Feed.should_receive(:all).and_return(feed)
 
     feed.each do |feed|
-      feed.should_receive(:fetch_feeds)
+      feed.should_receive(:fetch_feed_entries)
     end
 
     FeedFetcher.get_all_feeds()
   end
+
 end
