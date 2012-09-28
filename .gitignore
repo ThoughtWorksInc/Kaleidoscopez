@@ -1,2 +1,7 @@
 .bundle/
 .idea/
+
+# Ignore Vagrant local storage
+.vagrant
+
+.DS_Store
