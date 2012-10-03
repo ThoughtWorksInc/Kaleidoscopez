@@ -1,6 +1,12 @@
 development:
-  uri: mongodb://localhost:27017/kaleidoscope_dev
+  sessions:
+    default:
+      uri: mongodb://localhost:27017/kaleidoscope_dev
 test:
-  uri: mongodb://localhost:27017/test
+  sessions:
+    default:
+      uri: mongodb://localhost:27017/test
 production:
-  uri: <%= ENV['MONGOLAB_URI'] %>
+  sessions:
+    default:
+      uri: <%= ENV['MONGOLAB_URI'] %>

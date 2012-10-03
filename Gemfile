@@ -2,9 +2,9 @@ source "https://rubygems.org"
 
 gem "sinatra"
 gem "rake"
-gem "mongoid", "2.4.0"
+gem "mongoid"
 gem "bson_ext"
-gem "feedzirra"
+gem "feedzirra", "~> 0.2.0.rc2"
 gem "clockwork"
 gem "jasmine"
 
