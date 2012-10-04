@@ -2,10 +2,12 @@
 class FeedFetcher
 
   def self.get_all_feeds()
-    Feed.all.each do |feed|
-      Item.where(feed: feed).delete
-      feed.fetch_feed_entries.each { | item| item.save }
-    end
+    items = Feed.all.collect { |feed| feed.fetch_feed_entries }
+    items.flatten!
+    return if (items.length < 10)
+
+    Item.delete_all
+    items.each { |item| item.save }
   end
 
 end
