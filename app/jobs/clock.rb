@@ -1,5 +1,6 @@
 require 'clockwork'
-require '../boot'
+require './app/boot'
+require "./app/jobs/feed_fetcher"
 
 include Clockwork
 

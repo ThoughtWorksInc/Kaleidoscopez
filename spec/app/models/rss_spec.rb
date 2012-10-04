@@ -1,4 +1,5 @@
 require "spec_helper"
+require_relative "../../../app/models/item"
 
 describe Rss do
 
@@ -10,7 +11,7 @@ describe Rss do
     @rss.name = "Dummy Source"
     @rss.url = "feeds.dummy.com"
     @rss.save
-
+  
     @feedzirra_rss.entries = [Feedzirra::Parser::RSSEntry.new, Feedzirra::Parser::RSSEntry.new]
     @feedzirra_rss.entries[0].title = "First Post"
     @feedzirra_rss.entries[0].url = "test.url"
@@ -21,22 +22,22 @@ describe Rss do
     @feedzirra_rss.entries[1].url = "test1.url"
     @feedzirra_rss.entries[1].author = "Daven Thomas"
   end
-
-  it "should fetch feeds and save them as items in db" do
+  
+  it "should fetch feeds as items" do
     Feedzirra::Feed.should_receive(:fetch_and_parse).with(@rss.url).and_return(@feedzirra_rss)
-    @rss.fetch_feed_entries()
+    items = @rss.fetch_feed_entries()
 
-    @rss.items[0].title.should == "First Post"
-    @rss.items[0].url.should == "test.url"
-    @rss.items[0].author.should == "Dave Thomas"
-    @rss.items[0].date.should == nil
-    @rss.items[0].image.should == "http://test.com"
+    items[0].title.should == "First Post"
+    items[0].url.should == "test.url"
+    items[0].author.should == "Dave Thomas"
+    items[0].date.should == nil
+    items[0].image.should == "http://test.com"
 
-    @rss.items[1].title.should == "Second Post"
-    @rss.items[1].url.should == "test1.url"
-    @rss.items[1].author.should == "Daven Thomas"
-    @rss.items[1].date.should == nil
-    @rss.items[1].image.should == "http://test1.com"
+    items[1].title.should == "Second Post"
+    items[1].url.should == "test1.url"
+    items[1].author.should == "Daven Thomas"
+    items[1].date.should == nil
+    items[1].image.should == "http://test1.com"
 
   end
 
