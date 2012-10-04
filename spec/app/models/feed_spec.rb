@@ -6,3 +6,4 @@ describe Feed do
   it {should respond_to :items}
 
 end
+
