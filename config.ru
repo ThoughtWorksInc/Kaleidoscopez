@@ -1,3 +1,3 @@
-require File.dirname(__FILE__) + '/config/boot'
+require './app/app'
 
 run App

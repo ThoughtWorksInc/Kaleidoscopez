@@ -1,5 +1,4 @@
 require "spec_helper"
-require './app'
 require 'rack/test'
 
 describe App do

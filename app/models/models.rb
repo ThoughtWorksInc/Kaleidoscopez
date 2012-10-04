@@ -1,0 +1,5 @@
+require './app/models/item'
+require './app/models/feed'
+require './app/models/atom'
+require './app/models/rss'
+require './app/models/rss_feed_burner'
