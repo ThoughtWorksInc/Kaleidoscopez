@@ -4,4 +4,8 @@
 # Ignore Vagrant local storage
 .vagrant
 
+# Mac Finder create this
 .DS_Store
+
+# Swap Files
+.swp
