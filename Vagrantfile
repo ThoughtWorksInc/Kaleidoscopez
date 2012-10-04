@@ -3,8 +3,9 @@
 
 Vagrant::Config.run do |config|
 
-  config.vm.box = "precise32"
+  config.vm.box = "precise64"
   config.vm.forward_port 9292, 9292
+  config.vm.forward_port 8888, 8888
   config.ssh.forward_agent = true
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "chef/cookbooks"
