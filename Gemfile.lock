@@ -87,7 +87,8 @@ DEPENDENCIES
   clockwork
   feedzirra (~> 0.2.0.rc2)
   jasmine
-  mongoid
+  mongoid (= 2.4.0)
+  nokogiri
   rack-test
   rake
   rspec

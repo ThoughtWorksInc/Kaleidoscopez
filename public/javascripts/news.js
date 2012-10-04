@@ -61,6 +61,15 @@ function setupDisplay() {
             return author;
         }
 
+        function prepareImage(item) {
+            var image_div = $('<div>');
+            var img = $('<img>');
+            img.attr('src',item['image']);
+            image_div.append(img);
+            image_div.addClass("image");
+            return image_div;
+        }
+
         function prepareEmptySlide() {
             var slide = $('<div>');
             slide.addClass('step');
@@ -81,17 +90,18 @@ function setupDisplay() {
             slide.append(source);
             slide.append(author);
             slide.append(date);
+            slide.append(image);
             impressDiv.append(slide);
         }
-
         for(var itemIndex = 0; itemIndex < totalNoOfItems; itemIndex++){
 
-            var item = items[itemIndex];
 
+            var item = items[itemIndex];
             var title = prepareTitle(item);
             var author = prepareAuthor(item);
             var source = prepareSource(item);
             var date = prepareDate(item);
+            var image = prepareImage(item);
             var slide = prepareEmptySlide();
 
             setupRotationOfSlide(slide[0], itemIndex);

@@ -20,14 +20,16 @@ describe("news", function(){
                     url: "item1_url",
                     author: "item1_author",
                     source: "abcd",
-                    date: "2012-09-29"
+                    date: "2012-09-29",
+                    image: "image1"
                 },
                 {
                     title: "item2_title",
                     url: "item2_url",
                     author: "item2_author",
                     source: "pqrs",
-                    date: "2011-09-29"
+                    date: "2011-09-29",
+                    image: "image2"
                 }
             ]
         };
@@ -50,6 +52,7 @@ describe("news", function(){
         describe("should setup slides", function(){
             var impressDiv=false;
             var steps = false;
+            var items = response["items"];
             beforeEach(function(){
                 impressDiv = $("<div>");
                 impressDiv.attr("id","impress");
@@ -63,27 +66,28 @@ describe("news", function(){
             })
 
             it("should create all slides with title", function(){
-                var items = response["items"];
                 expect($(steps[0]).find('.title').html()).toBe(items[0]["title"]);
                 expect($(steps[1]).find('.title').html()).toBe(items[1]["title"]);
             })
 
             it("should create all slides with date", function() {
-                var items = response["items"];
                 expect($(steps[0]).find('.date').html()).toBe(items[0]["date"]);
                 expect($(steps[1]).find('.date').html()).toBe(items[1]["date"]);
             })
 
             it("should create all slides with source",function(){
-                var items = response["items"];
                 expect($(steps[0]).find('.source').html()).toBe(items[0]["source"]);
                 expect($(steps[1]).find('.source').html()).toBe(items[1]["source"]);
             })
 
             it("should create all slides with author",function(){
-                var items = response["items"];
                 expect($(steps[0]).find('.author').html()).toBe(items[0]["author"]);
                 expect($(steps[1]).find('.author').html()).toBe(items[1]["author"]);
+            })
+
+            it("should create all slides with image",function(){
+                expect($(steps[0]).find('.image img').attr('src')).toBe(items[0]["image"]);
+                expect($(steps[1]).find('.image img').attr('src')).toBe(items[1]["image"]);
             })
 
             it("should set all slides to rotate", function(){

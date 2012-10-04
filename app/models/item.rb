@@ -6,5 +6,6 @@ class Item
   field :url
   field :author
   field :date
+  field :image
   belongs_to :feed
 end

@@ -11,7 +11,10 @@ class Rss < Feed
   def create_item(fz_rss)
     Item.delete_all(conditions: {:url => url})
     fz_rss.entries.each do |feed_entry|
-      self.items.create({:title => feed_entry.title, :url => feed_entry.url, :author => feed_entry.author, :date => nil})
+      date = nil
+      summary = Nokogiri::HTML(feed_entry.summary)
+      img = summary.css('img').map{ |i| i['src'] }
+      self.items.create({:title => feed_entry.title, :url => feed_entry.url, :author => feed_entry.author, :date => date , :image => img[0]})
     end
   end
 
