@@ -10,6 +10,7 @@ gem "jasmine"
 
 group :development do
   gem "shotgun"
+  gem "vagrant"
 end
 
 group :test do
