@@ -1,9 +1,9 @@
-var milliSecPerSlide = 5000;
+var milliSecPerSlide = 8000;
 
 function autoScroll() {
     impress().next();
     var hue = (Math.random()*360).toFixed();
-    var saturation = (Math.random() * 100).toFixed();
+    var saturation = (Math.random() * 70).toFixed();
     var value = 80 + (Math.random() * 20).toFixed();
     var hsvColor = {h: hue, s: saturation, v: value};
     $('body').css('background-color', tinycolor(hsvColor).toRgbString() )

@@ -5,17 +5,17 @@ body{
 }
 
 .source{
-    font-size: large;
+    font-size: 0.5em;
     text-shadow: none;
 }
 
 .author{
-    font-size: 50px;
+    font-size: 0.3em;
     text-shadow: none;
 }
 
 .date{
-    font-size: medium;
+    font-size: 0.25em;
     text-shadow: none;
 }
 
@@ -35,7 +35,7 @@ body{
     font-size: 75px;
     text-align: center;
     font-family: 'Vollkorn', serif;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 1);
+    text-shadow: 0 2px 5px rgba(10, 10, 10, 0.5);
     letter-spacing: -1px;
 }
 
