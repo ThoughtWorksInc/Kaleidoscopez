@@ -7,5 +7,4 @@ class Item
   field :date
   field :image
   belongs_to :feed
-
 end
