@@ -19,3 +19,12 @@ DAEMON_OPTS=""
 <% if @replicaset_name %>
 DAEMON_OPTS="$DAEMON_OPTS --replSet <%= @replicaset_name %>"
 <% end %>
+
+<% if @enable_rest %>
+DAEMON_OPTS="$DAEMON_OPTS --rest"
+<% end %>
+
+<% if %w(centos redhat fedora amazon).include? node.platform -%>
+DAEMON_OPTS="$DAEMON_OPTS --fork"
+DBPATH="<%= @dbpath %>"
+<% end -%>

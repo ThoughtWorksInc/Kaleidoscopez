@@ -1,53 +1,43 @@
 Description
 ===========
 
-Installs git and optionally sets up a git server as a daemon under runit.
+Installs Git from source and optionally configures it.
 
 Requirements
 ============
 
 ## Platform:
 
-* Debian/Ubuntu
-* ArchLinux
+* Ubuntu
+* Debian
 
 ## Cookbooks:
 
-* runit
+* apt (optional; you may want to include it to update the Debian package index)
+* build-essential
 
 Recipes
 =======
 
-## default
-
-Installs base git packages based on platform.
-
-## server
-
-Sets up a git daemon to provide a server.
-
 ## source
 
-Installs git from source.
+Installs Git from source.
 
-Usage
-=====
+This recipe can be run without any configuration. You might want to set
+`node['git']['version']` to a specific version of Git to install.
 
-This cookbook primarily installs git core packages. It can also be
-used to serve git repositories.
+## config
 
-    include_recipe "git::server"
+Provisions a system-wide configuration for Git.
 
-This creates the directory /srv/git and starts a git daemon, exporting
-all repositories found. Repositories need to be added manually, but
-will be available once they are created.
+For this recipe, set `node['git']['config']` accordingly.
 
 License and Author
 ==================
 
-Author:: Joshua Timberman (<joshua@opscode.com>)
+Author:: Mathias Lafeldt (<mathias.lafeldt@gmail.com>)
 
-Copyright:: 2009-2012, Opscode, Inc.
+Copyright:: 2012 Mathias Lafeldt
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

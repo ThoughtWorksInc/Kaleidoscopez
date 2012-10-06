@@ -1,0 +1,52 @@
+SITE
+  remote: http://community.opscode.com/api/v1
+  specs:
+    build-essential (1.1.2)
+    yum (1.0.0)
+
+GIT
+  remote: https://github.com/ashwinwhat/libcurl.git
+  ref: master
+  sha: 17cf71517a708b381e82e4845b3c39c55596576a
+  specs:
+    libcurl (1.0.0)
+      build-essential (>= 0.0.0)
+
+GIT
+  remote: https://github.com/edelight/chef-mongodb
+  ref: master
+  sha: 57ad84dba6bfc186a994fd85db75374817cb5794
+  specs:
+    mongodb (0.11.0)
+      apt (>= 0.0.0)
+      yum (>= 0.0.0)
+
+GIT
+  remote: https://github.com/fnichol/chef-rvm
+  ref: master
+  sha: 6411f1194c2f57dc2578e87d9ca89199561512dd
+  specs:
+    rvm (0.9.1)
+
+GIT
+  remote: https://github.com/mlafeldt/git-cookbook
+  ref: master
+  sha: 799254612e401e98bfa60a49518fc9114ad0f86e
+  specs:
+    git (1.0.0)
+      build-essential (>= 0.0.0)
+
+GIT
+  remote: https://github.com/opscode-cookbooks/apt
+  ref: master
+  sha: d9011dcfc4af935a7c5b5be512f90499f08683ba
+  specs:
+    apt (1.4.9)
+
+DEPENDENCIES
+  apt (>= 0)
+  git (>= 0)
+  libcurl (>= 0)
+  mongodb (>= 0)
+  rvm (>= 0)
+

@@ -33,15 +33,19 @@ when "debian", "ubuntu"
     uri "http://downloads-distro.mongodb.org/repo/debian-sysvinit"
     distribution "dist"
     components ["10gen"]
-    keyserver "keyserver.ubuntu.com"
+    keyserver "hkp://keyserver.ubuntu.com:80"
     key "7F0CEB10"
     action :add
     notifies :run, "execute[apt-get update]", :immediately
   end
 
-  package "mongodb" do
-    package_name "mongodb-10gen"
+when "centos","redhat","fedora","amazon"
+  yum_repository "10gen" do
+    description "10gen RPM Repository"
+    url "http://downloads-distro.mongodb.org/repo/redhat/os/$arch"
+    action :add
   end
+
 else
     Chef::Log.warn("Adding the #{node['platform']} 10gen repository is not yet not supported by this cookbook")
 end

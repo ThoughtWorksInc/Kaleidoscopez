@@ -29,7 +29,12 @@ class Chef::ResourceDefinitionList::MongoDB
     require 'mongo'
     
     if members.length == 0
-      abort("cannot configure replicaset '#{name}', no member nodes found")
+      if Chef::Config[:solo]
+        abort("Cannot configure replicaset '#{name}', no member nodes found")
+      else
+        Chef::Log.warn("Cannot configure replicaset '#{name}', no member nodes found")
+        return
+      end
     end
     
     begin
@@ -39,12 +44,15 @@ class Chef::ResourceDefinitionList::MongoDB
       return
     end
     
-    members.sort!{ |x,y| x['name'] <=> y['name'] }
+    # Want the node originating the connection to be included in the replicaset
+    members << node unless members.include?(node)
+    members.sort!{ |x,y| x.name <=> y.name }
     rs_members = []
     members.each_index do |n|
       port = members[n]['mongodb']['port']
       rs_members << {"_id" => n, "host" => "#{members[n]['fqdn']}:#{port}"}
     end
+
     
     Chef::Log.info(
       "Configuring replicaset with members #{members.collect{ |n| n['hostname'] }.join(', ')}"

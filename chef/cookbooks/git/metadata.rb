@@ -1,19 +1,14 @@
-maintainer        "Opscode, Inc."
-maintainer_email  "cookbooks@opscode.com"
+name              "git"
+maintainer        "Mathias Lafeldt"
+maintainer_email  "mathias.lafeldt@gmail.com"
 license           "Apache 2.0"
-description       "Installs git and/or sets up a Git server daemon"
+description       "Installs Git from source and optionally configures it"
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version           "1.0.2"
-recipe            "git", "Installs git"
-recipe            "git::server", "Sets up a runit_service for git daemon"
-recipe            "git::source", "Installs git from source"
+version           "1.0.0"
+recipe            "git::source", "Installs Git from source"
+recipe            "git::config", "Provisions a system-wide Git config"
 
-%w{ amazon arch centos debian fedora redhat scientific ubuntu windows }.each do |os|
-  supports os
-end
+supports "ubuntu"
+supports "debian"
 
-supports "mac_os_x", ">= 10.6.0"
-
-%w{ build-essential dmg runit yum }.each do |cb|
-  depends cb
-end
+depends "build-essential"

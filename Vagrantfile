@@ -10,14 +10,15 @@ Vagrant::Config.run do |config|
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "chef/cookbooks"
     chef.add_recipe("apt")
-    chef.add_recipe("zsh")
-    chef.add_recipe("ohmyzsh")
+    chef.add_recipe("git::source")
+    #chef.add_recipe("zsh")
+    #chef.add_recipe("ohmyzsh")
     chef.add_recipe("rvm::vagrant")
     chef.add_recipe("rvm::system")
-    chef.add_recipe("git")
     chef.add_recipe("mongodb::10gen_repo")
     chef.add_recipe("mongodb::default")
-    chef.add_recipe("libcurl")
+#    chef.cookbooks_path = "chef/site-cookbooks"
+  #  chef.add_recipe("libcurl")
 
     chef.json= {
         :oh_my_zsh => {

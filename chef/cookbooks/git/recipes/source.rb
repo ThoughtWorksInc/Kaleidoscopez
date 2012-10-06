@@ -2,7 +2,7 @@
 # Cookbook Name:: git
 # Recipe:: source
 #
-# Copyright 2012, Brian Flad, Fletcher Nichol
+# Copyright (C) 2012 Mathias Lafeldt <mathias.lafeldt@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,30 +15,45 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
+# Install packages to compile C programs (gcc, make, etc.)
 include_recipe "build-essential"
 
-pkgs = value_for_platform_family(
-  ["rhel"] => %w{ expat-devel gettext-devel libcurl-devel openssl-devel zlib-devel }
-)
-
-pkgs.each do |pkg|
-  package pkg
+# Install packages required for building Git.
+# See http://git-scm.com/book/en/Getting-Started-Installing-Git
+%w(libcurl4-gnutls-dev libexpat1-dev gettext zlib1g-dev libssl-dev).each do |pkg|
+  package(pkg) do
+    action :install
+  end
 end
 
-remote_file "#{Chef::Config[:file_cache_path]}/git-#{node[:git][:version]}.tar.gz" do
-  source    node[:git][:url]
-  checksum  node[:git][:checksum]
-  mode      "0644"
-  not_if "test -f #{Chef::Config[:file_cache_path]}/git-#{node[:git][:version]}.tar.gz"
+require 'tmpdir'
+
+tmp_dir = Dir.tmpdir
+tarball = File.join(tmp_dir, "git-#{node['git']['version']}.tar.gz")
+
+# Download source tarball.
+remote_file(tarball) do
+  source node['git']['url']
+  mode "0644"
+  checksum node['git']['checksum']
+  action :create
 end
 
-execute "Extracting and Building Git #{node[:git][:version]} from Source" do
-  cwd Chef::Config[:file_cache_path]
-  command <<-COMMAND
-    (mkdir git-#{node[:git][:version]} && tar -zxf git-#{node[:git][:version]}.tar.gz -C git-#{node[:git][:version]} --strip-components 1)
-    (cd git-#{node[:git][:version]} && make prefix=#{node[:git][:prefix]} install)
-  COMMAND
-  creates "node[:git][:prefix]}/bin/git"
-  not_if "git --version | grep #{node[:git][:version]}"
+# Extract code, compile it, and install Git.
+bash "build and install git" do
+  user "root"
+  cwd tmp_dir
+  flags "-e"
+
+  code <<-EOS
+    tar xzf #{tarball}
+    cd `tar -tf #{tarball} | head -n1`
+    make prefix=#{node['git']['prefix']} install
+    cd ..
+    rm -rf `tar -tf #{tarball} | head -n1`
+  EOS
+
+  not_if "git --version | grep -q #{node['git']['version']}$"
 end

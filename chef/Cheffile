@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+site 'http://community.opscode.com/api/v1'
+
+cookbook 'apt',
+         :git => 'https://github.com/opscode-cookbooks/apt'
+
+cookbook 'rvm',
+         :git => 'https://github.com/fnichol/chef-rvm'
+
+cookbook 'git',
+         :git => 'https://github.com/mlafeldt/git-cookbook'
+
+cookbook 'mongodb',
+         :git => 'https://github.com/edelight/chef-mongodb'
+
+cookbook 'libcurl',
+         :git => 'https://github.com/ashwinwhat/libcurl.git'
+
+
