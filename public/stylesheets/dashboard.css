@@ -57,4 +57,9 @@ body{
     letter-spacing: -1px;
 }
 
+.image{
+    min-height: 20%;
+    max-height: 50%;
+}
+
 .impress-enabled .step.active { opacity: 1 }

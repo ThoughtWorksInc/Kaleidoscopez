@@ -17,12 +17,12 @@ describe Feed do
     @feedzirra_feed.entries[0].url = "test.url"
     @feedzirra_feed.entries[0].author = "Dave Thomas"
     @feedzirra_feed.entries[0].published = "2012-09-29 06:03:48 UTC"
-    @feedzirra_feed.entries[0].content = "<div><br /></div><div>(Side note: test)<br /><div><br /></div><div>test1</div><div><br /></div><div>Because we <i>care just enough</i> to feed our kids!</div><div><br /></div><div>test2</div></div><div class=\"blogger-post-footer\"><img width='1' height='1' src='http://test2.com' alt='' /></div>"
+    @feedzirra_feed.entries[0].content = "<div><br /></div><div>(Side note: test)<br /><div><br /></div><div>test1</div><div><br /></div><div>Because we <i>care just enough</i> to feed our kids!</div><div><br /></div><div>test2</div></div><div class=\"blogger-post-footer\"><img width='1' height='1' src='http://test2.com?w=100&h=70&crop=1' alt='' /></div>"
     @feedzirra_feed.entries[1].title = "Second Post"
     @feedzirra_feed.entries[1].url = "test1.url"
     @feedzirra_feed.entries[1].author = "Daven Thomas"
     @feedzirra_feed.entries[1].published = "2013-09-29 06:03:48 UTC"
-    @feedzirra_feed.entries[1].content = "<div><br /></div><div>(Side note: test)<br /><div><br /></div><div>test1</div><div><br /></div><div>Because we <i>care just enough</i> to feed our kids!</div><div><br /></div><div>test2</div></div><div class=\"blogger-post-footer\"><img width='1' height='1' src='http://test.com' alt='' /></div>"
+    @feedzirra_feed.entries[1].content = "<div><br /></div><div>(Side note: test)<br /><div><br /></div><div>test1</div><div><br /></div><div>Because we <i>care just enough</i> to feed our kids!</div><div><br /></div><div>test2</div></div><div class=\"blogger-post-footer\"><img width='1' height='1' src='http://test.com?w=100&h=70&crop=1' alt='' /></div>"
   end
 
   it "should fetch feeds as items" do

@@ -13,7 +13,7 @@ class TwitterSource < Source
   def fetch_items
     tweets = Twitter.search(query)[:statuses]
     tweets.collect do |tweet|
-        img_url = tweet[:media][0][:media_url] if tweet[:media][0]
+        img_url = tweet[:media][0][:media_url].gsub!(/\?.*/,"") if tweet[:media][0]
         Item.new({
           :title => tweet[:text],
           :date => tweet[:created_at].strftime("%Y-%m-%d"),

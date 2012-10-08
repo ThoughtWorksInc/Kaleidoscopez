@@ -8,7 +8,7 @@ describe TwitterSource do
         :created_at => Time.parse("Fri Oct 05 17:15:12 +0000 2012"),
         :text => "Tweet text",
         :media => [{
-          :media_url => "media_url"
+          :media_url => "media_url?params"
         }],
         :user => {
           :name => "user name",
@@ -40,7 +40,7 @@ describe TwitterSource do
     items[0].title.should == @search_result[:statuses][0][:text]
     items[0].date.should == "2012-10-05"
     items[0].author.should == @search_result[:statuses][0][:user][:name]
-    items[0].image.should == @search_result[:statuses][0][:media][0][:media_url]
+    items[0].image.should == "media_url"
     items[0].source.should == twitter_source
     items[0].author_image.should == @search_result[:statuses][0][:user][:profile_image_url]
 
