@@ -10,20 +10,20 @@ describe App do
 
   it "should fetch and return all the items in a json" do
     feed = Feed.create(:name => "IMDB")
-    item_one = Item.create(:title => "James Bond", :feed => feed)
-    item_two = Item.create(:title => "Rowdy Rathore", :feed => feed)
+    item_one = Item.create(:title => "James Bond", :source => feed)
+    item_two = Item.create(:title => "Rowdy Rathore", :source => feed)
     expected_json_response = {:items => [
         {
             :_id => item_one.id,
             :title => item_one.title,
-            :feed_id => item_one.feed.id,
-            :source => item_one.feed.name
+            :source_id => item_one.source.id,
+            :source => item_one.source.name
         },
         {
             :_id => item_two.id,
             :title => item_two.title,
-            :feed_id => item_two.feed.id,
-            :source => item_two.feed.name
+            :source_id => item_two.source.id,
+            :source => item_two.source.name
         }
     ]}.to_json
     expected_response = JSON::parse(expected_json_response)

@@ -8,6 +8,7 @@ gem "feedzirra", "~> 0.2.0.rc2"
 gem "clockwork"
 gem "jasmine"
 gem "nokogiri"
+gem "twitter"
 
 
 group :development do

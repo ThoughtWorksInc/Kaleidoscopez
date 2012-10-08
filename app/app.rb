@@ -11,7 +11,7 @@ class App < Sinatra::Base
   end
 
   get '/all_news' do
-    items = Item.all.collect {|item| item.attributes.merge("source" => item.feed.name)}
+    items = Item.all.collect {|item| item.attributes.merge("source" => item.source.name)}
     content_type :json
     {:items => items.shuffle!}.to_json
   end

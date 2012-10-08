@@ -2,8 +2,11 @@ require 'spec_helper'
 require 'feedzirra'
 
 describe Feed do
-  it {should respond_to :name}
   it {should respond_to :url}
+
+  it "should inherit Source" do
+    Feed.ancestors.include?(Source).should be true
+  end
 
   before(:each) do
     @feed = Feed.create(:name => "Dummy Source", :url => "feeds.dummy.com")
@@ -24,19 +27,21 @@ describe Feed do
 
   it "should fetch feeds as items" do
     Feedzirra::Feed.should_receive(:fetch_and_parse).with(@feed.url).and_return(@feedzirra_feed)
-    items = @feed.fetch_feed_entries()
+    items = @feed.fetch_items()
 
     items[0].title.should == "First Post"
     items[0].url.should == "test.url"
     items[0].author.should == "Dave Thomas"
     items[0].date.should == "2012-09-29"
     items[0].image.should == "http://test2.com"
+    items[0].source.should == @feed
 
     items[1].title.should == "Second Post"
     items[1].url.should == "test1.url"
     items[1].author.should == "Daven Thomas"
     items[1].date.should == "2013-09-29"
     items[1].image.should == "http://test.com"
+    items[1].source.should == @feed
   end
 
 end

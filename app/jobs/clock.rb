@@ -1,7 +1,7 @@
 require 'clockwork'
 require './app/boot'
-require "./app/jobs/feed_fetcher"
+require "./app/jobs/source_fetcher"
 
 include Clockwork
 
-every(10.minute , "feeds.refresh") {FeedFetcher.get_all_feeds}
+every(10.minute , "feeds.refresh") {SourceFetcher.get_all_items}

@@ -1,9 +1,9 @@
-class FeedFetcher
+class SourceFetcher
 
   NUMBER_OF_ITEMS = 15
 
-  def self.get_all_feeds()
-    items = Feed.all.collect { |feed| feed.fetch_feed_entries.slice(0,NUMBER_OF_ITEMS) }.flatten.compact
+  def self.get_all_items()
+    items = Source.all.collect { |source| source.fetch_items.slice(0,NUMBER_OF_ITEMS) }.flatten.compact
 
     return if (items_are_too_few?(items))
 
