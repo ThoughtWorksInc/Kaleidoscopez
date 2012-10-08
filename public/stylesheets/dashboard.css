@@ -9,14 +9,32 @@ body{
     text-shadow: none;
 }
 
+.author_container{
+    display: inline-table;
+}
+
 .author{
     font-size: 0.3em;
     text-shadow: none;
+    display: table-row;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.author img{
+    display: table-cell;
+}
+.author_name{
+    padding-left: 2%;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .date{
-    font-size: 0.25em;
+    padding-left: 5%;
     text-shadow: none;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 

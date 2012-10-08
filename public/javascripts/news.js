@@ -55,10 +55,24 @@ function setupDisplay() {
         }
 
         function prepareAuthor(item) {
+            function prepare_author_image(author_div) {
+                var author_image = $('<img>');
+                author_image.attr('src', item['author_image']);
+                if (item['author_image']) author_div.append(author_image);
+            }
+            function prepare_author_name(author_div) {
+                author_div.append($('<div>').addClass('author_name').append(item["author"]))
+                author_div.addClass("author");
+            }
+
             var author = $('<div>');
-            author.append(item["author"])
-            author.addClass("author");
-            return author;
+            var author_container=$('<div>');
+            author_container.addClass('author_container')
+
+            prepare_author_image(author);
+            prepare_author_name(author);
+            author_container.append(author)
+            return author_container;
         }
 
         function prepareImage(item) {
@@ -89,13 +103,11 @@ function setupDisplay() {
             slide.append(title);
             slide.append(source);
             slide.append(author);
-            slide.append(date);
+            $(author).find('.author').append(date)
             slide.append(image);
             impressDiv.append(slide);
         }
         for(var itemIndex = 0; itemIndex < totalNoOfItems; itemIndex++){
-
-
             var item = items[itemIndex];
             var title = prepareTitle(item);
             var author = prepareAuthor(item);

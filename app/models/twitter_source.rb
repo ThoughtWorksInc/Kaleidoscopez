@@ -19,6 +19,7 @@ class TwitterSource < Source
           :date => tweet[:created_at].strftime("%Y-%m-%d"),
           :author => tweet[:user][:name],
           :image => img_url,
+          :author_image => tweet[:user][:profile_image_url],
           :source => self
         })
     end

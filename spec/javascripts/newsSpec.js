@@ -27,6 +27,7 @@ describe("news", function(){
                     title: "item2_title",
                     url: "item2_url",
                     author: "item2_author",
+                    author_image: "item2_author_image",
                     source: "pqrs",
                     date: "2011-09-29",
                     image: "image2"
@@ -81,14 +82,20 @@ describe("news", function(){
             })
 
             it("should create all slides with author",function(){
-                expect($(steps[0]).find('.author').html()).toBe(items[0]["author"]);
-                expect($(steps[1]).find('.author').html()).toBe(items[1]["author"]);
+                expect($(steps[0]).find('.author .author_name').html()).toBe(items[0]["author"]);
+                expect($(steps[1]).find('.author .author_name').html()).toBe(items[1]["author"]);
             })
 
             it("should create all slides with image",function(){
                 expect($(steps[0]).find('.image img').attr('src')).toBe(items[0]["image"]);
                 expect($(steps[1]).find('.image img').attr('src')).toBe(items[1]["image"]);
             })
+
+            it("should create slides with author image, if it exists", function(){
+                expect($(steps[0]).find(' .author img').length).toBe(0)
+                expect($(steps[1]).find('.author img').attr('src')).toBe(items[1]["author_image"])
+            })
+
 
             it("should set all slides to rotate", function(){
                for(var i = 0; i < steps.length; i++){
