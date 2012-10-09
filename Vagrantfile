@@ -23,8 +23,16 @@ Vagrant::Config.run do |config|
             'vagrant' => {
                 'system_chef_solo' => '/opt/vagrant_ruby/bin/chef-solo'
             }
+        },
+        :oh_my_zsh => {
+            :users => [
+                {
+                    :user_name => 'vagrant'
+                }
+            ]
         }
     }
+
 
   end
 

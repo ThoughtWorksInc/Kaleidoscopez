@@ -43,10 +43,28 @@ GIT
   specs:
     apt (1.4.9)
 
+GIT
+  remote: https://github.com/opscode-cookbooks/zsh.git
+  ref: master
+  sha: 19f23b7b51e4dfa747ddad96e43dc2f0a37eec8b
+  specs:
+    zsh (0.7.1)
+
+GIT
+  remote: https://github.com/satyamag/chef-oh-my-zsh.git
+  ref: master
+  sha: ce8fb151c8379762e2be2ab9fb0091340e7bfe12
+  specs:
+    oh-my-zsh (0.0.1)
+      git (>= 0.0.0)
+      zsh (>= 0.0.0)
+
 DEPENDENCIES
   apt (>= 0)
   git (>= 0)
   libcurl (>= 0)
   mongodb (>= 0)
+  oh-my-zsh (>= 0)
   rvm (>= 0)
+  zsh (>= 0)
 

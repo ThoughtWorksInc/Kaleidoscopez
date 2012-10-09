@@ -15,6 +15,12 @@ cookbook 'git',
 cookbook 'mongodb',
          :git => 'https://github.com/edelight/chef-mongodb'
 
+cookbook 'zsh',
+         :git => 'https://github.com/opscode-cookbooks/zsh.git'
+
+cookbook 'oh-my-zsh',
+         :git => 'https://github.com/satyamag/chef-oh-my-zsh.git'
+
 cookbook 'libcurl',
          :git => 'https://github.com/ashwinwhat/libcurl.git'
 
