@@ -1,3 +1,19 @@
+function mockMoment(items){
+    function moment_for_first_item(){
+        this.fromNow = function(){
+            return "20 minutes ago"
+        }
+    }
+    function moment_for_second_item(){
+        this.fromNow = function(){
+            return "a few seconds ago"
+        }
+    }
+    window.moment = function (date){
+        if(date == items[0]["date"]) return new moment_for_first_item
+        if(date == items[1]["date"]) return new moment_for_second_item
+    }
+}
 describe("news", function(){
 
     beforeEach(function(){
@@ -10,6 +26,7 @@ describe("news", function(){
                 pre: function(){}
             }
         }
+
     })
 
     describe("should setup display", function(){
@@ -20,7 +37,7 @@ describe("news", function(){
                     url: "item1_url",
                     author: "item1_author",
                     source: "abcd",
-                    date: "2012-09-29",
+                    date: "2012-10-08T04:00:00Z",
                     image: "image1"
                 },
                 {
@@ -29,7 +46,7 @@ describe("news", function(){
                     author: "item2_author",
                     author_image: "item2_author_image",
                     source: "pqrs",
-                    date: "2011-09-29",
+                    date: "2012-10-08T05:00:00Z",
                     image: "image2"
                 }
             ]
@@ -39,6 +56,7 @@ describe("news", function(){
             spyOn($,'ajax').andCallFake(function(params){
                 params.success(response);
             })
+
             setupDisplay();
         })
 
@@ -58,6 +76,7 @@ describe("news", function(){
                 impressDiv = $("<div>");
                 impressDiv.attr("id","impress");
                 $('body').append(impressDiv);
+                mockMoment(items);
                 setupDisplay();
                 steps = impressDiv.find('.step');
             })
@@ -72,8 +91,8 @@ describe("news", function(){
             })
 
             it("should create all slides with date", function() {
-                expect($(steps[0]).find('.date').html()).toBe(items[0]["date"]);
-                expect($(steps[1]).find('.date').html()).toBe(items[1]["date"]);
+                expect($(steps[0]).find('.date').html()).toBe("20 minutes ago");
+                expect($(steps[1]).find('.date').html()).toBe("a few seconds ago");
             })
 
             it("should create all slides with source",function(){
@@ -104,7 +123,6 @@ describe("news", function(){
                    var expected_radius = steps.length * 100;
                    var expected_data_x = expected_radius*Math.cos(expected_theta_radians);
                    var expected_data_y = expected_radius*Math.sin(expected_theta_radians);
-
                    expect(parseFloat($(steps[i]).attr('data-x'))).toBe(expected_data_x);
                    expect(parseFloat($(steps[i]).attr('data-y'))).toBe(expected_data_y);
                    expect(parseFloat($(steps[i]).attr('data-rotate-z'))).toBe(expected_theta_degrees);

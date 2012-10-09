@@ -38,14 +38,14 @@ describe TwitterSource do
     items = twitter_source.fetch_items
 
     items[0].title.should == @search_result[:statuses][0][:text]
-    items[0].date.should == "2012-10-05"
+    items[0].date.should == @search_result[:statuses][0][:created_at]
     items[0].author.should == @search_result[:statuses][0][:user][:name]
     items[0].image.should == "media_url"
     items[0].source.should == twitter_source
     items[0].author_image.should == @search_result[:statuses][0][:user][:profile_image_url]
 
     items[1].title.should == @search_result[:statuses][1][:text]
-    items[1].date.should == "2012-10-06"
+    items[1].date.should == @search_result[:statuses][1][:created_at]
     items[1].author.should == @search_result[:statuses][1][:user][:name]
     items[1].image.should == nil
     items[1].source.should == twitter_source

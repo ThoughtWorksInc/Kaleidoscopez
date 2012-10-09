@@ -42,7 +42,7 @@ function setupDisplay() {
 
         function prepareDate(item) {
             var date = $('<div>');
-            date.append(item["date"])
+            date.append(moment(item["date"]).fromNow())
             date.addClass("date");
             return date
         }

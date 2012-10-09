@@ -17,7 +17,7 @@ class Feed < Source
   end
 
   def create_item(feed_entry)
-    date = feed_entry.published.strftime("%Y-%m-%d")
+    date = feed_entry.published
     content = Nokogiri::HTML(feed_entry.content || feed_entry.summary)
     img = content.css('img').map{ |i| i['src'] }
     img[0].gsub!(/\?.*/,"") if img[0]

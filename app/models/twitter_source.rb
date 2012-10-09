@@ -1,7 +1,7 @@
 class TwitterSource < Source
   field :query
 
-  # Warning Untested code !!
+  # Warning: Untested code !!
   Twitter.configure do |config|
     config.consumer_key =  ENV["TWITTER_CUSTOMER_KEY"]
     config.consumer_secret = ENV["TWITTER_CUSTOMER_SECRET"]
@@ -16,7 +16,7 @@ class TwitterSource < Source
         img_url = tweet[:media][0][:media_url].gsub!(/\?.*/,"") if tweet[:media][0]
         Item.new({
           :title => tweet[:text],
-          :date => tweet[:created_at].strftime("%Y-%m-%d"),
+          :date => tweet[:created_at],
           :author => tweet[:user][:name],
           :image => img_url,
           :author_image => tweet[:user][:profile_image_url],
