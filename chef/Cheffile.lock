@@ -53,7 +53,7 @@ GIT
 GIT
   remote: https://github.com/satyamag/chef-oh-my-zsh.git
   ref: master
-  sha: ce8fb151c8379762e2be2ab9fb0091340e7bfe12
+  sha: 96c913437f5eb046f51b0f2f1f6c5b6bce02c90f
   specs:
     oh-my-zsh (0.0.1)
       git (>= 0.0.0)

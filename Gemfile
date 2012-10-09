@@ -9,6 +9,7 @@ gem "clockwork"
 gem "jasmine"
 gem "nokogiri"
 gem "twitter"
+gem "sass"
 
 
 group :development do
