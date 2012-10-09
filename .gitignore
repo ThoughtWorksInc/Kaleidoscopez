@@ -10,3 +10,4 @@
 # Swap Files
 .swp
 chef/cookbooks
+.sass-cache/
