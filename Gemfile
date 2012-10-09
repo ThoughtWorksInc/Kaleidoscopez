@@ -10,7 +10,7 @@ gem "jasmine"
 gem "nokogiri"
 gem "twitter"
 gem "sass"
-
+gem "fastimage"
 
 group :development do
   gem "shotgun"

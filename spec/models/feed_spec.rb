@@ -27,13 +27,15 @@ describe Feed do
 
   it "should fetch feeds as items" do
     Feedzirra::Feed.should_receive(:fetch_and_parse).with(@feed.url).and_return(@feedzirra_feed)
+    FastImage.should_receive(:size).with("http://test2.com").and_return([1,1])
+    FastImage.should_receive(:size).with("http://test.com").and_return([200,200])
     items = @feed.fetch_items()
 
     items[0].title.should == "First Post"
     items[0].url.should == "test.url"
     items[0].author.should == "Dave Thomas"
     items[0].date.should ==  "2012-09-29 06:03:48 UTC"
-    items[0].image.should == "http://test2.com"
+    items[0].image.should == nil
     items[0].source.should == @feed
 
     items[1].title.should == "Second Post"

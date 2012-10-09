@@ -20,6 +20,7 @@ GEM
     diff-lcs (1.1.3)
     faraday (0.8.4)
       multipart-post (~> 1.1)
+    fastimage (1.2.13)
     feedzirra (0.2.0.rc2)
       curb (~> 0.8.0)
       gorillib (~> 0.1.9)
@@ -94,6 +95,7 @@ PLATFORMS
 DEPENDENCIES
   bson_ext
   clockwork
+  fastimage
   feedzirra (~> 0.2.0.rc2)
   jasmine
   mongoid
