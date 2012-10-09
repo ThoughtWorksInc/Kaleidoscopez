@@ -20,7 +20,7 @@ class Feed < Source
   end
 
   def create_item(feed_entry)
-    img = getImage(feed_entry)
+    img = get_image(feed_entry)
 
     Item.new({
     :title => feed_entry.title,
@@ -33,17 +33,25 @@ class Feed < Source
   end
 
 
-  def getImage(feed_entry)
+  def get_image(feed_entry)
     content = Nokogiri::HTML(feed_entry.content || feed_entry.summary)
     images = content.css('img').map { |i| i['src'] }
-    images[0].gsub!(/\?.*/, "") if images[0]
+    biggest_image(images)
+  end
+
+  def biggest_image(images)
+    final_image=nil
+    final_image_area=nil
+
     images.each do |img|
-      fast_image_size = FastImage.size(img)
-      if(fast_image_size && fast_image_size[0]*fast_image_size[1]>MIN_AREA)
-        return img
+      image_size = FastImage.size(img)
+      image_area = image_size[0]*image_size[1] if image_size
+      if (image_area && image_area > (final_image_area || MIN_AREA))
+        final_image = img
+        final_image_area = image_area
       end
     end
-
-    nil
+    final_image
   end
+
 end

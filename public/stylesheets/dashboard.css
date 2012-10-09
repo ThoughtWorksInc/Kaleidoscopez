@@ -48,9 +48,10 @@ body {
   text-shadow: 0 2px 5px rgba(10, 10, 10, 0.5);
   letter-spacing: -1px; }
 
-.image {
-  min-height: 20%;
-  max-height: 50%; }
+.image img{
+    max-height: 300px;
+    max-width: 500px;
+}
 
 .impress-enabled .step.active {
   opacity: 1; }
