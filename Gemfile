@@ -14,6 +14,7 @@ gem "fastimage"
 
 group :development do
   gem "shotgun"
+  gem "librarian"
 end
 
 group :test do
