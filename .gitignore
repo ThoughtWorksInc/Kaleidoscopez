@@ -5,6 +5,9 @@ TAGS
 # Ignore Vagrant local storage
 .vagrant
 
+# Coverage reports
+coverage/
+
 # Mac Finder create this
 .DS_Store
 
