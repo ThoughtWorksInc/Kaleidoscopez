@@ -3,10 +3,11 @@ require "fastimage"
 
 class Feed < Source
   field :url
+  NUMBER_OF_ITEMS = 15
 
   def fetch_items()
     feed = Feedzirra::Feed.fetch_and_parse(url)
-    create_items(feed) if feed
+    create_items(feed.entries.slice(0,NUMBER_OF_ITEMS)) if feed
   end
 
   private

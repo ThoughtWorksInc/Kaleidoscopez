@@ -1,9 +1,8 @@
 class SourceFetcher
 
-  NUMBER_OF_ITEMS = 15
 
   def self.get_all_items()
-    items = Source.all.collect { |source| source.fetch_items.slice(0,NUMBER_OF_ITEMS) }.flatten.compact
+    items = Source.all.collect { |source| source.fetch_items }.flatten.compact
 
     return if (items_are_too_few?(items))
 
