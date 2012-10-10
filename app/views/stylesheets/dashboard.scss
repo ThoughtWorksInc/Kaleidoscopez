@@ -1,0 +1,67 @@
+body {
+  background-color: #7fffd4;
+  -webkit-transition-property: background-color;
+  -webkit-transition-duration: 2s;
+}
+
+.source {
+  font-size: 0.5em;
+  text-shadow: none;
+}
+
+.author_container {
+  display: inline-table;
+}
+
+.author {
+  font-size: 0.3em;
+  text-shadow: none;
+  display: table-row;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.author img {
+  display: table-cell;
+}
+
+.author_name {
+  padding-left: 2%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.date {
+  padding-left: 5%;
+  text-shadow: none;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.step {
+  opacity: 0.1;
+  -webkit-transition-property: opacity;
+  -webkit-transition-duration: 0.5s;
+}
+
+.slide {
+  display: block;
+  width: 1200px;
+  height: 700px;
+  padding: 40px 60px;
+  line-height: 1.5;
+  font-size: 75px;
+  text-align: center;
+  font-family: 'Vollkorn', serif;
+  text-shadow: 0 2px 5px rgba(10, 10, 10, 0.5);
+  letter-spacing: -1px;
+}
+
+.image img {
+  max-height: 300px;
+  max-width: 500px;
+}
+
+.impress-enabled .step.active {
+  opacity: 1
+}
