@@ -3,11 +3,18 @@ require "fastimage"
 
 class Feed < Source
   field :url
-  NUMBER_OF_ITEMS = 15
+  field :last_fetched_at
 
-  def fetch_items()
-    feed = Feedzirra::Feed.fetch_and_parse(url)
-    create_items(feed.entries.slice(0,NUMBER_OF_ITEMS)) if feed
+
+  def self.initialize(name,url)
+    Feed.create({:name => name, :url => url, :last_fetched_at => Time.now})
+  end
+
+  def fetch_items(number_of_items)
+    feed = Feedzirra::Feed.fetch_and_parse(url, {:if_modified_since => last_fetched_at})
+    self.last_fetched_at = Time.now
+    self.save
+    create_items(feed.entries.slice(0,number_of_items)) if feed
   end
 
   private

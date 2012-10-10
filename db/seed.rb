@@ -2,9 +2,9 @@ require './app/boot'
 
 Source.delete_all
 Item.delete_all
-Feed.create({:name => "XKCD", :url => "http://xkcd.com/rss.xml"})
-Feed.create({:name => "Tech Crunch", :url => "http://feeds.feedburner.com/TechCrunch/"})
-Feed.create({:name => "ThoughtWorks Events", :url => "http://feeds.feedburner.com/thoughtworks-upcoming-events"})
-Feed.create({:name => "ThoughtWorks Blogs", :url => "http://www.thoughtworks.com/blogs/rss/current"})
-Feed.create({:name => "HBR", :url => "http://feeds.harvardbusiness.org/harvardbusiness"})
-TwitterSource.create({:name=>"#ThoughtWorks" ,:query=> "#thoughtworks"})
+
+Feed.initialize("XKCD","http://xkcd.com/rss.xml")
+Feed.initialize("Tech Crunch","http://feeds.feedburner.com/TechCrunch/")
+Feed.initialize("ThoughtWorks Events","http://feeds.feedburner.com/thoughtworks-upcoming-events")
+Feed.initialize("ThoughtWorks Blogs","http://www.thoughtworks.com/blogs/rss/current")
+Feed.initialize("HBR","http://feeds.harvardbusiness.org/harvardbusiness")
