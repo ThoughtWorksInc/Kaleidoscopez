@@ -53,5 +53,11 @@ body {
     max-width: 500px;
 }
 
+.qrcode{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
 .impress-enabled .step.active {
   opacity: 1; }

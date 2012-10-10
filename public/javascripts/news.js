@@ -44,7 +44,7 @@ function setupDisplay() {
             var date = $('<div>');
             date.append(moment(item["date"]).fromNow())
             date.addClass("date");
-            return date
+            return date;
         }
 
         function prepareSource(item) {
@@ -60,6 +60,7 @@ function setupDisplay() {
                 author_image.attr('src', item['author_image']);
                 if (item['author_image']) author_div.append(author_image);
             }
+
             function prepare_author_name(author_div) {
                 author_div.append($('<div>').addClass('author_name').append(item["author"]))
                 author_div.addClass("author");
@@ -68,7 +69,6 @@ function setupDisplay() {
             var author = $('<div>');
             var author_container=$('<div>');
             author_container.addClass('author_container')
-
             prepare_author_image(author);
             prepare_author_name(author);
             author_container.append(author)
@@ -84,13 +84,25 @@ function setupDisplay() {
             return image_div;
         }
 
+        function prepareQrCode(item) {
+            var qrcode_div = $('<div>');
+            qrcode_div.addClass('qrcode')
+            if(item['url'] != undefined){
+                qrcode_div.qrcode({
+                    height: 200,
+                    width: 200,
+                    text: item["url"]
+                });
+            }
+            return qrcode_div;
+        }
+
         function prepareEmptySlide() {
             var slide = $('<div>');
             slide.addClass('step');
             slide.addClass('slide');
             return slide;
         }
-
         function setupRotationOfSlide(slide, itemIndex) {
             var theta = calcRotationAngle(itemIndex);
             slide.setAttribute('data-x', getXCoOrdinate(theta));
@@ -98,13 +110,14 @@ function setupDisplay() {
             slide.setAttribute('data-rotate-z', theta);
             slide.setAttribute('data-rotate-x', itemIndex * 90);
         }
-
         function assembleSlide() {
             slide.append(title);
             slide.append(source);
             slide.append(author);
             $(author).find('.author').append(date)
             slide.append(image);
+            image.append(qrcode);
+
             impressDiv.append(slide);
         }
         for(var itemIndex = 0; itemIndex < totalNoOfItems; itemIndex++){
@@ -114,6 +127,7 @@ function setupDisplay() {
             var source = prepareSource(item);
             var date = prepareDate(item);
             var image = prepareImage(item);
+            var qrcode = prepareQrCode(item)
             var slide = prepareEmptySlide();
 
             setupRotationOfSlide(slide[0], itemIndex);

@@ -14,7 +14,9 @@ function mockMoment(items){
         if(date == items[1]["date"]) return new moment_for_second_item
     }
 }
+
 describe("news", function(){
+
 
     beforeEach(function(){
 
@@ -28,8 +30,8 @@ describe("news", function(){
         }
 
     })
-
     describe("should setup display", function(){
+
         var response = {
             items: [
                 {
@@ -42,7 +44,6 @@ describe("news", function(){
                 },
                 {
                     title: "item2_title",
-                    url: "item2_url",
                     author: "item2_author",
                     author_image: "item2_author_image",
                     source: "pqrs",
@@ -57,6 +58,7 @@ describe("news", function(){
                 params.success(response);
             })
 
+            spyOn($.fn,"qrcode")
             setupDisplay();
         })
 
@@ -67,11 +69,11 @@ describe("news", function(){
                 success: jasmine.any(Function)
             });
         })
-
         describe("should setup slides", function(){
             var impressDiv=false;
             var steps = false;
             var items = response["items"];
+
             beforeEach(function(){
                 impressDiv = $("<div>");
                 impressDiv.attr("id","impress");
@@ -110,11 +112,23 @@ describe("news", function(){
                 expect($(steps[1]).find('.image img').attr('src')).toBe(items[1]["image"]);
             })
 
+
             it("should create slides with author image, if it exists", function(){
                 expect($(steps[0]).find(' .author img').length).toBe(0)
                 expect($(steps[1]).find('.author img').attr('src')).toBe(items[1]["author_image"])
             })
-
+            it("should create slides with qr code",function(){
+                expect($.fn.qrcode).toHaveBeenCalledWith({
+                    width: 200,
+                    height: 200,
+                    text: items[0].url
+                });
+                expect($.fn.qrcode).not.toHaveBeenCalledWith({
+                    width: 200,
+                    height: 200,
+                    text: undefined
+                });
+            })
 
             it("should set all slides to rotate", function(){
                for(var i = 0; i < steps.length; i++){
