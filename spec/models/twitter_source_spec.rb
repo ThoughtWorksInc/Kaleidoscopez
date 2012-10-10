@@ -35,7 +35,7 @@ describe TwitterSource do
     Twitter.should_receive(:search).with("xyz").and_return(@search_result)
 
     twitter_source = TwitterSource.new({:query => 'xyz'})
-    items = twitter_source.fetch_items
+    items = twitter_source.fetch_items(15)
 
     items[0].title.should == @search_result[:statuses][0][:text]
     items[0].date.should == @search_result[:statuses][0][:created_at]

@@ -9,7 +9,7 @@ describe Feed do
   end
 
   before(:each) do
-    @feed = Feed.create(:name => "Dummy Source", :url => "feeds.dummy.com")
+    @feed = Feed.create(:name => "Dummy Source", :url => "feeds.dummy.com", :last_fetched_at => Time.now)
     @feedzirra_feed = Feedzirra::Parser::Atom.new
 
     @feedzirra_feed.entries = [Feedzirra::Parser::AtomEntry.new, Feedzirra::Parser::AtomEntry.new]
@@ -26,11 +26,11 @@ describe Feed do
   end
 
   it "should fetch feeds as items" do
-    Feedzirra::Feed.should_receive(:fetch_and_parse).with(@feed.url).and_return(@feedzirra_feed)
+    Feedzirra::Feed.should_receive(:fetch_and_parse).with(@feed.url, {:if_modified_since => @feed.last_fetched_at}).and_return(@feedzirra_feed)
     FastImage.should_receive(:size).with("http://test2.com").and_return([1,1])
     FastImage.should_receive(:size).with("http://test.com").and_return([200,200])
     FastImage.should_receive(:size).with("http://test300x400.com").and_return([300,400])
-    items = @feed.fetch_items()
+    items = @feed.fetch_items(15)
 
     items[0].title.should == "First Post"
     items[0].url.should == "test.url"
