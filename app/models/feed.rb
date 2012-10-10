@@ -52,7 +52,7 @@ class Feed < Source
     final_image_area=nil
 
     images.each do |img|
-      image_size = FastImage.size(img)
+      image_size = FastImage.size(URI.escape img)
       image_area = image_size[0]*image_size[1] if image_size
       if (image_area && image_area > (final_image_area || MIN_AREA))
         final_image = img

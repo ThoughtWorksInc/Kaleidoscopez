@@ -22,13 +22,13 @@ describe Feed do
     @feedzirra_feed.entries[1].url = "test1.url"
     @feedzirra_feed.entries[1].author = "Daven Thomas"
     @feedzirra_feed.entries[1].published = "2013-09-29 06:03:48 UTC"
-    @feedzirra_feed.entries[1].content = "<img src='http://test.com'/><img src='http://test300x400.com'/>"
+    @feedzirra_feed.entries[1].content = "<img src='http://test.com/a b'/><img src='http://test300x400.com'/>"
   end
 
   it "should fetch feeds as items" do
     Feedzirra::Feed.should_receive(:fetch_and_parse).with(@feed.url, {:if_modified_since => @feed.last_fetched_at}).and_return(@feedzirra_feed)
     FastImage.should_receive(:size).with("http://test2.com").and_return([1,1])
-    FastImage.should_receive(:size).with("http://test.com").and_return([200,200])
+    FastImage.should_receive(:size).with("http://test.com/a%20b").and_return([200,200])
     FastImage.should_receive(:size).with("http://test300x400.com").and_return([300,400])
     items = @feed.fetch_items(15)
 
