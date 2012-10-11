@@ -11,6 +11,7 @@ gem "twitter"
 gem "sass"
 gem "fastimage"
 gem "httparty"
+gem "xml-simple"
 
 group :development do
   gem "shotgun"

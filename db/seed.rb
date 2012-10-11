@@ -10,3 +10,4 @@ Feed.initialize("ThoughtWorks Blogs","http://www.thoughtworks.com/blogs/rss/curr
 Feed.initialize("HBR","http://feeds.harvardbusiness.org/harvardbusiness")
 TwitterSource.create({:name=>"#ThoughtWorks" ,:query=> "#thoughtworks"})
 TwitterSource.create({:name=>"#ThoughtWorks" ,:query=> "#vodqa"})
+Flickr.create({:name => "Flickr-TW", :tags => "thoughtworks, tw-pune"})
