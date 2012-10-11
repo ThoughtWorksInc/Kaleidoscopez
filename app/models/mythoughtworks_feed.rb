@@ -26,7 +26,7 @@ class MythoughtworksFeed < Source
     create_items(JSON::parse(response)) if response["data"]
   end
 
-   def create_items(response)
+  def create_items(response)
     response["data"].collect do |response_entry|
       create_item(response_entry)
     end
