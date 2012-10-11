@@ -10,6 +10,7 @@ gem "nokogiri"
 gem "twitter"
 gem "sass"
 gem "fastimage"
+gem "httparty"
 
 group :development do
   gem "shotgun"

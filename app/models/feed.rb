@@ -5,7 +5,6 @@ class Feed < Source
   field :url
   field :last_fetched_at
 
-
   def self.initialize(name,url)
     Feed.create({:name => name, :url => url, :last_fetched_at => Time.now})
   end
@@ -31,12 +30,12 @@ class Feed < Source
     img = get_image(feed_entry)
 
     Item.new({
-    :title => feed_entry.title,
-    :url => feed_entry.url,
-    :author => feed_entry.author,
-    :date => feed_entry.published,
-    :image => img,
-    :source => self
+      :title => feed_entry.title,
+      :url => feed_entry.url,
+      :author => feed_entry.author,
+      :date => feed_entry.published,
+      :image => img,
+      :source => self
     })
   end
 
