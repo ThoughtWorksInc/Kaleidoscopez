@@ -3,7 +3,7 @@ class Flickr < Source
   field :tags
 
   def fetch_items(max_items)
-    flickr_content = XmlSimple.xml_in(HTTParty.get(URI.escape("http://api.flickr.com/services/feeds/photos_public.gne?tags=#{tags}")),{:ForceArray => false})
+    flickr_content = XmlSimple.xml_in(HTTParty.get(URI.escape("http://api.flickr.com/services/feeds/photos_public.gne?tags=#{tags}&tagmode=any")),{:ForceArray => false})
     flickr_content["entry"].collect do |entry|
       url = img = nil
       entry["link"].each do |link|

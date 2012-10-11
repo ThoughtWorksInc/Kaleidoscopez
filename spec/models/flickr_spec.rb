@@ -9,7 +9,7 @@ describe Flickr do
 
   it "should fetch images from Flickr.com and create items" do
     flickr = Flickr.create({:name => "test", :tags => "test_tag1, test_tag2"})
-    flickr_url = URI.escape "http://api.flickr.com/services/feeds/photos_public.gne?tags=#{flickr.tags}"
+    flickr_url = URI.escape "http://api.flickr.com/services/feeds/photos_public.gne?tags=#{flickr.tags}&tagmode=any"
     xml_response = "abcd"
     HTTParty.should_receive(:get).with(flickr_url).and_return(xml_response)
     flickr_content = {
