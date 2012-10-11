@@ -1,5 +1,6 @@
 .bundle/
 .idea/
+TAGS
 
 # Ignore Vagrant local storage
 .vagrant
