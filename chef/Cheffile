@@ -3,24 +3,14 @@
 
 site 'http://community.opscode.com/api/v1'
 
-cookbook 'apt',
-         :git => 'https://github.com/opscode-cookbooks/apt'
-
+cookbook 'apt'
 cookbook 'rvm',
          :git => 'https://github.com/fnichol/chef-rvm'
-
-cookbook 'git',
-         :git => 'https://github.com/mlafeldt/git-cookbook'
-
-cookbook 'mongodb',
-         :git => 'https://github.com/edelight/chef-mongodb'
-
-cookbook 'zsh',
-         :git => 'https://github.com/opscode-cookbooks/zsh.git'
-
+cookbook 'git'
+cookbook 'mongodb'
+cookbook 'zsh'
 cookbook 'oh-my-zsh',
          :git => 'https://github.com/satyamag/chef-oh-my-zsh.git'
-
 cookbook 'libcurl',
          :git => 'https://github.com/ashwinwhat/libcurl.git'
 
