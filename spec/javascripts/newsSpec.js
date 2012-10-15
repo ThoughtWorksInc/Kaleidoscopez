@@ -140,7 +140,7 @@ describe("news", function(){
                    expect(parseFloat($(steps[i]).attr('data-x'))).toBe(expected_data_x);
                    expect(parseFloat($(steps[i]).attr('data-y'))).toBe(expected_data_y);
                    expect(parseFloat($(steps[i]).attr('data-rotate-z'))).toBe(expected_theta_degrees);
-                   expect(parseFloat($(steps[i]).attr('data-rotate-x'))).toBe(i * 90);
+                   expect(parseFloat($(steps[i]).attr('data-rotate-x'))).toBe(i * 88);
                }
             })
 
