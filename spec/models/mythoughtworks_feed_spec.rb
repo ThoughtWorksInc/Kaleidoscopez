@@ -4,6 +4,10 @@ describe MythoughtworksFeed do
 
   it {should respond_to :query}
 
+  it "should inherit from Source" do
+    MythoughtworksFeed.ancestors.should include(Source)
+  end
+
   context "fetch items" do
 
     before do
@@ -29,24 +33,16 @@ describe MythoughtworksFeed do
     end
 
     it "should authenticate user and fetch items" do
-      result = search_result
-      @httparty.should_receive(:parsed_response).and_return(result.to_json)
+      @httparty.should_receive(:parsed_response).and_return({"data" => ["first_post", "second_post"]}.to_json)
+      MythoughtworksParser.any_instance.should_receive(:create_item).twice.and_return(Item.new)
 
       items = @mytw_feed.fetch_items(10)
 
-      items.count.should == 1
-      items[0].title.should == result[:data][0][:subject]
-      items[0].url.should == result[:data][0][:resources][:self][:ref]
-      items[0].date.should == result[:data][0][:modificationDate]
-      items[0].author.should == result[:data][0][:author][:name]
-      items[0].image.should == nil
-      items[0].source.should == @mytw_feed
-      items[0].author_image.should == result[:data][0][:author][:resources][:avatar][:ref]
+      items.count.should == 2
     end
 
     it "should not create items if data is absent in the response" do
-      result = error_response
-      @httparty.should_receive(:parsed_response).and_return(result.to_json)
+      @httparty.should_receive(:parsed_response).and_return({"msg" => "Bad Credentials","code" => 401}.to_json)
 
       items = @mytw_feed.fetch_items(10)
 
@@ -55,35 +51,4 @@ describe MythoughtworksFeed do
 
   end
 
-  def search_result
-    {
-      :data => [{
-        :blogSummary => {
-          :name => "Pune-Office News"
-        },
-        :subject => "My First Post",
-        :author => {
-          :name => "Yahya Poonawala",
-          :resources => {
-            :avatar => {
-              :ref => "http://yahya.avatar.me"
-            }
-          }
-        },
-        :resources => {
-          :self => {
-            :ref => "http://blogpost.api.url"
-          }
-        },
-        :modificationDate => "2012-03-02T05:15:32.743+0000"
-      }]
-    }
-  end
-
-  def error_response
-    {
-      :msg => "Bad Credentials",
-      :code => 401
-    }
-  end
 end

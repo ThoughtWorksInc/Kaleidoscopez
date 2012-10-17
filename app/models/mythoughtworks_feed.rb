@@ -27,20 +27,10 @@ class MythoughtworksFeed < Source
   end
 
   def create_items(response)
-    response["data"].collect do |response_entry|
-      create_item(response_entry)
+    parser = MythoughtworksParser.new
+    response["data"].collect do |post|
+      parser.create_item(post, self)
     end
   end
 
-  def create_item(post)
-    Item.new({
-    :title => post["subject"],
-    :url => post["resources"]["self"]["ref"],
-    :author => post["author"]["name"],
-    :author_image => post["author"]["resources"]["avatar"]["ref"],
-    :date => post["modificationDate"],
-    :image => nil,
-    :source => self
-    })
-  end
 end

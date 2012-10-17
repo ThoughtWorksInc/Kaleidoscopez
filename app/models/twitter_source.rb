@@ -12,16 +12,11 @@ class TwitterSource < Source
 
   def fetch_items(number_of_items)
     tweets = Twitter.search(query)[:statuses]
-    tweets.slice(0,number_of_items).collect do |tweet|
-        img_url = tweet[:media][0][:media_url].gsub!(/\?.*/,"") if tweet[:media][0]
-        Item.new({
-          :title => tweet[:text],
-          :date => tweet[:created_at],
-          :author => tweet[:user][:name],
-          :image => img_url,
-          :author_image => tweet[:user][:profile_image_url],
-          :source => self
-        })
+    parser = TwitterParser.new
+    tweets.slice(0, number_of_items).collect do |tweet|
+      parser.create_item(tweet, self)
     end
   end
+
+
 end
