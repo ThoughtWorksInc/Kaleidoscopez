@@ -5,6 +5,9 @@ class MyThoughtworks
   parser(Proc.new { |body, format| body.gsub(/throw .*;/, '') })
 end
 
+BLOGPOST = "post"
+DISCUSSION = "discussion"
+
 class MythoughtworksFeed < Source
   field :query
 
@@ -12,7 +15,8 @@ class MythoughtworksFeed < Source
     options = {
         :query => {
             :q => query.split(/[-\s]+/).join("+"),
-            :type => "post",
+            :type => BLOGPOST,
+            :type => DISCUSSION,
             :container => query,
             :sort => "date",
             :limit => number_of_items

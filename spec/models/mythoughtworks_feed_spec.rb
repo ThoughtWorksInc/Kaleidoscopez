@@ -18,7 +18,8 @@ describe MythoughtworksFeed do
       @options = {
           :query => {
               :q => "Pune+Office+News",
-              :type => "post",
+              :type => BLOGPOST,
+              :type => DISCUSSION,
               :container => @mytw_feed.query,
               :sort => "date",
               :limit => 10
