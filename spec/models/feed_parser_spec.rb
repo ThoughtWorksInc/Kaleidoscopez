@@ -61,5 +61,12 @@ describe FeedParser do
     item.image.should == "www.test.com/image_two.jpg"
   end
 
+  it "should return item without image_url if the content of feed_entry has a image tag without src attribute" do
+    @feed_entry.content = "<img alt='oops! I dont have a source!'/>"
+
+    item = FeedParser.new.create_item(@feed_entry, @source)
+
+    item.image.should be_nil
+  end
 
 end

@@ -20,7 +20,7 @@ class FeedParser
   def get_image(feed_entry)
     content = Nokogiri::HTML(feed_entry.content || feed_entry.summary)
     images = content.css('img').map { |i| i['src'] }
-    biggest_image(images)
+    biggest_image(images.compact)
 
   end
 
