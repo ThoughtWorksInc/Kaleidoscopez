@@ -26,7 +26,7 @@ GIT
 GIT
   remote: https://github.com/fnichol/chef-rvm
   ref: master
-  sha: 6411f1194c2f57dc2578e87d9ca89199561512dd
+  sha: 6cd79589c85365227c930a559cfedc4c5b8bf9f6
   specs:
     rvm (0.9.1)
 

@@ -1,0 +1,10 @@
+bash -c '
+<%= "export http_proxy=\"#{knife_config[:bootstrap_proxy]}\"" if knife_config[:bootstrap_proxy] -%>
+
+(
+cat << 'EOP'
+<%= first_boot.to_json %>
+EOP
+) > /etc/chef/first-boot.json
+
+chef-solo -j /etc/chef/first-boot.json -c /etc/chef/solo.rb'

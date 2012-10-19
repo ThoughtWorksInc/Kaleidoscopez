@@ -1,0 +1,5 @@
+name "deploy"
+license "Apache 2.0"
+description "Deploys Application"
+version "1.0.0"
+recipe "deploy", "Deploys"
