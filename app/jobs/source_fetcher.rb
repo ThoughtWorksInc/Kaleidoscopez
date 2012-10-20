@@ -1,6 +1,6 @@
 class SourceFetcher
 
-  NUMBER_OF_ITEMS = 15
+  NUMBER_OF_ITEMS = 5
 
   def self.get_all_items()
     items = Source.all.collect { |source| source.fetch_items(NUMBER_OF_ITEMS) }.flatten.compact
