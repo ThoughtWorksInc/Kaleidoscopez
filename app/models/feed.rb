@@ -6,7 +6,7 @@ class Feed < Source
   field :last_fetched_at
 
   def self.initialize(name,url)
-    Feed.create({:name => name, :url => url, :last_fetched_at => Time.now})
+    Feed.create({:name => name, :url => url, :last_fetched_at => 1.month.ago})
   end
 
   def fetch_items(number_of_items)
