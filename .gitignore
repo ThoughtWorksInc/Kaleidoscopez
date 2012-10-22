@@ -12,6 +12,6 @@ coverage/
 .DS_Store
 
 # Swap Files
-.swp
+*.swp
 chef/cookbooks
 .sass-cache/
