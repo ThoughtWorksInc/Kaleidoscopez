@@ -8,7 +8,7 @@ end
 BLOGPOST = "post"
 DISCUSSION = "discussion"
 
-TAG = "pune"
+TAG = "PuneDashboard"
 
 class MythoughtworksFeed < Source
   field :group_name
