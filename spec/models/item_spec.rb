@@ -8,4 +8,5 @@ describe Item do
   it {should respond_to :source}
   it {should respond_to :image}
   it {should respond_to :author_image}
+  it {should respond_to :content}
 end

@@ -7,6 +7,7 @@ class Item
   field :date
   field :image
   field :author_image
+  field :content
 
   belongs_to :source
 end

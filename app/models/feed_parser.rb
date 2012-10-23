@@ -4,12 +4,13 @@ class FeedParser
     image_url = get_image(feed_entry)
 
     Item.new({
-               :title => feed_entry.title,
-               :url => feed_entry.url,
-               :author => feed_entry.author,
-               :date => feed_entry.published,
-               :image => image_url,
-               :source => source
+                 :title => feed_entry.title,
+                 :url => feed_entry.url,
+                 :author => feed_entry.author,
+                 :date => feed_entry.published,
+                 :image => image_url,
+                 :content => parsed_content(feed_entry),
+                 :source => source
              })
   end
 
@@ -37,6 +38,11 @@ class FeedParser
       end
     end
     final_image_url
+  end
+
+  def parsed_content(feed_entry)
+    content = feed_entry.content || feed_entry.summary
+    content.gsub(/<.*?>/, "").gsub(/\n/, " ") if content
   end
 
 end

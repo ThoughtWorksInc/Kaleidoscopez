@@ -69,4 +69,12 @@ describe FeedParser do
     item.image.should be_nil
   end
 
+  it "should return item with content without HTML tags and new lines" do
+    @feed_entry.content = "<p>This is a test.</p>\n<a href=\"abcd.com\">Test is also code</a>"
+
+    item = FeedParser.new.create_item(@feed_entry, @source)
+
+    item.content.should == "This is a test. Test is also code"
+  end
+
 end
