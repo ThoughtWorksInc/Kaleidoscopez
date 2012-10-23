@@ -10,7 +10,7 @@ body {
 
 .title-no-image{
     position: relative;
-    margin-top: 20%;
+    margin-top: 8%;
     line-height:140%
 }
 
@@ -25,7 +25,7 @@ body {
 .author-container {
   position: absolute;
   width: 81%;
-    top:88%;
+  top:88%;
 }
 
 .author {
