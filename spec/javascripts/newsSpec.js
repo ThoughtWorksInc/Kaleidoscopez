@@ -35,8 +35,7 @@ describe("news", function(){
         var response = {
             items: [
                 {
-                    title: "item1_title",
-                    url: "item1_url",
+                    title: "item1_title_without_author_image",
                     author: "item1_author",
                     source: "abcd",
                     date: "2012-10-08T04:00:00Z",
@@ -49,6 +48,13 @@ describe("news", function(){
                     source: "pqrs",
                     date: "2012-10-08T05:00:00Z",
                     image: "image2"
+                } ,
+                {
+                    title: "item3_title_without_image",
+                    author: "item3_author",
+                    author_image: "item3_author_image",
+                    source: "pqrs",
+                    date: "2012-10-08T05:00:00Z"
                 }
             ]
         };
@@ -58,7 +64,6 @@ describe("news", function(){
                 params.success(response);
             })
 
-            spyOn($.fn,"qrcode")
             setupDisplay();
         })
 
@@ -87,9 +92,13 @@ describe("news", function(){
                 expect(steps.length).toBe(response["items"].length);
             })
 
-            it("should create all slides with title", function(){
-                expect($(steps[0]).find('.title').html()).toBe(items[0]["title"]);
-                expect($(steps[1]).find('.title').html()).toBe(items[1]["title"]);
+            it("should create slides with title at the top when image is present", function(){
+                expect($(steps[0]).find('.title-with-image').html()).toBe(items[0]["title"]);
+                expect($(steps[1]).find('.title-with-image').html()).toBe(items[1]["title"]);
+            })
+
+            it("should position title at the centre of slide when there is no image", function(){
+                expect($(steps[2]).find('.title-no-image').length).toBe(1);
             })
 
             it("should create all slides with date", function() {
@@ -98,36 +107,30 @@ describe("news", function(){
             })
 
             it("should create all slides with source",function(){
-                expect($(steps[0]).find('.source').html()).toBe(items[0]["source"]);
-                expect($(steps[1]).find('.source').html()).toBe(items[1]["source"]);
+                expect($(steps[0]).find('.source').html()).toBe("via " + items[0]["source"]);
+                expect($(steps[1]).find('.source').html()).toBe("via " + items[1]["source"]);
             })
 
             it("should create all slides with author",function(){
-                expect($(steps[0]).find('.author .author_name').html()).toBe(items[0]["author"]);
-                expect($(steps[1]).find('.author .author_name').html()).toBe(items[1]["author"]);
+                expect($(steps[0]).find('.author .author-name').html()).toBe(items[0]["author"]);
+                expect($(steps[1]).find('.author .author-name').html()).toBe(items[1]["author"]);
             })
 
-            it("should create all slides with image",function(){
+            it("should create all slides with image if image exists",function(){
                 expect($(steps[0]).find('.image img').attr('src')).toBe(items[0]["image"]);
                 expect($(steps[1]).find('.image img').attr('src')).toBe(items[1]["image"]);
             })
 
+            it("should create slide without image if image does not exist",function(){
+                expect($(steps[2]).find('.image img').length).toBe(0);
+            })
+
+            it("should create slides without author image, if it does not exists", function(){
+                expect($(steps[0]).find('.author img').length).toBe(0)
+            })
 
             it("should create slides with author image, if it exists", function(){
-                expect($(steps[0]).find(' .author img').length).toBe(0)
                 expect($(steps[1]).find('.author img').attr('src')).toBe(items[1]["author_image"])
-            })
-            it("should create slides with qr code",function(){
-                expect($.fn.qrcode).toHaveBeenCalledWith({
-                    width: 200,
-                    height: 200,
-                    text: items[0].url
-                });
-                expect($.fn.qrcode).not.toHaveBeenCalledWith({
-                    width: 200,
-                    height: 200,
-                    text: undefined
-                });
             })
 
             it("should set all slides to rotate", function(){
@@ -170,11 +173,7 @@ describe("news", function(){
             expect(autoScroll.callCount).toEqual(2);
         })
 
-        it("should change body color",function(){
-            var original_body_color = $('body').css('background-color');
-            jasmine.Clock.tick(milliSecPerSlide);
-            expect($('body').css('background-color')).not.toBe(original_body_color);
-        })
+
     });
 
 })

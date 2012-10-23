@@ -2,11 +2,6 @@ var milliSecPerSlide = 8000;
 
 function autoScroll() {
     impress().next();
-    var hue = (Math.random()*360).toFixed();
-    var saturation = (Math.random() * 70).toFixed();
-    var value = 80 + (Math.random() * 20).toFixed();
-    var hsvColor = {h: hue, s: saturation, v: value};
-    $('body').css('background-color', tinycolor(hsvColor).toRgbString() )
 }
 
 function convertToRadians(degrees) {
@@ -36,7 +31,11 @@ function setupDisplay() {
         function prepareTitle(item) {
             var title = $('<div>');
             title.append(item["title"]) ;
-            title.addClass("title");
+            if(item['image'] == null) {
+                title.addClass('title-no-image');
+            }else {
+                title.addClass("title-with-image");
+            }
             return title;
         }
 
@@ -49,7 +48,7 @@ function setupDisplay() {
 
         function prepareSource(item) {
             var source = $('<div>');
-            source.append(item["source"]);
+            source.append("via " + item["source"]);
             source.addClass("source");
             return source;
         }
@@ -62,39 +61,29 @@ function setupDisplay() {
             }
 
             function prepare_author_name(author_div) {
-                author_div.append($('<div>').addClass('author_name').append(item["author"]));
+                author_div.append($('<div>').addClass('author-name').append(item["author"]));
                 author_div.addClass("author");
             }
-
             var author = $('<div>');
+
             var author_container=$('<div>');
-            author_container.addClass('author_container');
+            author_container.addClass('author-container');
             prepare_author_image(author);
             prepare_author_name(author);
             author_container.append(author);
+            author_container.append(source);
             return author_container;
         }
 
         function prepareImage(item) {
-            var image_div = $('<div>');
-            var img = $('<img>');
-            img.attr('src',item['image']);
-            image_div.append(img);
-            image_div.addClass("image");
-            return image_div;
-        }
-
-        function prepareQrCode(item) {
-            var qrcode_div = $('<div>');
-            qrcode_div.addClass('qrcode');
-            if(item['url'] != undefined){
-                qrcode_div.qrcode({
-                    height: 200,
-                    width: 200,
-                    text: item["url"]
-                });
+            if(item['image']){
+                var image_div = $('<div>');
+                var img = $('<img>');
+                img.attr('src',item['image']);
+                image_div.append(img);
+                image_div.addClass("image");
+                return image_div;
             }
-            return qrcode_div;
         }
 
         function prepareEmptySlide() {
@@ -107,27 +96,23 @@ function setupDisplay() {
             var theta = calcRotationAngle(itemIndex);
             slide.setAttribute('data-x', getXCoOrdinate(theta));
             slide.setAttribute('data-y', getYCoOrdinate(theta));
-           slide.setAttribute('data-rotate-x', itemIndex * 88);
+            slide.setAttribute('data-rotate-x', itemIndex * 88);
             slide.setAttribute('data-rotate-z', theta);
         }
         function assembleSlide() {
             slide.append(title);
-            slide.append(source);
+            slide.append(image);
             slide.append(author);
             $(author).find('.author').append(date);
-            slide.append(image);
-            image.append(qrcode);
-
             impressDiv.append(slide);
         }
         for(var itemIndex = 0; itemIndex < totalNoOfItems; itemIndex++){
             var item = items[itemIndex];
             var title = prepareTitle(item);
-            var author = prepareAuthor(item);
-            var source = prepareSource(item);
-            var date = prepareDate(item);
             var image = prepareImage(item);
-            var qrcode = prepareQrCode(item);
+            var source = prepareSource(item);
+            var author = prepareAuthor(item);
+            var date = prepareDate(item);
             var slide = prepareEmptySlide();
 
             setupRotationOfSlide(slide[0], itemIndex);
@@ -152,4 +137,4 @@ function startup() {
 
 $(document).ready(function () {
     startup();
-})
+});

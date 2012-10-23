@@ -1,63 +1,115 @@
 body {
-  background-color: #7fffd4;
-  -webkit-transition-property: background-color;
-  -webkit-transition-duration: 2s; }
+    background-color: #333;
+}
+
+
+.title-with-image{
+    width: 95%;
+    line-height: 100%;
+}
+
+.title-no-image{
+    position: relative;
+    margin-top: 20%;
+    line-height:140%
+}
+
 
 .source {
-  font-size: 0.5em;
-  text-shadow: none; }
+  text-shadow: none;
+  display: table-column;
+  float: right;
+  font-size: 0.3em
+}
 
-.author_container {
-  display: inline-table; }
+.author-container {
+  position: absolute;
+  width: 81%;
+    top:88%;
+}
 
 .author {
   font-size: 0.3em;
   text-shadow: none;
-  display: table-row;
+  display: table-column;
   white-space: nowrap;
-  width: 100%; }
+  float: left;
+}
 
 .author img {
-  display: table-cell; }
-
-.author_name {
-  padding-left: 2%;
   display: table-cell;
-  vertical-align: middle; }
+  float: left;
+}
+
+.author-name {
+  padding-left: 3%;
+  display: table-cell;
+}
 
 .date {
-  padding-left: 5%;
+  padding-left: 7%;
   text-shadow: none;
   display: table-cell;
-  vertical-align: middle; }
+}
 
 .step {
-  opacity: 0.1;
-  -webkit-transition-property: opacity;
-  -webkit-transition-duration: 0.5s; }
-
-.slide {
-  display: block;
-  width: 1200px;
-  height: 700px;
-  padding: 40px 60px;
-  line-height: 1.5;
-  font-size: 75px;
-  text-align: center;
-  font-family: 'Vollkorn', serif;
-  text-shadow: 0 2px 5px rgba(10, 10, 10, 0.5);
-  letter-spacing: -1px; }
+  opacity: 0;
+}
 
 .image img{
-    max-height: 500px;
+    max-height: 400px;
     max-width: 700px;
+    padding-top: 3%
 }
 
-.qrcode{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
 
 .impress-enabled .step.active {
   opacity: 1; }
+
+
+.slide
+{
+    position: relative;
+    width: 1200px;
+    height:720px;
+    padding: 50px;
+    margin: 0 auto;
+    background-image: url('../images/slide_image.jpeg');
+    -webkit-box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    font-family: 'Handlee', cursive;
+    text-shadow: 0 2px 5px rgba(10, 10, 10, 0.5);
+    line-height: 1.5;
+    font-size: 75px;
+    z-index: 20;
+}
+
+
+.slide::before {
+    content: "";
+    margin: 0 0 10px 10px;
+    position: absolute;
+    border-style: solid;
+    border-width: 0px 100px 100px 0px;
+    border-color: #777 #333;
+    display: block;
+    width: 0px;
+    top: 0;
+    right: 0;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.0), -6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+h1, h2
+{
+    font-size: 1.6em;
+    font-weight: normal;
+    margin: 0;
+}
+
+h2
+{
+    font-size: 1.3em;
+    margin-top: 1.5em;
+}
