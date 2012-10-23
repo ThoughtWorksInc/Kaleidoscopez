@@ -39,6 +39,7 @@ body {
 .author img {
   display: table-cell;
   float: left;
+  max-height: 80px;
 }
 
 .author-name {
