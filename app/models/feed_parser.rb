@@ -16,7 +16,7 @@ class FeedParser
 
   private
 
-  MIN_AREA = 10000
+  MIN_AREA = 40000
 
   def get_image(feed_entry)
     content = Nokogiri::HTML(feed_entry.content || feed_entry.summary)
