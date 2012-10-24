@@ -11,15 +11,14 @@ body {
 .title-no-image{
     position: relative;
     margin-top: 8%;
-    line-height:140%
+    line-height:140%;
 }
 
-
 .source {
-  text-shadow: none;
-  display: table-column;
+  display: inline-block;
+  vertical-align: middle;
   float: right;
-  font-size: 0.3em
+  font-size: 0.3em;
 }
 
 .footer {
@@ -27,31 +26,33 @@ body {
   width: 81%;
   top:88%;
   font-weight: bold;
+  text-shadow: none;
 }
 
 .author {
   font-size: 0.3em;
-  text-shadow: none;
-  display: table-column;
+  display: inline-block;
   white-space: nowrap;
   float: left;
+  width: 50%;
+  text-align: left;
 }
 
 .author img {
-  display: table-cell;
-  float: left;
   max-height: 80px;
+  vertical-align: middle;
 }
 
 .author-name {
   padding-left: 3%;
-  display: table-cell;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .date {
   padding-left: 7%;
-  text-shadow: none;
-  display: table-cell;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .step {
