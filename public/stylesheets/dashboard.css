@@ -97,12 +97,12 @@ body {
     position: absolute;
     border-style: solid;
     border-width: 0px 100px 100px 0px;
-    border-color: #777 #333;
+    border-color: #EBEBEB #333;
     display: block;
     width: 0px;
     top: 0;
     right: 0;
-    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.0), -6px 6px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.0), -8px 8px 10px rgba(0, 0, 0, 0.2);
 }
 
 h1, h2
