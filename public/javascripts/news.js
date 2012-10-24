@@ -66,13 +66,13 @@ function setupDisplay() {
             }
             var author = $('<div>');
 
-            var author_container=$('<div>');
-            author_container.addClass('author-container');
+            var footer=$('<div>');
+            footer.addClass('footer');
             prepare_author_image(author);
             prepare_author_name(author);
-            author_container.append(author);
-            author_container.append(source);
-            return author_container;
+            footer.append(author);
+            footer.append(source);
+            return footer;
         }
 
         function prepareImage(item) {
