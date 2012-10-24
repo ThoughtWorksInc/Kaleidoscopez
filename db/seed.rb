@@ -3,7 +3,7 @@ require './app/boot'
 Source.delete_all
 Item.delete_all
 
-Feed.initialize("500px", "http://500px.com/popular.rss")
+Feed.initialize("500px", "http://500px.com/editors.rss?only=Animals")
 Feed.initialize("Quora", "http://quora.com/rss")
 Feed.initialize("Quora: Technology: Best Questions", "http://www.quora.com/Technology/best_questions/rss")
 Feed.initialize("Quora: India: Best Questions", "http://www.quora.com/India/best_questions/rss")
