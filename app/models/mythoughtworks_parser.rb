@@ -23,16 +23,25 @@ class MythoughtworksParser
             :password => ENV['TW_PASSWORD']
         }
     }
-    get_image_from_content_url(options, content["resources"]["self"]["ref"], content["type"])
+    if(content["type"])
+      get_image_from_content_url(options, content["resources"]["self"]["ref"], content["type"])
+    else
+      images_url = content["resources"]["images"]["ref"]
+      retrieve_image(images_url, options)
+    end
   end
 
   def get_image_from_content_url(options, content_url, type)
     content = JSON::parse((MyThoughtworks.get(content_url, options)).parsed_response)
     if(type == BLOGPOST)
       images_url = content["resources"]["images"]["ref"]
-    else
+    elsif(type == DISCUSSION)
       images_url = content["message"]["resources"]["images"]["ref"]
     end
+    retrieve_image(images_url, options)
+  end
+
+  def retrieve_image(images_url, options)
     images = JSON::parse((MyThoughtworks.get(images_url, options)).parsed_response)
     get_biggest_image(images)
   end
