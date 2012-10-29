@@ -3,7 +3,7 @@
 IP_ADDR=$1
 USERNAME=$2
 PASSWORD=$3
-tar -cz /tmp/chef.tar.gz chef
+tar -czf /tmp/chef.tar.gz chef
 scp /tmp/chef.tar.gz $USERNAME@$IP_ADDR:/tmp
 ssh $USERNAME@$IP_ADDR '
 cd /tmp
