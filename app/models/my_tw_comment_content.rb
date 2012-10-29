@@ -32,18 +32,23 @@ class MyTWCommentContent < Source
     items = Array.new
     if(content["data"])
        content["data"].each do |content|
-         if(content["type"] == "comment")
-           raw_content = fetch_content_from_comment(content["resources"]["self"]["ref"])
-           item = parser.create_item(raw_content, self)
-         elsif(content["type"] == DISCUSSION)
-           item = parser.create_item(content, self)
-         else
-           item = nil
-         end
+         item = create_item(content, parser)
          items.append(item)
        end
     end
     items
+  end
+
+  def create_item(content, parser)
+    if (content["type"] == "comment")
+      raw_content = fetch_content_from_comment(content["resources"]["self"]["ref"])
+      item = parser.create_item(raw_content, self)
+    elsif (content["type"] == DISCUSSION)
+      item = parser.create_item(content, self)
+    else
+      item = nil
+    end
+    item
   end
 
   def fetch_content_from_comment(comment_url)
