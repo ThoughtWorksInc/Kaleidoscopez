@@ -25,7 +25,7 @@ describe FeedParser do
   end
 
   it "should return item with image_url for image size greater than min area" do
-    @feed_entry.content = "<img src='www.test.com/image.jpg'/>"
+    @feed_entry.summary = "<img src='www.test.com/image.jpg'/>"
     FastImage.should_receive(:size).with("www.test.com/image.jpg").and_return([200, 205])
 
     item = FeedParser.new.create_item(@feed_entry, @source)
@@ -34,7 +34,7 @@ describe FeedParser do
   end
 
   it "should return item without image_url for image size lesser than min area" do
-    @feed_entry.content = "<img src='www.test.com/image.jpg'/>"
+    @feed_entry.summary = "<img src='www.test.com/image.jpg'/>"
     FastImage.should_receive(:size).with("www.test.com/image.jpg").and_return([10, 10])
 
     item = FeedParser.new.create_item(@feed_entry, @source)
@@ -43,7 +43,7 @@ describe FeedParser do
   end
 
   it "should return item with image_url for valid image with url with escape characters" do
-    @feed_entry.content = "<img src='www.test.com/test image.jpg'/>"
+    @feed_entry.summary = "<img src='www.test.com/test image.jpg'/>"
     FastImage.should_receive(:size).with("www.test.com/test%20image.jpg").and_return([200, 205])
 
     item = FeedParser.new.create_item(@feed_entry, @source)
@@ -51,8 +51,8 @@ describe FeedParser do
     item.image.should == "www.test.com/test image.jpg"
   end
 
-  it "should return item with image_url of largest image in the content" do
-    @feed_entry.content = "<img src='www.test.com/image_one.jpg'/> <img src='www.test.com/image_two.jpg'/>"
+  it "should return item with image_url of largest image in the summary" do
+    @feed_entry.summary = "<img src='www.test.com/image_one.jpg'/> <img src='www.test.com/image_two.jpg'/>"
     FastImage.should_receive(:size).with("www.test.com/image_one.jpg").and_return([200, 205])
     FastImage.should_receive(:size).with("www.test.com/image_two.jpg").and_return([200, 210])
 
@@ -61,20 +61,20 @@ describe FeedParser do
     item.image.should == "www.test.com/image_two.jpg"
   end
 
-  it "should return item without image_url if the content of feed_entry has a image tag without src attribute" do
-    @feed_entry.content = "<img alt='oops! I dont have a source!'/>"
+  it "should return item without image_url if the summary of feed_entry has a image tag without src attribute" do
+    @feed_entry.summary = "<img alt='oops! I dont have a source!'/>"
 
     item = FeedParser.new.create_item(@feed_entry, @source)
 
     item.image.should be_nil
   end
 
-  it "should return item with content without HTML tags and new lines" do
-    @feed_entry.content = "<p>This is a test.</p>\n<a href=\"abcd.com\">Test is also code</a>"
+  it "should return item with summary without HTML tags and new lines" do
+    @feed_entry.summary = "<p>This is a test.</p>\n<a href=\"abcd.com\">Test is also code</a>"
 
     item = FeedParser.new.create_item(@feed_entry, @source)
 
-    item.content.should == "This is a test. Test is also code"
+    item.summary.should == "This is a test. Test is also code..."
   end
 
 end

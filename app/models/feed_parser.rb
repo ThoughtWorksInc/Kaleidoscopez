@@ -9,7 +9,7 @@ class FeedParser
                  :author => feed_entry.author,
                  :date => feed_entry.published,
                  :image => image_url,
-                 :content => parsed_content(feed_entry),
+                 :summary => parsed_summary(feed_entry),
                  :source => source
              })
   end
@@ -19,8 +19,8 @@ class FeedParser
   MIN_AREA = 40000
 
   def get_image(feed_entry)
-    content = Nokogiri::HTML(feed_entry.content || feed_entry.summary)
-    images = content.css('img').map { |i| i['src'] }
+    summary = Nokogiri::HTML(feed_entry.content || feed_entry.summary)
+    images = summary.css('img').map { |i| i['src'] }
     biggest_image(images.compact)
 
   end
@@ -40,9 +40,11 @@ class FeedParser
     final_image_url
   end
 
-  def parsed_content(feed_entry)
-    content = feed_entry.content || feed_entry.summary
-    content.gsub(/<.*?>/, "").gsub(/\n/, " ") if content
+  def parsed_summary(feed_entry)
+    summary = feed_entry.content || feed_entry.summary
+    (summary = summary.gsub(/<.*?>/, "").gsub(/\n/, " ").slice(0,300)) if summary
+    (summary = summary + "...") if summary && summary != ""
+    summary
   end
 
 end

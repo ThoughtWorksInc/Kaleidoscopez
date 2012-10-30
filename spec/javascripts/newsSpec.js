@@ -39,7 +39,8 @@ describe("news", function(){
                     author: "item1_author",
                     source: "abcd",
                     date: "2012-10-08T04:00:00Z",
-                    image: "image1"
+                    image: "image1",
+                    summary: "this is dummy content"
                 },
                 {
                     title: "item2_title",
@@ -47,7 +48,8 @@ describe("news", function(){
                     author_image: "item2_author_image",
                     source: "pqrs",
                     date: "2012-10-08T05:00:00Z",
-                    image: "image2"
+                    image: "image2",
+                    summary: "this is dummy content 2"
                 } ,
                 {
                     title: "item3_title_without_image",
@@ -55,6 +57,14 @@ describe("news", function(){
                     author_image: "item3_author_image",
                     source: "pqrs",
                     date: "2012-10-08T05:00:00Z"
+                },
+                {
+                    title: "item4_without_summary",
+                    author: "item4_author",
+                    author_image: "item4_author_image",
+                    source: "pqrs",
+                    date: "2012-10-08T05:00:00Z",
+                    image: "image4"
                 }
             ]
         };
@@ -117,12 +127,25 @@ describe("news", function(){
             })
 
             it("should create all slides with image if image exists",function(){
-                expect($(steps[0]).find('.image img').attr('src')).toBe(items[0]["image"]);
-                expect($(steps[1]).find('.image img').attr('src')).toBe(items[1]["image"]);
+                expect($(steps[0]).find('.image-with-summary img').attr('src')).toBe(items[0]["image"]);
+                expect($(steps[1]).find('.image-with-summary img').attr('src')).toBe(items[1]["image"]);
+            })
+
+            it("should create all slides with summary if summary exists",function(){
+                expect($(steps[0]).find('.summary').html()).toBe(items[0]["summary"]);
+                expect($(steps[1]).find('.summary').html()).toBe(items[1]["summary"]);
+            })
+
+            it("should position image at the centre of slide when there is no summary", function(){
+                expect($(steps[3]).find('.image-without-summary img').length).toBe(1);
+            })
+
+            it("should create slide without summary if it does not exist", function(){
+                expect($(steps[2]).find('.image-with-summary img').length).toBe(0);
             })
 
             it("should create slide without image if image does not exist",function(){
-                expect($(steps[2]).find('.image img').length).toBe(0);
+                expect($(steps[2]).find('.image-with-summary img').length).toBe(0);
             })
 
             it("should create slides without author image, if it does not exists", function(){

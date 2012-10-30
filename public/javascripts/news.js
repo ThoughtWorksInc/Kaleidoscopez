@@ -1,4 +1,4 @@
-var milliSecPerSlide = 8000;
+var milliSecPerSlide = 15000;
 
 function autoScroll() {
     impress().next();
@@ -81,8 +81,20 @@ function setupDisplay() {
                 var img = $('<img>');
                 img.attr('src',item['image']);
                 image_div.append(img);
-                image_div.addClass("image");
+                if(item['summary'] == "" || item['summary'] == null)
+                    image_div.addClass("image-without-summary");
+                else
+                    image_div.addClass("image-with-summary");
                 return image_div;
+            }
+        }
+
+        function prepareSummary(item) {
+            if(item['summary']){
+                var summary = $('<div>');
+                summary.append(item['summary']);
+                summary.addClass("summary");
+                return summary;
             }
         }
 
@@ -102,6 +114,7 @@ function setupDisplay() {
         function assembleSlide() {
             slide.append(title);
             slide.append(image);
+            slide.append(summary);
             slide.append(author);
             $(author).find('.author').append(date);
             impressDiv.append(slide);
@@ -109,6 +122,7 @@ function setupDisplay() {
         for(var itemIndex = 0; itemIndex < totalNoOfItems; itemIndex++){
             var item = items[itemIndex];
             var title = prepareTitle(item);
+            var summary = prepareSummary(item);
             var image = prepareImage(item);
             var source = prepareSource(item);
             var author = prepareAuthor(item);

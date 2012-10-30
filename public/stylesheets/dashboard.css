@@ -43,6 +43,12 @@ body {
   vertical-align: middle;
 }
 
+.summary {
+    font-size: 30px;
+    padding-top: 3%;
+    word-wrap: break-word;
+}
+
 .author-name {
   padding-left: 3%;
   display: inline-block;
@@ -61,10 +67,18 @@ body {
   -webkit-transition-property: opacity;
 }
 
-.image img{
+.image-with-summary img{
     max-height: 400px;
     max-width: 700px;
-    padding-top: 3%
+    float:left;
+    padding-top: 3%;
+}
+
+.image-without-summary img{
+    max-width: 700px;
+    padding-top: 3%;
+    max-height: 400px;
+
 }
 
 
