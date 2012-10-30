@@ -19,3 +19,4 @@ Feed.initialize("ThoughtWorks Blogs", "http://www.thoughtworks.com/blogs/rss/cur
 TwitterSource.create(:name => "#ThoughtWorks", :query => "#thoughtworks")
 MyTWGroupContent.create(:name => "myTW: Pune Office", :group_name => "Pune Office")
 MyTWCommentContent.create(:name => "myTW", :comment_tag => "PuneDashboard")
+Flickr.create(:name=> "Traditional Day", :tags => "TWPune")
