@@ -65,6 +65,14 @@ describe("news", function(){
                     source: "pqrs",
                     date: "2012-10-08T05:00:00Z",
                     image: "image4"
+                } ,
+                {
+                    title: "item5_title_without_image_with_summary",
+                    author: "item5_author",
+                    author_image: "item5_author_image",
+                    source: "pqrs",
+                    date: "2012-10-08T05:00:00Z",
+                    summary: "this is dummy content 5"
                 }
             ]
         };
@@ -102,13 +110,14 @@ describe("news", function(){
                 expect(steps.length).toBe(response["items"].length);
             })
 
-            it("should create slides with title at the top when image is present", function(){
-                expect($(steps[0]).find('.title-with-image').html()).toBe(items[0]["title"]);
-                expect($(steps[1]).find('.title-with-image').html()).toBe(items[1]["title"]);
+            it("should create slides with title at the top when image or summary or both are present", function(){
+                expect($(steps[0]).find('.title-with-content').html()).toBe(items[0]["title"]);
+                expect($(steps[1]).find('.title-with-content').html()).toBe(items[1]["title"]);
+                expect($(steps[4]).find('.title-with-content').html()).toBe(items[4]["title"]);
             })
 
             it("should position title at the centre of slide when there is no image", function(){
-                expect($(steps[2]).find('.title-no-image').length).toBe(1);
+                expect($(steps[2]).find('.title-without-content').length).toBe(1);
             })
 
             it("should create all slides with date", function() {

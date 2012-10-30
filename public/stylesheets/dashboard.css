@@ -3,12 +3,12 @@ body {
 }
 
 
-.title-with-image{
+.title-with-content{
     width: 95%;
     line-height: 100%;
 }
 
-.title-no-image{
+.title-without-content{
     position: relative;
     margin-top: 8%;
     line-height:140%;

@@ -31,10 +31,10 @@ function setupDisplay() {
         function prepareTitle(item) {
             var title = $('<div>');
             title.append(item["title"]) ;
-            if(item['image'] == null) {
-                title.addClass('title-no-image');
+            if(item['image'] == null && (item['summary'] == "" || item['summary'] == null)) {
+                title.addClass('title-without-content');
             }else {
-                title.addClass("title-with-image");
+                title.addClass("title-with-content");
             }
             return title;
         }
