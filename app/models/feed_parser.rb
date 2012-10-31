@@ -1,7 +1,10 @@
+require 'IMGKit'
+
 class FeedParser
 
   def create_item(feed_entry, source)
     image_url = get_image(feed_entry)
+    webpage_preview_url = get_webpage_preview(feed_entry) if !image_url
 
     Item.new({
                  :title => feed_entry.title,
@@ -10,17 +13,35 @@ class FeedParser
                  :date => feed_entry.published,
                  :image => image_url,
                  :summary => parsed_summary(feed_entry),
+                 :webpage_preview => webpage_preview_url,
                  :source => source
              })
   end
 
   private
+  MIN_AREA = 10000
 
-  MIN_AREA = 40000
+  def get_webpage_preview(feed_entry)
+    begin
+      jpg = IMGKit.new(feed_entry.url,quality: 50,width: 600).to_jpg
+    rescue
+      jpg = nil
+    end
+    webpage_preview_to_file(feed_entry, jpg) if jpg
+  end
+
+  def webpage_preview_to_file(feed_entry, jpg)
+    filename = feed_entry.title[0..4]+feed_entry.published.strftime("%d%m%y%H%M%S")+".jpg"
+    file = File.new("public/images/preview/"+filename, "w")
+    file.write(jpg)
+    file.flush
+    file.close
+    "/images/preview/"+filename
+  end
 
   def get_image(feed_entry)
-    summary = Nokogiri::HTML(feed_entry.content || feed_entry.summary)
-    images = summary.css('img').map { |i| i['src'] }
+    content = Nokogiri::HTML(feed_entry.content || feed_entry.summary)
+    images = content.css('img').map { |i| i['src'].gsub(/\?.*/,'') if i['src'] }
     biggest_image(images.compact)
 
   end

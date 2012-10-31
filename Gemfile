@@ -19,6 +19,7 @@ group :development do
 end
 
 group :test do
+  gem "imgkit"
   gem "rspec"
   gem "rack-test"
   gem "simplecov", :require => false
