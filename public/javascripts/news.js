@@ -31,7 +31,7 @@ function setupDisplay() {
         function prepareTitle(item) {
             var title = $('<div>');
             title.append(item["title"].slice(0,200)) ;
-            if(item['image'] == null && (item['summary'] == "" || item['summary'] == null)) {
+            if(!item['image'] && (!item['summary'] || item['summary'] == "") && !item['webpage_preview']) {
                 title.addClass('title-without-content');
             }else {
                 title.addClass("title-with-content");
@@ -92,17 +92,17 @@ function setupDisplay() {
         }
 
         function prepareImage(item) {
-            if(item['image']){
-                var image_div = $('<div>');
-                var img = $('<img>');
-                img.attr('src',item['image']);
-                image_div.append(img);
-                if(item['summary'] == "" || item['summary'] == null)
-                    image_div.addClass("image-without-summary");
-                else
-                    image_div.addClass("image-with-summary");
-                return image_div;
-            }
+            if(!item['image']) return
+            var image_div = $('<div>');
+            var img = $('<img>');
+            img.attr('src',item['image']);
+            image_div.append(img);
+            if(item['summary'] == "" || item['summary'] == null)
+                image_div.addClass("image-without-summary");
+            else
+                image_div.addClass("image-with-summary");
+            return image_div;
+
         }
 
         function prepareSummary(item) {
@@ -135,11 +135,25 @@ function setupDisplay() {
             $(author).find('.author').append(date);
             impressDiv.append(slide);
         }
+
+        function prepareSiteScreenshot(item) {
+            if(!item['webpage_preview']) return
+            var image_div = $('<div>');
+            var img = $('<img>');
+            img.attr('src',item['webpage_preview']);
+            image_div.append(img);
+            image_div.addClass("webpage-preview");
+            return image_div;
+        }
+
         for(var itemIndex = 0; itemIndex < totalNoOfItems; itemIndex++){
             var item = items[itemIndex];
             var title = prepareTitle(item);
             var summary = prepareSummary(item);
             var image = prepareImage(item);
+
+            if(!item["image"])
+                var image = prepareSiteScreenshot(item);
             var source = prepareSource(item);
             var author = prepareAuthor(item);
             var date = prepareDate(item);
