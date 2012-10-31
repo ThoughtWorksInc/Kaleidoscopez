@@ -8,6 +8,7 @@ class Item
   field :image
   field :author_image
   field :summary
+  field :source_image
 
   belongs_to :source
 end

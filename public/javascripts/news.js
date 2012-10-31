@@ -1,7 +1,7 @@
 var milliSecPerSlide = 15000;
 
 function autoScroll() {
-    impress().next();
+   impress().next();
 }
 
 function convertToRadians(degrees) {
@@ -30,7 +30,7 @@ function setupDisplay() {
 
         function prepareTitle(item) {
             var title = $('<div>');
-            title.append(item["title"]) ;
+            title.append(item["title"].slice(0,200)) ;
             if(item['image'] == null && (item['summary'] == "" || item['summary'] == null)) {
                 title.addClass('title-without-content');
             }else {
@@ -47,11 +47,27 @@ function setupDisplay() {
         }
 
         function prepareSource(item) {
+            function prepare_source_image(source_div) {
+                var source_image = $('<img>');
+                source_image.attr('src', item['source_image']);
+                if (item['source_image']) source_div.append("via ").append(source_image);
+
+            }
+
+            function prepare_source_name(source_div) {
+                source_div.append($('<div>').addClass('source-name').append(item["source"]));
+            }
+
             var source = $('<div>');
-            source.append("via " + item["source"]);
             source.addClass("source");
+            prepare_source_image(source);
+            if(item["source"].match(/#./)) {
+                prepare_source_name(source);
+            }
             return source;
         }
+
+
 
         function prepareAuthor(item) {
             function prepare_author_image(author_div) {

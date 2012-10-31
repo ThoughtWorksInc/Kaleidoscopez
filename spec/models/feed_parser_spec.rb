@@ -9,12 +9,13 @@ describe FeedParser do
     @feed_entry.author = "Dave Thomas"
     @feed_entry.published = "2012-09-29 06:03:48 UTC"
 
+    @source_image = "source_image_url"
     @source = Source.new
   end
 
   it "should create item object from a valid feed entry" do
 
-    item = FeedParser.new.create_item(@feed_entry, @source)
+    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
 
     item.title.should == "First Post"
     item.url.should == "test.url"
@@ -28,7 +29,7 @@ describe FeedParser do
     @feed_entry.summary = "<img src='www.test.com/image.jpg'/>"
     FastImage.should_receive(:size).with("www.test.com/image.jpg").and_return([200, 205])
 
-    item = FeedParser.new.create_item(@feed_entry, @source)
+    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
 
     item.image.should == "www.test.com/image.jpg"
   end
@@ -37,7 +38,7 @@ describe FeedParser do
     @feed_entry.summary = "<img src='www.test.com/image.jpg'/>"
     FastImage.should_receive(:size).with("www.test.com/image.jpg").and_return([10, 10])
 
-    item = FeedParser.new.create_item(@feed_entry, @source)
+    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
 
     item.image.should == nil
   end
@@ -46,7 +47,7 @@ describe FeedParser do
     @feed_entry.summary = "<img src='www.test.com/test image.jpg'/>"
     FastImage.should_receive(:size).with("www.test.com/test%20image.jpg").and_return([200, 205])
 
-    item = FeedParser.new.create_item(@feed_entry, @source)
+    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
 
     item.image.should == "www.test.com/test image.jpg"
   end
@@ -56,7 +57,7 @@ describe FeedParser do
     FastImage.should_receive(:size).with("www.test.com/image_one.jpg").and_return([200, 205])
     FastImage.should_receive(:size).with("www.test.com/image_two.jpg").and_return([200, 210])
 
-    item = FeedParser.new.create_item(@feed_entry, @source)
+    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
 
     item.image.should == "www.test.com/image_two.jpg"
   end
@@ -64,7 +65,7 @@ describe FeedParser do
   it "should return item without image_url if the summary of feed_entry has a image tag without src attribute" do
     @feed_entry.summary = "<img alt='oops! I dont have a source!'/>"
 
-    item = FeedParser.new.create_item(@feed_entry, @source)
+    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
 
     item.image.should be_nil
   end
@@ -72,7 +73,7 @@ describe FeedParser do
   it "should return item with summary without HTML tags and new lines" do
     @feed_entry.summary = "<p>This is a test.</p>\n<a href=\"abcd.com\">Test is also code</a>"
 
-    item = FeedParser.new.create_item(@feed_entry, @source)
+    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
 
     item.summary.should == "This is a test. Test is also code..."
   end

@@ -1,6 +1,6 @@
 class FeedParser
 
-  def create_item(feed_entry, source)
+  def create_item(feed_entry, source,source_image)
     image_url = get_image(feed_entry)
 
     Item.new({
@@ -10,7 +10,8 @@ class FeedParser
                  :date => feed_entry.published,
                  :image => image_url,
                  :summary => parsed_summary(feed_entry),
-                 :source => source
+                 :source => source,
+                 :source_image => source_image
              })
   end
 

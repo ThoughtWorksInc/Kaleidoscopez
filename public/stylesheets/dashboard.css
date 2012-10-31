@@ -21,10 +21,20 @@ body {
   font-size: 0.3em;
 }
 
+.source img {
+    max-height: 70px;
+    vertical-align: middle;
+}
+
+.source-name {
+    text-align: center
+}
+
+
 .footer {
   position: absolute;
   width: 81%;
-  top:88%;
+  top:85%;
   font-weight: bold;
   text-shadow: none;
 }

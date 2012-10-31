@@ -1,7 +1,7 @@
 
 class MythoughtworksParser
 
-  def create_item(post, source)
+  def create_item(post, source , source_image)
     image = get_image(post)
     Item.new({
       :title => post["subject"],
@@ -10,7 +10,8 @@ class MythoughtworksParser
       :author_image => post["author"]["resources"]["avatar"]["ref"],
       :date => post["modificationDate"],
       :image => image,
-      :source => source
+      :source => source,
+      :source_image => source_image
     })
   end
 

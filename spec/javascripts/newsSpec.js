@@ -38,6 +38,7 @@ describe("news", function(){
                     title: "item1_title_without_author_image",
                     author: "item1_author",
                     source: "abcd",
+                    source_image: "source_image1",
                     date: "2012-10-08T04:00:00Z",
                     image: "image1",
                     summary: "this is dummy content"
@@ -47,6 +48,7 @@ describe("news", function(){
                     author: "item2_author",
                     author_image: "item2_author_image",
                     source: "pqrs",
+                    source_image: "source_image2",
                     date: "2012-10-08T05:00:00Z",
                     image: "image2",
                     summary: "this is dummy content 2"
@@ -56,6 +58,7 @@ describe("news", function(){
                     author: "item3_author",
                     author_image: "item3_author_image",
                     source: "pqrs",
+                    source_image: "source_image3",
                     date: "2012-10-08T05:00:00Z"
                 },
                 {
@@ -63,6 +66,7 @@ describe("news", function(){
                     author: "item4_author",
                     author_image: "item4_author_image",
                     source: "pqrs",
+                    source_image: "source_image4",
                     date: "2012-10-08T05:00:00Z",
                     image: "image4"
                 } ,
@@ -70,7 +74,8 @@ describe("news", function(){
                     title: "item5_title_without_image_with_summary",
                     author: "item5_author",
                     author_image: "item5_author_image",
-                    source: "pqrs",
+                    source: "#pqrs",
+                    source_image: "source_image5",
                     date: "2012-10-08T05:00:00Z",
                     summary: "this is dummy content 5"
                 }
@@ -125,9 +130,14 @@ describe("news", function(){
                 expect($(steps[1]).find('.date').html()).toBe("a few seconds ago");
             })
 
-            it("should create all slides with source",function(){
-                expect($(steps[0]).find('.source').html()).toBe("via " + items[0]["source"]);
-                expect($(steps[1]).find('.source').html()).toBe("via " + items[1]["source"]);
+            it("should create all slides with source image", function() {
+                expect($(steps[0]).find('.source img').attr('src')).toBe(items[0]["source_image"]);
+                expect($(steps[1]).find('.source img').attr('src')).toBe(items[1]["source_image"]);
+            })
+
+            it("should create only slides from Twitter with source name and source image",function(){
+                expect($(steps[4]).find('.source .source-name').html()).toBe(items[4]["source"]);
+                expect($(steps[4]).find('.source img').attr('src')).toBe(items[4]["source_image"])
             })
 
             it("should create all slides with author",function(){

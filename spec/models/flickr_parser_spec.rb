@@ -4,7 +4,8 @@ describe FlickrParser do
 
   it "should fetch images from Flickr.com and create items" do
     source = Source.new
-    item = FlickrParser.new.create_item(flickr_entry, source)
+    source_image = "dummy_url"
+    item = FlickrParser.new.create_item(flickr_entry, source , source_image)
     item.title.should == "title"
     item.url.should == "page_link"
     item.image.should == "image_link"

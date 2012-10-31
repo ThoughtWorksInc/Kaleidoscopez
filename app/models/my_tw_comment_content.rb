@@ -8,6 +8,7 @@ end
 class MyTWCommentContent < Source
 
   field  :comment_tag
+  field  :image_url
 
   def fetch_items(number_of_items)
     options = {
@@ -42,9 +43,9 @@ class MyTWCommentContent < Source
   def create_item(content, parser)
     if (content["type"] == "comment")
       raw_content = fetch_content_from_comment(content["resources"]["self"]["ref"])
-      item = parser.create_item(raw_content, self)
+      item = parser.create_item(raw_content, self , image_url)
     elsif (content["type"] == DISCUSSION)
-      item = parser.create_item(content, self)
+      item = parser.create_item(content, self , image_url)
     else
       item = nil
     end

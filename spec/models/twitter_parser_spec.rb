@@ -14,10 +14,11 @@ describe TwitterParser do
         }
     }
     @source = Source.new
+    @source_image = "source_image_url"
   end
 
   it "should create item object when image_url is present" do
-    item = TwitterParser.new.create_item(@tweet, @source)
+    item = TwitterParser.new.create_item(@tweet, @source , @source_image)
 
     item.title.should == "Tweet text"
     item.date.should == Time.parse("Fri Oct 05 17:15:12 +0000 2012")
@@ -31,7 +32,7 @@ describe TwitterParser do
   it "should create item object when image_url is not present" do
     tweet = @tweet
     tweet[:media] = []
-    item = TwitterParser.new.create_item(@tweet, @source)
+    item = TwitterParser.new.create_item(@tweet, @source , @source_image)
 
     item.title.should == "Tweet text"
     item.date.should == Time.parse("Fri Oct 05 17:15:12 +0000 2012")

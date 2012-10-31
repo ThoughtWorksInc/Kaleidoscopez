@@ -1,5 +1,6 @@
 class TwitterSource < Source
   field :query
+  field :image_url
 
   # Warning: Untested code !!
   Twitter.configure do |config|
@@ -14,7 +15,7 @@ class TwitterSource < Source
     tweets = Twitter.search(query)[:statuses]
     parser = TwitterParser.new
     tweets.slice(0, number_of_items).collect do |tweet|
-      parser.create_item(tweet, self)
+      parser.create_item(tweet, self , image_url)
     end
   end
 

@@ -4,7 +4,7 @@ describe MythoughtworksParser do
 
   before do
     @source = Source.new
-
+    @source_image = "source_image_url"
     @options = {
       :basic_auth => {
           :username => ENV['TW_USERNAME'],
@@ -67,7 +67,7 @@ describe MythoughtworksParser do
       MyThoughtworks.should_receive(:get).with("content_images_url", @options).and_return(@httparty_images)
       @httparty_images.should_receive(:parsed_response).and_return(images.to_json)
 
-      item = MythoughtworksParser.new.create_item(@mythoughtworks_post, @source)
+      item = MythoughtworksParser.new.create_item(@mythoughtworks_post, @source , @source_image)
 
       item.title.should == "My First Post"
       item.url.should == "http://blogpost.api.url"
@@ -84,7 +84,7 @@ describe MythoughtworksParser do
       MyThoughtworks.should_receive(:get).with("content_images_url", @options).and_return(@httparty_images)
       @httparty_images.should_receive(:parsed_response).and_return(@images.to_json)
 
-      item = MythoughtworksParser.new.create_item(@mythoughtworks_post, @source)
+      item = MythoughtworksParser.new.create_item(@mythoughtworks_post, @source , @source_image)
 
       item.title.should == "My First Post"
       item.url.should == "http://blogpost.api.url"
@@ -139,7 +139,7 @@ describe MythoughtworksParser do
       MyThoughtworks.should_receive(:get).with("content_images_url", @options).and_return(@httparty_images)
       @httparty_images.should_receive(:parsed_response).and_return(images.to_json)
 
-      item = MythoughtworksParser.new.create_item(@mythoughtworks_discussion, @source)
+      item = MythoughtworksParser.new.create_item(@mythoughtworks_discussion, @source , @source_image)
 
       item.title.should == "My First Discussion"
       item.url.should == "http://blogpost.api.url"
@@ -156,7 +156,7 @@ describe MythoughtworksParser do
       MyThoughtworks.should_receive(:get).with("content_images_url", @options).and_return(@httparty_images)
       @httparty_images.should_receive(:parsed_response).and_return(@images.to_json)
 
-      item = MythoughtworksParser.new.create_item(@mythoughtworks_discussion, @source)
+      item = MythoughtworksParser.new.create_item(@mythoughtworks_discussion, @source , @source_image)
 
       item.title.should == "My First Discussion"
       item.url.should == "http://blogpost.api.url"
