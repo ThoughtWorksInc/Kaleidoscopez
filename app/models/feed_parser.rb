@@ -1,4 +1,4 @@
-require 'IMGKit'
+require 'imgkit'
 
 class FeedParser
 
