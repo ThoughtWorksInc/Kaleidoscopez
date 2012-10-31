@@ -74,6 +74,8 @@ EOP
 <%= "export TWITTER_CUSTOMER_SECRET=#{ENV['TWITTER_CUSTOMER_SECRET']}" %>
 <%= "export TWITTER_OAUTH_TOKEN=#{ENV['TWITTER_OAUTH_TOKEN']}" %>
 <%= "export TWITTER_OAUTH_TOKEN_SECRET=#{ENV['TWITTER_OAUTH_TOKEN_SECRET']}" %>
+<%= "export TW_USERNAME=#{ENV['TW_USERNAME']}" %>
+<%= "export TW_PASSWORD=#{ENV['TW_PASSWORD']}" %>
 
  chef-solo -j /etc/chef/first-boot.json -c /etc/chef/solo.rb
 '
