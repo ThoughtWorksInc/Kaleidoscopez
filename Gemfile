@@ -12,6 +12,7 @@ gem "sass"
 gem "fastimage"
 gem "httparty"
 gem "xml-simple"
+gem "imgkit"
 
 group :development do
   gem "shotgun"
@@ -19,7 +20,6 @@ group :development do
 end
 
 group :test do
-  gem "imgkit"
   gem "rspec"
   gem "rack-test"
   gem "simplecov", :require => false
