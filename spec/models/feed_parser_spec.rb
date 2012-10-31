@@ -61,17 +61,7 @@ describe FeedParser do
     item.image.should == "www.test.com/image_two.jpg"
   end
 
-  it "should not generate webpage preview when there is an image available" do
-    @feed_entry.summary = "<img src='some_image' />"
-    FastImage.should_receive(:size).with("some_image").and_return([100,110])
-
-    item = FeedParser.new.create_item @feed_entry, @source
-
-    item.webpage_preview.should be nil
-  end
-
-
-  it "should return item without image_url if the content of feed_entry has a image tag without src attribute" do
+  it "should return item without image_url if the summary of feed_entry has a image tag without src attribute" do
     @feed_entry.summary = "<img alt='oops! I dont have a source!'/>"
 
     item = FeedParser.new.create_item(@feed_entry, @source)
@@ -85,32 +75,6 @@ describe FeedParser do
     item = FeedParser.new.create_item(@feed_entry, @source)
 
     item.summary.should == "This is a test. Test is also code..."
-  end
-
-  it "should return item with webpage preview" do
-    mock_imgkit = "mock imgkit"
-    mock_image = "Mock jpg Image"
-    mock_file_handle = "mock file handle"
-
-    IMGKit.should_receive(:new).with("test.url",quality: 50, width: 600).and_return(mock_imgkit)
-    mock_imgkit.should_receive(:to_jpg).and_return(mock_image)
-    File.should_receive(:new).with("public/images/preview/First290912060348.jpg","w").and_return(mock_file_handle)
-    mock_file_handle.should_receive(:write).with(mock_image)
-    mock_file_handle.should_receive(:flush)
-    mock_file_handle.should_receive(:close)
-
-    item = FeedParser.new.create_item(@feed_entry,@source)
-
-    item.webpage_preview.should == "/images/preview/First290912060348.jpg"
-  end
-
-  it "should not crash when IMGKit can't produce webpage preview" do
-    mock_imgkit = "mock imgkit"
-    IMGKit.should_receive(:new).with("test.url",quality: 50, width: 600).and_return(mock_imgkit)
-    mock_imgkit.should_receive(:to_jpg).and_raise(RuntimeError.new("Test Exception"))
-
-    item = FeedParser.new.create_item(@feed_entry,@source)
-    item.webpage_preview.should be nil
   end
 
 end

@@ -15,4 +15,3 @@ coverage/
 *.swp
 chef/cookbooks
 .sass-cache/
-public/images/preview/*.jpg

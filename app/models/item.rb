@@ -8,7 +8,6 @@ class Item
   field :image
   field :author_image
   field :summary
-  field :webpage_preview
 
   belongs_to :source
 end

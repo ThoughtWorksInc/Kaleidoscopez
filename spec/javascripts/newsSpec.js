@@ -52,7 +52,7 @@ describe("news", function(){
                     summary: "this is dummy content 2"
                 } ,
                 {
-                    title: "item3_title_without_image_without_url",
+                    title: "item3_title_without_image",
                     author: "item3_author",
                     author_image: "item3_author_image",
                     source: "pqrs",
@@ -61,7 +61,6 @@ describe("news", function(){
                 {
                     title: "item4_without_summary",
                     author: "item4_author",
-                    url: "url",
                     author_image: "item4_author_image",
                     source: "pqrs",
                     date: "2012-10-08T05:00:00Z",
@@ -74,15 +73,6 @@ describe("news", function(){
                     source: "pqrs",
                     date: "2012-10-08T05:00:00Z",
                     summary: "this is dummy content 5"
-                },
-                {
-                    title: "item6_without_summary",
-                    author: "item6_author",
-                    url: "url",
-                    webpage_preview: "preview1",
-                    author_image: "item6_author_image",
-                    source: "pqrs",
-                    date: "2012-10-08T05:00:00Z"
                 }
             ]
         };
@@ -123,17 +113,11 @@ describe("news", function(){
             it("should create slides with title at the top when image or summary or both are present", function(){
                 expect($(steps[0]).find('.title-with-content').html()).toBe(items[0]["title"]);
                 expect($(steps[1]).find('.title-with-content').html()).toBe(items[1]["title"]);
-                expect($(steps[3]).find('.title-with-content').html()).toBe(items[3]["title"]);
                 expect($(steps[4]).find('.title-with-content').html()).toBe(items[4]["title"]);
             })
 
-            it("should position title at the centre of slide when there is no image and no webpage preview", function(){
+            it("should position title at the centre of slide when there is no image", function(){
                 expect($(steps[2]).find('.title-without-content').length).toBe(1);
-            })
-
-            it("should show wepage preview when there is no image and a webpage preview is available", function(){
-                var webpage_preview = $(steps[5]).find('.webpage-preview img');
-                expect(webpage_preview.length).toBe(1);
             })
 
             it("should create all slides with date", function() {
@@ -173,12 +157,12 @@ describe("news", function(){
                 expect($(steps[2]).find('.image-with-summary img').length).toBe(0);
             })
 
-            it("should create slides with author image, if it exists", function(){
-                expect($(steps[1]).find('.author img').attr('src')).toBe(items[1]["author_image"])
-            })
-
             it("should create slides without author image, if it does not exists", function(){
                 expect($(steps[0]).find('.author img').length).toBe(0)
+            })
+
+            it("should create slides with author image, if it exists", function(){
+                expect($(steps[1]).find('.author img').attr('src')).toBe(items[1]["author_image"])
             })
 
             it("should set all slides to rotate", function(){
