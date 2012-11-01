@@ -7,7 +7,7 @@ Vagrant::Config.run do |config|
   config.vm.forward_port 8888, 8888
   config.ssh.forward_agent = true
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = "chef/cookbooks"
+    chef.cookbooks_path = ["chef/cookbooks","chef/site-cookbooks"]
     chef.roles_path = "chef/roles"
     chef.add_role "vagrant"
   end
