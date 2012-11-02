@@ -114,4 +114,12 @@ describe FeedParser do
     item.webpage_preview.should be nil
   end
 
+  it "should not crash when image url contains more than 255 character" do
+    very_long_text = "x"*256
+    @feed_entry.summary = "<img src='#{very_long_text}' />"
+
+    IMGKit.should_not_receive(:new).with(very_long_text,quality: 50, width: 60)
+
+    FeedParser.new.create_item(@feed_entry,@source,@source_image)
+  end
 end
