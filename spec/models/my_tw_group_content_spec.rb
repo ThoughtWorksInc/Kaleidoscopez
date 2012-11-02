@@ -20,9 +20,8 @@ describe MyTWGroupContent do
     before do
       @options = {
           :query => {
-              :q => "a",
-              :type => BLOGPOST,
-              :type => DISCUSSION,
+              :q => "*a*",
+              :type => [BLOGPOST,DISCUSSION],
               :container => @mytw_feed.group_name,
               :sort => "date",
               :limit => 10

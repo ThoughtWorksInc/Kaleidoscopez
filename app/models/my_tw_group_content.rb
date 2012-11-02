@@ -22,9 +22,8 @@ class MyTWGroupContent < Source
   def fetch_items_from_group(number_of_items)
     options = {
         :query => {
-            :q => "a", #"a" has been used as a generic search query to fetch all results assuming all posts contain "a"
-            :type => BLOGPOST,
-            :type => DISCUSSION,
+            :q => "*a*", #"*a*" has been used as a generic search query to fetch all results assuming all posts contain "a"
+            :type => [BLOGPOST, DISCUSSION],
             :container => group_name,
             :sort => "date",
             :limit => number_of_items
