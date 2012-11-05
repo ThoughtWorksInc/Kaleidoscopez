@@ -4,6 +4,7 @@ require 'feedzirra'
 describe Feed do
   it {should respond_to :url}
   it {should respond_to :source_image}
+  it {should respond_to :has_summary}
 
   it "should inherit Source" do
     Feed.ancestors.include?(Source).should be true

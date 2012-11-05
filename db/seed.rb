@@ -3,13 +3,13 @@ require './app/boot'
 Source.delete_all
 Item.delete_all
 
-Feed.initialize("500px", "http://500px.com/editors.rss?only=Animals", "http://learningdslr.com/wp-content/uploads/2011/11/500px-iPad-Logo.png")
+Feed.initialize("500px", "http://500px.com/editors.rss?only=Animals", "http://learningdslr.com/wp-content/uploads/2011/11/500px-iPad-Logo.png","false")
 Feed.initialize("Quora", "http://quora.com/rss","http://qph.cf.quoracdn.net/main-qimg-f61a4d3c922757b1f5f354f28f4c3558")
 Feed.initialize("Quora: Technology: Best Questions", "http://www.quora.com/Technology/best_questions/rss","http://qph.cf.quoracdn.net/main-qimg-f61a4d3c922757b1f5f354f28f4c3558")
 Feed.initialize("Quora: India: Best Questions", "http://www.quora.com/India/best_questions/rss","http://qph.cf.quoracdn.net/main-qimg-f61a4d3c922757b1f5f354f28f4c3558")
 Feed.initialize("The Economist", "http://www.economist.com/topics/india/index.xml","http://www.economistconferences.co.uk/sites/www.economistconferences.co.uk/files/uploaded-resources/cfo_summit/EMB_P_0.jpg")
 Feed.initialize("Google News", "http://news.google.com/news?ned=in&topic=n&output=rss", "http://www.gstatic.com/news/img/logo/en_in/news.gif")
-Feed.initialize("XKCD", "http://xkcd.com/rss.xml", "http://imgs.xkcd.com/store/imgs/hoodie_square_0.png")
+Feed.initialize("XKCD", "http://xkcd.com/rss.xml", "http://imgs.xkcd.com/store/imgs/hoodie_square_0.png","false")
 Feed.initialize("CNET", "http://feeds.feedburner.com/cnet/NnTv","http://www.thatvideogameblog.com/wp-content/uploads/2009/11/cnet-logo.png")
 Feed.initialize("Mashable", "http://feeds.mashable.com/Mashable","http://6.mshcdn.com/wp-content/uploads/2010/04/Mashable_Logo_230px.jpg")
 Feed.initialize("Tech Crunch", "http://feeds.feedburner.com/TechCrunch/", "http://tctechcrunch2011.files.wordpress.com/2011/11/techcrunch_transparent.png")

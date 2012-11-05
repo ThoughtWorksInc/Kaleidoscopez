@@ -10,7 +10,7 @@ describe FeedParser do
     @feed_entry.published = "2012-09-29 06:03:48 UTC"
 
     @source_image = "source_image_url"
-    @source = Source.new
+    @source = Source.new(:has_summary=>true)
   end
 
   it "should create item object from a valid feed entry" do
@@ -88,6 +88,22 @@ describe FeedParser do
     item.summary.should == "This is a test. Test is also code..."
   end
 
+  it "should return item without summary when has_summary is false" do
+    @source = Source.new(:has_summary=>false)
+
+    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
+
+    item.title.should == "First Post"
+    item.url.should == "test.url"
+    item.author.should == "Dave Thomas"
+    item.date.should ==  "2012-09-29 06:03:48 UTC"
+    item.image.should == nil
+    item.summary.should == nil
+    item.source.should == @source
+
+  end
+
+
   it "should return item with webpage preview" do
     mock_imgkit = "mock imgkit"
     mock_image = "Mock jpg Image"
@@ -104,6 +120,7 @@ describe FeedParser do
 
     item.webpage_preview.should == "/images/preview/First290912060348.jpg"
   end
+
 
   it "should not crash when IMGKit can't produce webpage preview" do
     mock_imgkit = "mock imgkit"

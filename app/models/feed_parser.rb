@@ -5,6 +5,7 @@ class FeedParser
   def create_item(feed_entry, source,source_image)
     image_url = get_image(feed_entry)
     webpage_preview_url = get_webpage_preview(feed_entry) if !image_url
+    summary = parsed_summary(feed_entry) if source.has_summary
 
     Item.new({
                  :title => feed_entry.title,
@@ -12,7 +13,7 @@ class FeedParser
                  :author => feed_entry.author,
                  :date => feed_entry.published,
                  :image => image_url,
-                 :summary => parsed_summary(feed_entry),
+                 :summary => summary,
                  :source => source,
                  :source_image => source_image,
                  :webpage_preview => webpage_preview_url,
