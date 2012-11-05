@@ -3,7 +3,7 @@ require "spec_helper"
 describe MyTWCommentContent do
 
   it "should inherit from Source" do
-    MyTWGroupContent.ancestors.should include(Source)
+    MyTWCommentContent.ancestors.should include(Source)
   end
 
   it {should respond_to :comment_tag}

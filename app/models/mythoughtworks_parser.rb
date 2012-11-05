@@ -15,6 +15,9 @@ class MythoughtworksParser
     })
   end
 
+  BLOGPOST = "post"
+  DISCUSSION = "discussion"
+
   private
 
   def get_image(content)
