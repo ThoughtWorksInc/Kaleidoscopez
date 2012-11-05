@@ -17,5 +17,5 @@ Feed.initialize("HBR", "http://feeds.harvardbusiness.org/harvardbusiness", "http
 Feed.initialize("ThoughtWorks Events", "http://feeds.feedburner.com/thoughtworks-upcoming-events", "http://blog.platogo.com/wp-content/uploads/thoughtworks.gif")
 Feed.initialize("ThoughtWorks Blogs", "http://www.thoughtworks.com/blogs/rss/current", "http://blog.platogo.com/wp-content/uploads/thoughtworks.gif")
 TwitterSource.create(:name => "#ThoughtWorks", :query => "#thoughtworks", :image_url => "http://netrightdaily.com/wp-content/uploads/2012/04/Twitter.png")
-MyTWCommentContent.create(:name => "myTW", :comment_tag => "PuneDashboard" , :image_url => "https://my.thoughtworks.com/themes/generated_advanced_skin_global/images/myThoughtworks_logo.png")
+MyTWContent.create(:name => "myTW", :comment_tag => "PuneDashboard" , :image_url => "https://my.thoughtworks.com/themes/generated_advanced_skin_global/images/myThoughtworks_logo.png")
 Flickr.create(:name=> "Traditional Day", :tags => "TWPune", :image_url => "http://www.undp.org.tr/Images/SM_flickr.jpg")
