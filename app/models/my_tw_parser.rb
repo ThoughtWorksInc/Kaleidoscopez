@@ -1,5 +1,5 @@
 
-class MythoughtworksParser
+class MyTwParser
 
   def create_item(post, source , source_image)
     image = get_image(post)
@@ -14,9 +14,6 @@ class MythoughtworksParser
       :source_image => source_image
     })
   end
-
-  BLOGPOST = "post"
-  DISCUSSION = "discussion"
 
   private
 

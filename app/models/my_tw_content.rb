@@ -5,10 +5,15 @@ class MyThoughtworks
   parser(Proc.new { |body, format| body.gsub(/throw .*;/, '') })
 end
 
-class MyTWCommentContent < Source
+BLOGPOST = "post"
+DISCUSSION = "discussion"
+
+class MyTWContent < Source
 
   field  :comment_tag
   field  :image_url
+
+
 
   def fetch_items(number_of_items)
     options = {
@@ -29,7 +34,7 @@ class MyTWCommentContent < Source
   private
 
   def fetch_content_with_tag(content)
-    parser = MythoughtworksParser.new
+    parser = MyTwParser.new
     items = Array.new
     if(content["data"])
        content["data"].each do |content|
