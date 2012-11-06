@@ -96,6 +96,9 @@ body {
 .webpage-preview{
     height: 300px;
     overflow: hidden;
+    float: left;
+    padding-right: 10px;
+    padding-top: 3%
 }
 
 .webpage-preview img{
