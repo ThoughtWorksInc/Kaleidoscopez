@@ -13,6 +13,9 @@ describe SourceFetcher do
     @items_less_than_ten = 3.times.collect { Item.new }
   end
 
+  it "should be singleton" do
+     SourceFetcher.ancestors.include?(Singleton).should be true
+  end
 
   it "should delete and save items if number of items greater than 10" do
     Source.should_receive(:all).and_return([@feed_source, @twitter_source])
@@ -27,7 +30,7 @@ describe SourceFetcher do
 
     Item.should_receive(:delete_all)
 
-    SourceFetcher.get_all_items
+    SourceFetcher.instance.get_all_items
   end
 
 
@@ -42,7 +45,7 @@ describe SourceFetcher do
       item.should_not_receive(:save)
     end
 
-    SourceFetcher.get_all_items
+    SourceFetcher.instance.get_all_items
   end
 
 end
