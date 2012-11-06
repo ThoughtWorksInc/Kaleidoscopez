@@ -16,3 +16,6 @@ coverage/
 chef/cookbooks
 .sass-cache/
 public/images/preview/*.jpg
+
+# Log files
+log/*.log
