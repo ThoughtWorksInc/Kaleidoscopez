@@ -47,6 +47,7 @@ describe MyTwParser do
                   "ref" => "http://blogpost.api.url"
               }
           },
+          "contentSummary" => "This is the first post",
           "modificationDate" => "2012-03-02T05:15:32.743+0000"
       }
 
@@ -73,6 +74,7 @@ describe MyTwParser do
       item.url.should == "http://blogpost.api.url"
       item.date.should == "2012-03-02T05:15:32.743+0000"
       item.author.should == "Yahya Poonawala"
+      item.summary.should == "This is the first post..."
       item.image.should == nil
       item.source.should == @source
       item.author_image.should == "http://yahya.avatar.me"
@@ -117,6 +119,7 @@ describe MyTwParser do
                   "ref" => "http://blogpost.api.url"
               }
           },
+          "contentSummary" => "This is the first discussion",
           "modificationDate" => "2012-03-02T05:15:32.743+0000"
       }
 
@@ -147,6 +150,7 @@ describe MyTwParser do
       item.author.should == "Yahya Poonawala"
       item.image.should == nil
       item.source.should == @source
+      item.summary.should == "This is the first discussion..."
       item.author_image.should == "http://yahya.avatar.me"
     end
 

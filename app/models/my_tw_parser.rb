@@ -1,15 +1,17 @@
 
 class MyTwParser
 
-  def create_item(post, source , source_image)
-    image = get_image(post)
+  def create_item(data, source , source_image)
+    image = get_image(data)
+    summary = parsed_summary(data)
     Item.new({
-      :title => post["subject"],
-      :url => post["resources"]["self"]["ref"],
-      :author => post["author"]["name"],
-      :author_image => post["author"]["resources"]["avatar"]["ref"],
-      :date => post["modificationDate"],
+      :title => data["subject"],
+      :url => data["resources"]["self"]["ref"],
+      :author => data["author"]["name"],
+      :author_image => data["author"]["resources"]["avatar"]["ref"],
+      :date => data["modificationDate"],
       :image => image,
+      :summary => summary,
       :source => source,
       :source_image => source_image
     })
@@ -17,17 +19,17 @@ class MyTwParser
 
   private
 
-  def get_image(content)
+  def get_image(data)
     options = {
         :basic_auth => {
             :username => ENV['TW_USERNAME'],
             :password => ENV['TW_PASSWORD']
         }
     }
-    if(content["type"])
-      get_image_from_content_url(options, content["resources"]["self"]["ref"], content["type"])
+    if(data["type"])
+      get_image_from_content_url(options, data["resources"]["self"]["ref"], data["type"])
     else
-      images_url = content["resources"]["images"]["ref"]
+      images_url = data["resources"]["images"]["ref"]
       retrieve_image(images_url, options)
     end
   end
@@ -57,6 +59,17 @@ class MyTwParser
        end
     end
     biggest_image_url
+  end
+
+  def parsed_summary(data)
+    if(data["type"])
+      summary = data["contentSummary"]
+    else
+      summary = data["content"]["text"]
+    end
+    (summary = summary.gsub(/<.*?>/, "").gsub(/\n/, " ").slice(0,300)) if summary
+    (summary = summary + "...") if summary && summary != ""
+    summary
   end
 
 end
