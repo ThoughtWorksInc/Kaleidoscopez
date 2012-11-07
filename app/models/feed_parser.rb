@@ -1,8 +1,9 @@
 require 'imgkit'
 
 class FeedParser
-
+  include SourceLogger
   def create_item(feed_entry, source,source_image)
+    logger.info "Got Feed Entry For Source <#{source.name}>: #{feed_entry.title}"
     image_url = get_image(feed_entry)
     webpage_preview_url = get_webpage_preview(feed_entry) if !image_url
     summary = parsed_summary(feed_entry) if source.has_summary
@@ -24,10 +25,13 @@ class FeedParser
   MIN_AREA = 10000
 
   def get_webpage_preview(feed_entry)
+    logger.info "Creating webpage preview for #{feed_entry.url}"
     begin
       jpg = IMGKit.new(feed_entry.url,quality: 50,width: 600).to_jpg
+      logger.info "Successfully fetched webpage preview for #{feed_entry.url}"
     rescue
       jpg = nil
+      logger.warn "Failed to fetch webpage preview for #{feed_entry.url}"
     end
     webpage_preview_to_file(feed_entry, jpg) if jpg
   end
@@ -38,7 +42,9 @@ class FeedParser
     file.write(jpg)
     file.flush
     file.close
-    "/images/preview/"+filename
+    file_url = "/images/preview/"+filename
+    logger.info("Saved webpage preview to #{file_url}")
+    file_url
   end
 
   def get_image(feed_entry)
@@ -53,6 +59,7 @@ class FeedParser
     final_image_area = nil
 
     images.each do |img|
+      logger.info "Checking Image: #{img}"
       image_size = FastImage.size(URI.escape img) if img.length < 256
       image_area = image_size[0] * image_size[1] if image_size
       if (image_area && image_area > (final_image_area || MIN_AREA))

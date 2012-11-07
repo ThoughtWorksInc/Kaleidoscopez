@@ -48,4 +48,7 @@ describe SourceFetcher do
     SourceFetcher.instance.get_all_items
   end
 
+  it "should include SourceLogger" do
+    SourceFetcher.ancestors.include?(SourceLogger).should be true
+  end
 end

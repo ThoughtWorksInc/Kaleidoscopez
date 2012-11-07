@@ -14,3 +14,6 @@ RSpec.configure do |config|
   end
 
 end
+RSpec.configure do |config|
+  config.before(:each) { SourceLogger.logger(Logger.new './log/test.log') }
+end
