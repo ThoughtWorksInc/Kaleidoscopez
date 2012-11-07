@@ -32,6 +32,7 @@ class FeedParser
     rescue
       jpg = nil
       logger.warn "Failed to fetch webpage preview for #{feed_entry.url}"
+      logger.warn $!
     end
     webpage_preview_to_file(feed_entry, jpg) if jpg
   end
