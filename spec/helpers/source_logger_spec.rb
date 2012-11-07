@@ -8,8 +8,8 @@ describe SourceLogger do
     end
   end
 
-  it "should expose a logger only to class which extends it" do
-    dummy_logger = "Dummy Logger"
+  it "should expose a logger only to class which includes it" do
+    dummy_logger = Logger.new 'log/test.log'
     SourceLogger.logger(dummy_logger)
     DummyClass.new.methods.include?("logger").should be false
     DummyClass.new.getLogger.should == dummy_logger

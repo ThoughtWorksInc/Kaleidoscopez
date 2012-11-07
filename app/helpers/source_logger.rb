@@ -4,6 +4,7 @@ module SourceLogger
   end
 
   def self.logger(logger)
+    logger.formatter=Logger::Formatter.new
     @@logger = logger
   end
   protected :logger
