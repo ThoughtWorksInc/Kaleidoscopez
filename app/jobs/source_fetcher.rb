@@ -4,6 +4,7 @@ class SourceFetcher
   NUMBER_OF_ITEMS = 5
 
   def get_all_items()
+    logger.info "Getting all Items"
     items = Source.all.collect do |source|
       logger.info("Item fetcher was called for source \"#{source.name}\"")
       begin
