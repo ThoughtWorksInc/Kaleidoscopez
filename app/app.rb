@@ -22,4 +22,13 @@ class App < Sinatra::Base
     scss(:"stylesheets/#{params[:name]}" )
   end
 
+  get '/news/:channel_name' do |name|
+    content_type :json
+    channel = Channel.where(:name => name).to_a[0]
+    items = channel.sources.collect do |source|
+      Item.where(:source => source).collect {|item| item.attributes.merge("source" => item.source.name)}
+    end.flatten
+    {:items => items.shuffle}.to_json
+  end
+
 end
