@@ -122,7 +122,7 @@ describe("news", function(){
             })
 
             it("should create all slides", function(){
-                expect(steps.length).toBe(response["items"].length);
+                expect(steps.length).toBe(response["items"].length + 1);
             })
 
             it("should create slides with title at the top when image or summary or both are present", function(){
@@ -196,8 +196,8 @@ describe("news", function(){
                    var expected_theta_degrees = 359 * i / steps.length;
                    var expected_theta_radians = (expected_theta_degrees) * Math.PI / 180;
                    var expected_radius = steps.length * 100;
-                   var expected_data_x = expected_radius*Math.cos(expected_theta_radians);
-                   var expected_data_y = expected_radius*Math.sin(expected_theta_radians);
+                   var expected_data_x = expected_radius * Math.cos(expected_theta_radians);
+                   var expected_data_y = expected_radius * Math.sin(expected_theta_radians);
                    expect(parseFloat($(steps[i]).attr('data-x'))).toBe(expected_data_x);
                    expect(parseFloat($(steps[i]).attr('data-y'))).toBe(expected_data_y);
                    expect(parseFloat($(steps[i]).attr('data-rotate-z'))).toBe(expected_theta_degrees);

@@ -101,9 +101,29 @@ body {
     padding-top: 3%
 }
 
+.logo {
+   padding-top: 3%;
+   padding-right: 2%
+}
+
 .webpage-preview img{
     width: 600px;
 }
+
+.last-slide-title{
+    font-size: larger;
+    padding-right: 3%;
+    font-family: fantasy;
+    text-align: center
+}
+
+.last-slide-caption{
+    font-size: larger;
+    text-align: center;
+    font-family: fantasy;
+    padding-left: 6%
+}
+
 
 .impress-enabled .step.active {
   opacity: 1; }

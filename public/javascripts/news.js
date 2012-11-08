@@ -14,10 +14,11 @@ function setupDisplay() {
     function setupSlides(response) {
         var items = response["items"];
         var totalNoOfItems = items.length;
-        var radiusOfSlideCircle = totalNoOfItems * 100;
+        var totalNoOfSlides = totalNoOfItems + 1;
+        var radiusOfSlideCircle = (totalNoOfSlides) * 100;
 
         function calcRotationAngle(itemIndex) {
-            return (359 * itemIndex) / totalNoOfItems;     //Some issue with 360, 359 works ! JS Sucks at Math >_<
+            return (359 * itemIndex) / (totalNoOfSlides);     //Some issue with 360, 359 works ! JS Sucks at Math >_<
         }
 
         function getXCoOrdinate(theta) {
@@ -161,6 +162,42 @@ function setupDisplay() {
 
             setupRotationOfSlide(slide[0], itemIndex);
             assembleSlide();
+        }
+
+        prepareAdvertisementSlide();
+
+        function prepareAdvertisementSlide() {
+            
+            function prepareTitle() {
+                var title = $('<div>')
+                title.addClass("last-slide-title");
+                title.append("Powered By");
+                return title;
+            }
+
+            function prepareLogo() {
+                var logo = $('<img>');
+                logo.attr('src','../images/logo.png')
+                logo.addClass("logo")
+                return logo;
+            }
+
+            function prepareCaption() {
+                var caption = $('<caption>');
+                caption.addClass("last-slide-caption");
+                caption.append("KALEIDOSCOPEZ.COM");
+                return caption;
+            }
+            
+            var slide = prepareEmptySlide();
+            var title = prepareTitle();
+            var logo = prepareLogo();
+            var caption = prepareCaption();
+            setupRotationOfSlide(slide[0], itemIndex);
+            slide.append(title);
+            slide.append(logo);
+            slide.append(caption);
+            impressDiv.append(slide);
         }
 
     }
