@@ -76,6 +76,12 @@ body {
   opacity: 0;
   -webkit-transition-duration: 1s;
   -webkit-transition-property: opacity;
+  -moz-transition-duration: 1s;
+  -moz-transition-property: opacity;
+  -o-transition-duration: 1s;
+  -o-transition-property: opacity;
+  transition-duration: 1s;
+  transition-property: opacity;
 }
 
 .image-with-summary img{
