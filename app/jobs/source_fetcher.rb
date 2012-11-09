@@ -11,7 +11,7 @@ class SourceFetcher
         source.fetch_items(NUMBER_OF_ITEMS)
       rescue
         logger.error "Exception Caught while fetching Items of #{source.name}"
-        logger.error "$!"
+        logger.error $!
       end
     end.flatten.compact
 
