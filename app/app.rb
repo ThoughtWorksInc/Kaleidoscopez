@@ -11,7 +11,11 @@ class App < Sinatra::Base
     send_file 'public/index.html'
   end
 
-  get '/all_news' do
+  get '/:channel_name' do |channel|
+    send_file 'public/index.html'
+  end
+
+  get '/news/' do
     items = Item.all.collect {|item| item.attributes.merge("source" => item.source.name)}
     content_type :json
     {:items => items.shuffle!}.to_json

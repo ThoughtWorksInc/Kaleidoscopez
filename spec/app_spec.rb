@@ -39,7 +39,7 @@ describe App do
         }
     ]}.to_json
 
-    get '/all_news'
+    get '/news/'
 
     test_json_response(expected_json_response)
   end
