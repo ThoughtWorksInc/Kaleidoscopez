@@ -98,16 +98,17 @@ body {
     overflow: hidden;
     float: left;
     padding-right: 10px;
-    padding-top: 3%
+    padding-top: 3% ;
 }
 
-.logo {
-   padding-top: 3%;
-   padding-right: 2%
-}
+
 
 .webpage-preview img{
     width: 600px;
+}
+
+.logo{
+    height: 70%;
 }
 
 .last-slide-title{
@@ -121,7 +122,7 @@ body {
     font-size: larger;
     text-align: center;
     font-family: fantasy;
-    padding-left: 6%
+    padding-left: 6%;
 }
 
 
@@ -174,4 +175,91 @@ h2
 {
     font-size: 1.3em;
     margin-top: 1.5em;
+}
+
+
+
+.kal_main{overflow:hidden;width:300px;height:320px;margin:auto; padding: 9%}
+.kal_cont{width:140%;height:140%;left:-20%;top:-30%;position:relative;margin:auto}
+.kal_cont .ks{
+    -webkit-transform-origin:right top;-moz-transform-origin:right top;-o-transform-origin:right top;transform-origin:right top;
+    width:50%;height:50%;position:absolute;top:50%;left:0;z-index:10;overflow:hidden;
+}
+.kal_cont .ksc{
+    height:100%;width:100%;-webkit-transform:rotate(30deg);-moz-transform:rotate(30deg);-o-transform:rotate(30deg);transform:rotate(30deg);position:relative;-webkit-transform-origin:left top;-moz-transform-origin:left top;-o-transform-origin:left top;transform-origin:left top;left:100%;top:0;
+    background-image:url(../images/pic.jpeg)
+}
+
+/* styles for each sector */
+.kal_cont .s1 {
+    -webkit-transform: rotate(-30deg);
+    -moz-transform: rotate(-30deg);
+    -o-transform: rotate(-30deg);
+    transform: rotate(-30deg);
+}
+.kal_cont .s2 {
+    -webkit-transform: rotate(30deg) matrix(-1,0,0,1,0,0);
+    -moz-transform: rotate(30deg) matrix(-1,0,0,1,0,0);
+    -o-transform: rotate(30deg) matrix(-1,0,0,1,0,0);
+    transform: rotate(30deg) matrix(-1,0,0,1,0,0);
+}
+.kal_cont .s3 {
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -o-transform: rotate(30deg);
+    transform: rotate(30deg);
+}
+.kal_cont .s4 {
+    -webkit-transform: rotate(90deg) matrix(-1,0,0,1,0,0);
+    -moz-transform: rotate(90deg) matrix(-1,0,0,1,0,0);
+    -o-transform: rotate(90deg) matrix(-1,0,0,1,0,0);
+    transform: rotate(90deg) matrix(-1,0,0,1,0,0);
+}
+.kal_cont .s5 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.kal_cont .s6 {
+    -webkit-transform: rotate(150deg) matrix(-1,0,0,1,0,0);
+    -moz-transform: rotate(150deg) matrix(-1,0,0,1,0,0);
+    -o-transform: rotate(150deg) matrix(-1,0,0,1,0,0);
+    transform: rotate(150deg) matrix(-1,0,0,1,0,0);
+}
+.kal_cont .s7 {
+    -webkit-transform: rotate(150deg);
+    -moz-transform: rotate(150deg);
+    -o-transform: rotate(150deg);
+    transform: rotate(150deg);
+}
+.kal_cont .s8 {
+    -webkit-transform: rotate(210deg) matrix(-1,0,0,1,0,0);
+    -moz-transform: rotate(210deg) matrix(-1,0,0,1,0,0);
+    -o-transform: rotate(210deg) matrix(-1,0,0,1,0,0);
+    transform: rotate(210deg) matrix(-1,0,0,1,0,0);
+}
+.kal_cont .s9 {
+    -webkit-transform: rotate(210deg);
+    -moz-transform: rotate(210deg);
+    -o-transform: rotate(210deg);
+    transform: rotate(210deg);
+}
+.kal_cont .s10 {
+    -webkit-transform: rotate(270deg) matrix(-1,0,0,1,0,0);
+    -moz-transform: rotate(270deg) matrix(-1,0,0,1,0,0);
+    -o-transform: rotate(270deg) matrix(-1,0,0,1,0,0);
+    transform: rotate(270deg) matrix(-1,0,0,1,0,0);
+}
+.kal_cont .s11 {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+.kal_cont .s12 {
+    -webkit-transform: rotate(330deg) matrix(-1,0,0,1,0,0);
+    -moz-transform: rotate(330deg) matrix(-1,0,0,1,0,0);
+    -o-transform: rotate(330deg) matrix(-1,0,0,1,0,0);
+    transform: rotate(330deg) matrix(-1,0,0,1,0,0);
 }

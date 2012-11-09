@@ -65,8 +65,7 @@ function setupSlides(response) {
         }
         return source;
     }
-
-
+   
 
     function prepareAuthor(item) {
         function prepare_author_image(author_div) {
@@ -161,43 +160,150 @@ function setupSlides(response) {
         assembleSlide();
     }
 
-    prepareAdvertisementSlide();
+        prepareAdvertisementSlide();
 
-    function prepareAdvertisementSlide() {
-        
-        function prepareTitle() {
-            var title = $('<div>')
-            title.addClass("last-slide-title");
-            title.append("Powered By");
-            return title;
+        function prepareAdvertisementSlide() {
+                var slide = prepareEmptySlide();
+                setupRotationOfSlide(slide[0], itemIndex);
+                var title = prepareTitle();
+                var logo = prepareLogo();
+                var caption = prepareCaption();
+                slide.append(title);
+                slide.append(logo);
+                slide.append(caption);
+                impressDiv.append(slide);
+
+
+            function prepareTitle() {
+                var title = $('<div>')
+                title.addClass("last-slide-title");
+                title.append("Powered By");
+                return title;
+            }
+
+
+            function prepareLogo() {
+                var logo = $('<div>');
+                logo.addClass("logo");
+
+                var kal_main = $('<div>') ;
+                kal_main.addClass("kal_main");
+
+                    var kal_centre = $('<div>');
+                    kal_centre.addClass("kal_cont");
+
+                        var s1 = $('<div>');
+                        s1.addClass("ks s1");
+                        var ksc = $('<div>') ;
+                        ksc.addClass("ksc");
+                        s1.append(ksc);
+
+                        var s2 = $('<div>');
+                        s2.addClass("ks s2");
+                        var ksc = $('<div>') ;
+                        ksc.addClass("ksc");
+                        s2.append(ksc);
+
+                        var s3 = $('<div>');
+                        s3.addClass("ks s3");
+                        var ksc = $('<div>') ;
+                        ksc.addClass("ksc");
+                        s3.append(ksc);
+
+                        var s4 = $('<div>');
+                        s4.addClass("ks s4");
+                        var ksc = $('<div>') ;
+                        ksc.addClass("ksc");
+                        s4.append(ksc);
+
+                        var s5 = $('<div>');
+                        s5.addClass("ks s5");
+                        var ksc = $('<div>') ;
+                        ksc.addClass("ksc");
+                        s5.append(ksc);
+
+                        var s6 = $('<div>');
+                        s6.addClass("ks s6");
+                        var ksc = $('<div>') ;
+                        ksc.addClass("ksc");
+                        s6.append(ksc);
+
+                        var s7 = $('<div>');
+                        s7.addClass("ks s7");
+                        var ksc = $('<div>') ;
+                        ksc.addClass("ksc");
+                        s7.append(ksc);
+
+                        var s8 = $('<div>');
+                        s8.addClass("ks s8");
+                        var ksc = $('<div>') ;
+                        ksc.addClass("ksc");
+                        s8.append(ksc);
+
+                        var s9 = $('<div>');
+                        s9.addClass("ks s9");
+                        var ksc = $('<div>') ;
+                        ksc.addClass("ksc");
+                        s9.append(ksc);
+
+                        var s10 = $('<div>');
+                        s10.addClass("ks s10");
+                        var ksc = $('<div>') ;
+                        ksc.addClass("ksc");
+                        s10.append(ksc);
+
+                        var s11 = $('<div>');
+                        s11.addClass("ks s11");
+                        var ksc = $('<div>') ;
+                        ksc.addClass("ksc");
+                        s11.append(ksc);
+
+                        var s12 = $('<div>');
+                        s12.addClass("ks s12");
+                        var ksc = $('<div>') ;
+                        ksc.addClass("ksc");
+                        s12.append(ksc);
+
+
+                        kal_centre.append(s1);
+                        kal_centre.append(s2);
+                        kal_centre.append(s3);
+                        kal_centre.append(s4);
+                        kal_centre.append(s5);
+                        kal_centre.append(s6);
+                        kal_centre.append(s7);
+                        kal_centre.append(s8);
+                        kal_centre.append(s9);
+                        kal_centre.append(s10);
+                        kal_centre.append(s11);
+                        kal_centre.append(s12);
+                    kal_main.append(kal_centre);
+                logo.append(kal_main);
+                return logo;
+            }
+
+
+            function prepareCaption() {
+                var caption = $('<caption>');
+                caption.addClass("last-slide-caption");
+                caption.append("KALEIDOSCOPEZ.COM");
+                return caption;
+            }
+
+            $(".kal_cont").each(function(){
+                var that = this
+                var step = 0.8;
+                setInterval(function(){
+                    $(that).find(".ksc").each(function(i){
+                        $(this).css({backgroundPosition: step++ + "px "+ step++ +"px"});
+                    });
+                },850);
+
+            });
+
         }
 
-        function prepareLogo() {
-            var logo = $('<img>');
-            logo.attr('src','../images/logo.png')
-            logo.addClass("logo")
-            return logo;
-        }
-
-        function prepareCaption() {
-            var caption = $('<caption>');
-            caption.addClass("last-slide-caption");
-            caption.append("KALEIDOSCOPEZ.COM");
-            return caption;
-        }
-        
-        var slide = prepareEmptySlide();
-        var title = prepareTitle();
-        var logo = prepareLogo();
-        var caption = prepareCaption();
-        setupRotationOfSlide(slide[0], itemIndex);
-        slide.append(title);
-        slide.append(logo);
-        slide.append(caption);
-        impressDiv.append(slide);
     }
-        
-}
 
 function getChannel() {
     return $(location).attr('pathname');
