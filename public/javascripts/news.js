@@ -295,9 +295,10 @@ function setupSlides(response) {
                 var step = 0.8;
                 setInterval(function(){
                     $(that).find(".ksc").each(function(i){
-                        $(this).css({backgroundPosition: step++ + "px "+ step++ +"px"});
+                        step = step - 0.1;
+                        $(this).css({backgroundPosition: step + "px "+ (-step) +"px"});
                     });
-                },850);
+                },50);
 
             });
 
