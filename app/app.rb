@@ -16,8 +16,18 @@ class App < Sinatra::Base
     @channels = Channel.all.to_a
     erb :config
   end
+
+  get '/:channel_name/edit' do |channel_name|
+    @channel = Channel.where(:name => channel_name).to_a[0]
+    erb :'channel/edit'
+  end
+
   get '/:channel_name' do |channel|
     send_file 'public/index.html'
+  end
+
+  delete '/:channel_name/:source_id' do |channel_name, source_id|
+    Channel.where(:name => channel_name).to_a[0].sources.delete Source.where(:id => source_id).to_a[0]
   end
 
   get '/news/' do

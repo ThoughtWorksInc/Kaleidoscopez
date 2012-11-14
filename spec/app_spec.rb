@@ -79,6 +79,15 @@ describe App do
 
   end
 
+  it "should delete a source from a channel" do
+    source1 = Source.create(:name => "s1")
+    source2 = Source.create(:name => "s2")
+    Channel.create(:name => "c1", :sources => [source1,source2])
+
+    delete '/c1/'+source1.id
+    Channel.where(:name => "c1").to_a[0].sources.include?(source1).should be false
+  end
+
   after do
     Feed.delete_all
   end

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit Channel: <%= @channel.name %></title>
+        <script src="/javascripts/lib/jquery.min.js"></script>
+        <script>
+            $('body').ready(function(){
+                $('.remove').click(function(){
+                    $.ajax({
+                        url: '/<%= @channel.name %>/'+this.title,
+                        type: 'DELETE',
+                        success: function(){
+                            location.reload()
+                        }
+                    })
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <div>
+            <p>Edit Channel: <%= @channel.name %></p>
+            <p>Sources</p>
+            <% @channel.sources.each do |source| %>
+                <p><span><%= source.name %></span> <span><a href="javascript:void(0)" class="remove" title="<%= source.id %>">Remove</a></span></p>
+            <% end %>
+        </div>
+    </body>
+</html>
