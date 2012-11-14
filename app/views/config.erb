@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Configure Kaleidoscopez</title>
+    </head>
+    <body>
+        <div>
+          <p>Channels</p>
+          <% @channels.each do |channel| %>
+            <p>
+              <span><a href="/<%=channel.name %>" ><%= channel.name %></a></span>
+              <span><a href="/<%=channel.name%>/edit">Edit</a></span>
+            </p>
+          <% end %>
+        </div>
+    </body>
+</html>

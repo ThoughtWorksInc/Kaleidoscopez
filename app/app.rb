@@ -1,6 +1,7 @@
 require 'sinatra'
 require './app/boot'
 require 'sass'
+require 'erb'
 
 class App < Sinatra::Base
 
@@ -11,6 +12,10 @@ class App < Sinatra::Base
     send_file 'public/index.html'
   end
 
+  get '/config' do
+    @channels = Channel.all.to_a
+    erb :config
+  end
   get '/:channel_name' do |channel|
     send_file 'public/index.html'
   end
