@@ -2,6 +2,7 @@ require './app/boot'
 
 Source.delete_all
 Item.delete_all
+Channel.delete_all
 
 five_hundred_px = Feed.initialize("500px", "http://500px.com/editors.rss?only=Animals", "http://learningdslr.com/wp-content/uploads/2011/11/500px-iPad-Logo.png","false")
 quora = Feed.initialize("Quora", "http://quora.com/rss", "http://qph.cf.quoracdn.net/main-qimg-f61a4d3c922757b1f5f354f28f4c3558")
