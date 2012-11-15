@@ -88,6 +88,16 @@ describe App do
     Channel.where(:name => "c1").to_a[0].sources.include?(source1).should be false
   end
 
+  it "should add a source to a channel" do
+    source1 = Source.create(:name => "s1")
+    source2 = Source.create(:name => "s2")
+    source3 = Source.create(:name => "s3")
+    Channel.create(:name => "c1", :sources => [source1,source2])
+
+    post '/c1/'+source3.id
+    Channel.where(:name => "c1").to_a[0].sources.include?(source3).should be true
+  end
+
   after do
     Feed.delete_all
   end

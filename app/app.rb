@@ -19,11 +19,17 @@ class App < Sinatra::Base
 
   get '/:channel_name/edit' do |channel_name|
     @channel = Channel.where(:name => channel_name).to_a[0]
+    @sources = Source.all.to_a - @channel.sources
     erb :'channel/edit'
   end
 
   get '/:channel_name' do |channel|
     send_file 'public/index.html'
+  end
+
+  post '/:channel_name/:source_id' do |channel_name, source_id|
+    Channel.where(:name => channel_name).to_a[0].sources << Source.where(:id => source_id).to_a[0]
+    nil
   end
 
   delete '/:channel_name/:source_id' do |channel_name, source_id|

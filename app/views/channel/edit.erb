@@ -5,15 +5,31 @@
         <script src="/javascripts/lib/jquery.min.js"></script>
         <script>
             $('body').ready(function(){
-                $('.remove').click(function(){
-                    $.ajax({
-                        url: '/<%= @channel.name %>/'+this.title,
-                        type: 'DELETE',
-                        success: function(){
-                            location.reload()
-                        }
+                function setupRemoveSourceLink() {
+                    $('.remove').click(function () {
+                        $.ajax({
+                            url:'/<%= @channel.name %>/' + this.title,
+                            type:'DELETE',
+                            success:function () {
+                                location.reload()
+                            }
+                        })
                     })
-                })
+                }
+                function setupAddSourceList() {
+                    $('.source').dblclick(function () {
+                        $.ajax({
+                            url: '/<%= @channel.name %>/' + this.value,
+                            type: 'POST',
+                            success: function(){
+                                location.reload()
+                            }
+                        })
+                    })
+                }
+
+                setupRemoveSourceLink();
+                setupAddSourceList();
             })
         </script>
     </head>
@@ -24,6 +40,11 @@
             <% @channel.sources.each do |source| %>
                 <p><span><%= source.name %></span> <span><a href="javascript:void(0)" class="remove" title="<%= source.id %>">Remove</a></span></p>
             <% end %>
+            <select size="10">
+                <% @sources.each do |source| %>
+                    <option class="source" value="<%= source.id %>"><%= source.name %></option>
+                <% end %>
+            </select>
         </div>
     </body>
 </html>
