@@ -3,7 +3,7 @@ require 'feedzirra'
 
 describe Feed do
   it {should respond_to :url}
-  it {should respond_to :source_image}
+  it {should respond_to :image_url}
   it {should respond_to :has_summary}
 
   it "should inherit Source" do
@@ -11,7 +11,7 @@ describe Feed do
   end
 
   before(:each) do
-    @feed = Feed.create(:name => "Dummy Source", :url => "feeds.dummy.com", :source_image => "feeds.dummy.gif",:last_fetched_at => Time.now)
+    @feed = Feed.create(:name => "Dummy Source", :url => "feeds.dummy.com", :image_url => "feeds.dummy.gif",:last_fetched_at => Time.now)
     @feedzirra_feed = Feedzirra::Parser::Atom.new
     @feedzirra_feed.entries = [Feedzirra::Parser::AtomEntry.new, Feedzirra::Parser::AtomEntry.new]
   end
