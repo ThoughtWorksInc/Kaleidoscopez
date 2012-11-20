@@ -31,6 +31,15 @@ class App < Sinatra::Base
     send_file 'public/index.html'
   end
 
+  get '/channel/new' do
+    send_file 'public/new_channel.html'
+  end
+
+  post '/channel/new' do
+    Channel.create(:name => params[:name])
+    redirect "/#{params[:name]}/edit"
+  end
+
   post '/:channel_name/:source_id' do |channel_name, source_id|
     Channel.where(:name => channel_name).to_a[0].sources << Source.where(:id => source_id).to_a[0]
     nil
