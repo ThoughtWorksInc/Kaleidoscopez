@@ -17,8 +17,8 @@ hbr = Feed.initialize("HBR", "http://feeds.harvardbusiness.org/harvardbusiness",
 tw_events = Feed.initialize("ThoughtWorks Events", "http://feeds.feedburner.com/thoughtworks-upcoming-events", "http://blog.platogo.com/wp-content/uploads/thoughtworks.gif")
 tw_blogs = Feed.initialize("ThoughtWorks Blogs", "http://www.thoughtworks.com/blogs/rss/current", "http://blog.platogo.com/wp-content/uploads/thoughtworks.gif")
 twitter_tw = TwitterSource.create(:name => "#ThoughtWorks", :query => "#thoughtworks", :image_url => "http://netrightdaily.com/wp-content/uploads/2012/04/Twitter.png")
-my_tw_PuneDashboard = MyTWContent.create(:name => "myTW", :comment_tag => "PuneDashboard", :image_url => "https://my.thoughtworks.com/themes/generated_advanced_skin_global/images/myThoughtworks_logo.png")
-my_tw_BangaloreDashboard = MyTWContent.create(:name => "myTW", :comment_tag => "BangaloreDashboard", :image_url => "https://my.thoughtworks.com/themes/generated_advanced_skin_global/images/myThoughtworks_logo.png")
+my_tw_PuneDashboard = MyTWContent.create(:name => "myTW Pune", :comment_tag => "PuneDashboard", :image_url => "https://my.thoughtworks.com/themes/generated_advanced_skin_global/images/myThoughtworks_logo.png")
+my_tw_BangaloreDashboard = MyTWContent.create(:name => "myTW Bangalore", :comment_tag => "BangaloreDashboard", :image_url => "https://my.thoughtworks.com/themes/generated_advanced_skin_global/images/myThoughtworks_logo.png")
 flickr_TWPune = Flickr.create(:name => "Traditional Day", :tags => "TWPune", :image_url => "http://www.undp.org.tr/Images/SM_flickr.jpg")
 
 common_sources = [five_hundred_px, quora, quora_technology, quora_india, google_news, xkcd, cnet, mashable, tech_crunch, hbr, tw_events, tw_blogs, twitter_tw]

@@ -2,7 +2,10 @@
 <html>
     <head>
         <title>Edit Channel: <%= @channel.name %></title>
+        <link type="text/css" rel="stylesheet" href="/stylesheets/lib/font-awesome.css" />
+        <link type="text/css" rel="stylesheet" href="/stylesheets/edit.css" />
         <script src="/javascripts/lib/jquery.min.js"></script>
+        <script src="/javascripts/lib/bootstrap.min.js"></script>
         <script>
             $('body').ready(function(){
                 function setupRemoveSourceLink() {
@@ -16,10 +19,10 @@
                         })
                     })
                 }
-                function setupAddSourceList() {
-                    $('.source').dblclick(function () {
+                function setupAddSourceLink() {
+                    $('.add').click(function () {
                         $.ajax({
-                            url: '/<%= @channel.name %>/' + this.value,
+                            url: '/<%= @channel.name %>/' + this.title,
                             type: 'POST',
                             success: function(){
                                 location.reload()
@@ -28,23 +31,52 @@
                     })
                 }
 
+                $(".source .button").hide()
+
+                $(".source").mouseover(function(){
+                    $(this).find(".button").show()
+                })
+
+                $(".source").mouseout(function(){
+                    $(this).find(".button").hide()
+                })
+
                 setupRemoveSourceLink();
-                setupAddSourceList();
+                setupAddSourceLink();
             })
         </script>
     </head>
     <body>
-        <div>
-            <p>Edit Channel: <%= @channel.name %></p>
-            <p>Sources</p>
-            <% @channel.sources.each do |source| %>
-                <p><span><%= source.name %></span> <span><a href="javascript:void(0)" class="remove" title="<%= source.id %>">Remove</a></span></p>
-            <% end %>
-            <select size="10">
-                <% @sources.each do |source| %>
-                    <option class="source" value="<%= source.id %>"><%= source.name %></option>
+        <div style="width: 100%;">
+            <h1>Edit Channel: <%= @channel.name %></h1>
+            <div class="clearfix">
+                <h2>Sources in Channel</h2>
+                <% @channel.sources.each do |source| %>
+                    <div class="source">
+                        <div style="display: inline-block;">
+                            <a href="javascript:void(0)" class="button remove" title="<%= source.id %>"><i class="icon-remove"></i></a>
+                            <div class="source-image-container">
+                              <img class="source-image" src="<%= source.image_url if source.image_url %>" />
+                            </div>
+                        </div>
+                        <p class="source-name"><span><%= source.name %></span></p>
+                    </div>
                 <% end %>
-            </select>
+            </div>
+            <div class="clearfix">
+                <h2>Sources Not in Channel</h2>
+                <% @sources.each do |source| %>
+                  <div class="source">
+                    <div style="display: inline-block;">
+                      <a href="javascript:void(0)" class="button add" title="<%= source.id %>"><i class="icon-plus"></i></a>
+                      <div class="source-image-container">
+                        <img class="source-image" src="<%= source.image_url if source.image_url %>" />
+                      </div>
+                    </div>
+                    <p class="source-name"><span><%= source.name %></span></p>
+                  </div>
+                <% end %>
+            </div>
         </div>
     </body>
 </html>

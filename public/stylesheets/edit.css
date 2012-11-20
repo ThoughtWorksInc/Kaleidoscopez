@@ -1,0 +1,60 @@
+.source-image {
+    max-height: 100px;
+    max-width: 200px;
+}
+.source-image-container {
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    height: 100px;
+}
+.source {
+    float: left;
+    width: 200px;
+    overflow: hidden;
+    margin: 0px 15px 15px 0px ;
+    text-align: center;
+    border: 0px solid red;
+    height: 150px;
+    max-height: 150px;
+
+}
+.source-name {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.button {
+    text-decoration: none;
+    font-size: 20px;
+    position: absolute;
+}
+
+.button .icon-remove, .button .icon-plus{
+    background-color: black;
+    color: #CCC;
+    border-radius: 3px;
+    padding-right: 3px;
+    padding-left: 3px;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+html[xmlns] .clearfix {
+    display: block;
+}
+
+* html .clearfix {
+    height: 1%;
+}
