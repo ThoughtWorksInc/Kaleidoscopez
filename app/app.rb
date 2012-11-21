@@ -13,12 +13,24 @@ class App < Sinatra::Base
   end
 
   get '/about' do
-    send_file 'public/about.html'
+    send_file 'public/about_kaleidoscopez.html'
   end
 
   get '/config' do
     @channels = Channel.all.to_a
     erb :config
+  end
+
+  get '/about_us' do
+    send_file 'public/about_us.html'
+  end
+
+  get '/contact_us' do
+    send_file 'public/contact_us.html'
+    end
+
+  get '/faq' do
+    send_file 'public/faq.html'
   end
 
   get '/:channel_name/edit' do |channel_name|
