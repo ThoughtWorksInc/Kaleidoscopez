@@ -11,4 +11,5 @@ require "./app/helpers/helpers"
 require "./app/models/models"
 
 Mongoid.load!('config/mongoid.yml',ENV["RACK_ENV"])
+Dir.mkdir("./log",0777) if !File.directory? "./log"
 SourceLogger.logger(Logger.new './log/source.log')
