@@ -25,5 +25,5 @@ common_sources = [five_hundred_px, quora, quora_technology, quora_india, google_
 pune_sources = common_sources + [my_tw_PuneDashboard,flickr_TWPune]
 bangalore_sources = common_sources + [my_tw_BangaloreDashboard]
 
-Channel.create(:name => "Pune", :sources => pune_sources)
-Channel.create(:name => "Bangalore",:sources => bangalore_sources)
+Channel.create(:name => "TW Pune Dashboard", :sources => pune_sources)
+Channel.create(:name => "TW Bangalore Dashboard",:sources => bangalore_sources)
