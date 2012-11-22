@@ -28,7 +28,7 @@ class App < Sinatra::Base
 
   get '/contact_us' do
     send_file 'public/contact_us.html'
-    end
+  end
 
   get '/faq' do
     send_file 'public/faq.html'

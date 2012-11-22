@@ -40,3 +40,7 @@
 input[type="submit"]{
     vertical-align: top;
 }
+
+legend{
+    border-color: #888;
+}
