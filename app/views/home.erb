@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kaleidoscopez</title>
+        <link href="/stylesheets/lib/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/stylesheets/home.css" rel="stylesheet"/>
+        <script src="/javascripts/lib/jquery.min.js"></script>
+        <script src="/javascripts/lib/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-static-top">
+          <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/">Kaleidoscopez</a>
+                <ul class="nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/about_us">About Us</a></li>
+                </ul>
+            </div>
+          </div>
+        </div>
+        <div style="margin: 60px auto;" class="main-container row">
+            <p class="awesome-person">Welcome Awesome Person</p>
+            <p class="select-channel">Get ready for radiation of information in the awesomest fashion possible.</p>
+            <div class="row-fluid">
+                <div class="channel-container span5">
+                    <fieldset>
+                        <legend>Select Channel</legend>
+                        <% @channels.each do |channel| %>
+                            <a class="btn channel" href="/<%= channel.name %>"><%= channel.name %></a>
+                        <% end %>
+                    </fieldset>
+                </div>
+                <div class="or span2">OR</div>
+                <div class="new-channel span5">
+                    <fieldset>
+                        <legend>Create Channel</legend>
+                        <p>Just Provide a Channel Name to get started</p>
+                        <form action="/channel/new" method="post">
+                            Name: <input type="text" name="name" required />
+                            <input type="submit" class="btn" value="Submit">
+                        </form>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

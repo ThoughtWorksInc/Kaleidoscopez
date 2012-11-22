@@ -1,0 +1,42 @@
+.main-container{
+    margin: 60px auto;
+    width: 950px;
+}
+
+.channel{
+    width: 100px;
+    text-align: left;
+    display: block;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.awesome-person{
+    font-size: 2em;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.select-channel{
+    font-size: 1.5em;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.channel-container{
+    text-align: left;
+}
+
+.new-channel{
+    text-align: left;
+}
+
+.or{
+    text-align: center;
+    font-size: 3em;
+    padding-top: 10px;
+}
+
+input[type="submit"]{
+    vertical-align: top;
+}

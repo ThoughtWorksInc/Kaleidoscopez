@@ -9,7 +9,8 @@ class App < Sinatra::Base
   set :public_folder, "#{dir}/../public"
 
   get '/' do
-    send_file 'public/index.html'
+    @channels = Channel.all.to_a
+    erb :home
   end
 
   get '/about' do
