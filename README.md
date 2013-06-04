@@ -20,6 +20,22 @@
 
    `vagrant ssh`
 
+6. Go to code
+
+  `cd vagrant`
+
+5. Run the seed
+
+  `rake db:seed`
+
+6. Fetch the feeds
+
+  `ruby app/jobs/clock.rb` # Make sure you export all necessary environment variables listed below
+
+7. Run the App
+
+  `rackup`
+
 ### Twitter
 For your twitter feeds to work you need to have these environemnt variables set in the shell you wil try to fetch items
 
