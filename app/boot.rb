@@ -5,6 +5,8 @@ require 'bundler'
 Bundler.setup
 Bundler.require(:default, ENV["RACK_ENV"].to_sym)
 
+$:.unshift "#{File.dirname(__FILE__)}/lib"
+
 require "feedzirra"
 require "mongoid"
 require "./app/helpers/helpers"

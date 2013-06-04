@@ -1,11 +1,13 @@
 require 'imgkit'
+require 'webpage_preview_generator'
 
 class FeedParser
   include SourceLogger
+
   def create_item(feed_entry, source,source_image)
     logger.info "Got Feed Entry For Source <#{source.name}>: #{feed_entry.title}"
     image_url = get_image(feed_entry)
-    webpage_preview_url = get_webpage_preview(feed_entry) if !image_url
+    webpage_preview_url = WebpagePreviewGenerator.instance.generate(webpage_preview_name(feed_entry)+".jpg",feed_entry.url) if !image_url
     summary = parsed_summary(feed_entry) if source.has_summary
 
     Item.new({
@@ -21,38 +23,19 @@ class FeedParser
              })
   end
 
+
   private
+
   MIN_AREA = 10000
 
-  def get_webpage_preview(feed_entry)
-    logger.info "Creating webpage preview for #{feed_entry.url}"
-    begin
-      jpg = IMGKit.new(feed_entry.url,quality: 50,width: 600).to_jpg
-      logger.info "Successfully fetched webpage preview for #{feed_entry.url}"
-    rescue
-      jpg = nil
-      logger.warn "Failed to fetch webpage preview for #{feed_entry.url}"
-      logger.warn $!
-    end
-    webpage_preview_to_file(feed_entry, jpg) if jpg
-  end
-
-  def webpage_preview_to_file(feed_entry, jpg)
-    filename = feed_entry.title[0..4]+feed_entry.published.strftime("%d%m%y%H%M%S")+".jpg"
-    file = File.new("public/images/preview/"+filename, "w")
-    file.write(jpg)
-    file.flush
-    file.close
-    file_url = "/images/preview/"+filename
-    logger.info("Saved webpage preview to #{file_url}")
-    file_url
+  def webpage_preview_name(feed_entry)
+    feed_entry.title[0..4]+feed_entry.published.strftime("%d%m%y%H%M%S")
   end
 
   def get_image(feed_entry)
     content = Nokogiri::HTML(feed_entry.content || feed_entry.summary)
     images = content.css('img').map { |i| i['src'].gsub(/\?.*/,'') if i['src'] }
     biggest_image(images.compact)
-
   end
 
   def biggest_image(images)
