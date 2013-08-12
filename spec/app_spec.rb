@@ -98,6 +98,12 @@ describe App do
     Channel.where(:name => "c1").to_a[0].sources.include?(source3).should be true
   end
 
+  it "should add a new feed" do
+    post '/source/feed/create', {:name => "posted", :url => "posted.url", :image_url => "image", :has_summary => false }
+
+    Source.where(:name => "posted").to_a[0].url.should == "posted.url"
+  end
+
   after do
     Feed.delete_all
   end

@@ -1,0 +1,9 @@
+<h2>Flickr</h2>
+
+<% Flickr.all.to_a.each do |t| %>
+  <%= t.tags %><br/>
+<% end %>
+<form action="/source/flickr/create" method="post" accept-charset="utf-8">
+  <input type="text" name="tags" id="tags" placeholder="tag" />
+  <input type="submit" name="submit" id="submit" value="Create" />
+</form>

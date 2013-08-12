@@ -1,0 +1,8 @@
+<h2>Twitter</h2>
+<% TwitterSource.all.to_a.each do |t| %>
+  <%= t.query %><br/>
+<% end %>
+<form action="/source/twitter/create" method="post" accept-charset="utf-8">
+  <input type="text" name="query" id="query" placeholder="#hashtag" />
+  <input type="submit" name="submit" id="submit" value="Create" />
+</form>
