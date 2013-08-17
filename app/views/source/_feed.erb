@@ -1,15 +1,17 @@
-<h2>RSS/Atom Feed</h2>
-<% Feed.all.to_a.each do |t| %>
-  <%= t.name %>
-  <%= t.url %>
-  <%= t.image_url %>
-  <%= t.has_summary %>
-  <br/>
-<% end %>
-<form action="/source/feed/create" method="post" accept-charset="utf-8">
-  <input type="text" name="name" id="name" placeholder="name" />
-  <input type="text" name="url" id="url" placeholder="http://your.feeds.url/" />
-  <input type="text" name="image_url" id="image_url" placeholder="The image on bottom right" />
-  <input type="checkbox" name="has_summary" id="has_summary"/><label for="has_summary">Show Summary</label>
-  <input type="submit" name="submit" id="submit" value="Create" />
-</form>
+<div class="tab-pane fade" id="feed">
+  <form action="/source/feed/create" method="post" accept-charset="utf-8">
+    <input type="text" name="name" id="name" placeholder="name" />
+    <input type="text" name="url" id="url" placeholder="http://your.feeds.url/" />
+    <input type="text" name="image_url" id="image_url" placeholder="The image on bottom right" />
+    <input type="checkbox" name="has_summary" id="has_summary"/><label for="has_summary">Show Summary</label>
+    <input type="submit" name="submit" id="submit" value="Create" />
+  </form>
+
+  <% Feed.all.to_a.each do |t| %>
+    <%= t.name %>
+    <%= t.url %>
+    <%= t.image_url %>
+    <%= t.has_summary %>
+    <br/>
+  <% end %>
+</div>
