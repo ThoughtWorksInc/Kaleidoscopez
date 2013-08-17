@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'webpage_preview_generator'
 
-describe WebpagePreviewGenerator do
+describe WebpagePreviewGenerator, :imgkit => true do
 
   subject do
     WebpagePreviewGenerator.instance
