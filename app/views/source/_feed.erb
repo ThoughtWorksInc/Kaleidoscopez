@@ -1,9 +1,9 @@
 <div class="tab-pane fade" id="feed">
-  <form action="/source/feed/create" method="post" accept-charset="utf-8">
+  <form action="/source/feed/create" method="post" accept-charset="utf-8" class="form-inline">
     <input type="text" name="name" id="name" placeholder="name" />
     <input type="text" name="url" id="url" placeholder="http://your.feeds.url/" />
     <input type="text" name="image_url" id="image_url" placeholder="The image on bottom right" />
-    <input type="checkbox" name="has_summary" id="has_summary"/><label for="has_summary">Show Summary</label>
+    <label class="checkbox"><input type="checkbox" name="has_summary" id="has_summary"/>Show Summary</label>
     <input type="submit" name="submit" id="submit" value="Create" />
   </form>
 
