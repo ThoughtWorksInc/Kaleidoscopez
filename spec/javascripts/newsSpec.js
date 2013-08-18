@@ -112,7 +112,7 @@ describe("news", function () {
         })
 
         it("should create all slides", function(){
-            expect(steps.length).toBe(response["items"].length + 1);
+            expect(steps.length).toBe(response["items"].length + 2);
         })
 
         it("should create slides with title at the top when image or summary or both are present", function () {
