@@ -1,4 +1,5 @@
 var milliSecPerSlide = 15000;
+var noOfAdSlides = 2;
 
 function autoScroll() {
    impress().next();
@@ -12,7 +13,7 @@ function setupSlides(response) {
     var impressDiv = $("#impress");
     var items = response["items"];
     var totalNoOfItems = items.length;
-    var totalNoOfSlides = totalNoOfItems + 1;
+    var totalNoOfSlides = totalNoOfItems + noOfAdSlides;
     var radiusOfSlideCircle = totalNoOfSlides * 100;
 
     function calcRotationAngle(itemIndex) {
@@ -160,27 +161,57 @@ function setupSlides(response) {
         assembleSlide();
     }
 
-        prepareAdvertisementSlide();
-
-        function prepareAdvertisementSlide() {
-                var slide = prepareEmptySlide();
-                setupRotationOfSlide(slide[0], itemIndex);
-                var title = prepareTitle();
-                var logo = prepareLogo();
-                var caption = prepareCaption();
-                slide.append(title);
-                slide.append(logo);
-                slide.append(caption);
-                impressDiv.append(slide);
+        prepareAdvertisementSlides();
 
 
-            function prepareTitle() {
-                var title = $('<div>')
-                title.addClass("last-slide-title");
-                title.append("Powered By");
-                return title;
+        function prepareAdvertisementSlides() {
+            var slide = prepareEmptySlide();
+            setupRotationOfSlide(slide[0], itemIndex);
+            var title = prepareTitle("Powered By");
+            var logo = prepareLogo();
+            var caption = prepareCaption();
+            slide.append(title);
+            slide.append(logo);
+            slide.append(caption);
+            impressDiv.append(slide);
+
+            var aboutSlide = prepareEmptySlide();
+            setupRotationOfSlide(aboutSlide[0], itemIndex + 1);
+            var secondTitle = prepareTitle("What is Kaleidoscopez????");
+            aboutSlide.append(secondTitle);
+            var summary = $('<div>');
+            var aboutSummary = prepareSummary();
+
+            summary.append(aboutSummary);
+            summary.addClass("summary");
+            aboutSlide.append(summary);
+            impressDiv.append(aboutSlide);
+
+
+            function prepareSummary() {
+                var first = prepareQuestion("Q: What is this?","A: This is Kaleidoscopez, An Awesome App that brings you fresh and quality content from the coolest places. It is truly awesome." );
+                var second = prepareQuestion("</br>Q: So how do I view this totally awesome app?", "A: Simple. Visit kaleidoscopez.com");
+                var third = prepareQuestion("</br>Q. Can I add/delete a source which I want to??", "A: Sure!! WE would like it though if you could contact Akshay Mankar (akshaym@thoughtworks.com) before doing so!!");
+                return first.append(second).append(third);
             }
 
+            function prepareQuestion(question, answer) {
+                var aboutSummary = $('<div>') ;
+                var firstQuestion = aboutSummary.append(question);
+                var firstAnswer = $('<div>');
+                firstAnswer.append(answer);
+                firstQuestion.append(firstAnswer);
+                return firstQuestion;
+            }
+
+
+
+            function prepareTitle(titled) {
+                var title = $('<div>')
+                title.addClass("last-slide-title");
+                title.append(titled);
+                return title;
+            }
 
             function prepareLogo() {
                 var logo = $('<div>');

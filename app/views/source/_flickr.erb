@@ -1,0 +1,10 @@
+<div class="tab-pane fade" id="flickr">
+  <form action="/source/flickr/create" method="post" accept-charset="utf-8" class="form-inline">
+    <input type="text" name="tags" id="tags" placeholder="tag" />
+    <input type="submit" name="submit" id="submit" value="Create" />
+  </form>
+
+  <% Flickr.all.to_a.each do |t| %>
+    <%= t.tags %><br/>
+  <% end %>
+</div>

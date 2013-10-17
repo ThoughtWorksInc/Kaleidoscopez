@@ -9,4 +9,11 @@ describe Source do
   it "should include SourceLogger" do
     Source.ancestors.include?(SourceLogger).should be true
   end
+
+  it "should track all the source types" do
+    class NewSource < Source
+    end
+
+    Source.types.should include(NewSource)
+  end
 end

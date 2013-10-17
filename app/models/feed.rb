@@ -7,8 +7,8 @@ class Feed < Source
   field :last_fetched_at
   field :has_summary ,type:Boolean, default: true
 
-  def self.initialize(name,url,image_url, has_summary = true)
-    Feed.create({:name => name, :url => url, :last_fetched_at => 1.month.ago, :image_url => image_url, :has_summary => has_summary})
+  def self.create(opts)
+    super({:has_summary => true, :last_fetched_at => 1.month.ago}.merge opts)
   end
 
   def fetch_items(number_of_items)

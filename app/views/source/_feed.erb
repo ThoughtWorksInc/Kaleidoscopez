@@ -1,0 +1,32 @@
+<style type="text/css">
+  img.feed-image {
+    width: 64px;
+    height: auto;
+  }
+</style>
+<div class="tab-pane fade" id="feed">
+  <form action="/source/feed/create" method="post" accept-charset="utf-8" class="form-inline">
+    <input type="text" name="name" id="name" placeholder="name" />
+    <input type="text" name="url" id="url" placeholder="http://your.feeds.url/" />
+    <input type="text" name="image_url" id="image_url" placeholder="The image on bottom right" />
+    <label class="checkbox"><input type="checkbox" name="has_summary" id="has_summary"/>Show Summary</label>
+    <input type="submit" name="submit" id="submit" value="Create" />
+  </form>
+
+  <div class="media-list">
+    <% Feed.all.to_a.each_with_index do |feed, index| %>
+      <div class="media">
+        <a href="#" class="pull-left">
+          <img alt="Image for <%= feed.name %>" class="media-object feed-image" src="<%= feed.image_url %>" />
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading">
+            <a href="<%= feed.url %>"><%= feed.name %></a>
+          </h4>
+          <p>Show Summary: <%= feed.has_summary %></p>
+        </div>
+      </div>
+      <br/>
+    <% end %>
+  </div>
+</div>

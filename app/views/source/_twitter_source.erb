@@ -1,0 +1,10 @@
+<div class="tab-pane fade in active" id="twitter">
+  <form action="/source/twitter/create" method="post" accept-charset="utf-8" class="form-inline">
+    <input type="text" name="query" id="query" placeholder="#hashtag" />
+    <input type="submit" name="submit" id="submit" value="Create" />
+  </form>
+
+  <% TwitterSource.all.to_a.each do |t| %>
+    <%= t.query %><br/>
+  <% end %>
+</div>
