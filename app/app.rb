@@ -53,6 +53,34 @@ class App < Sinatra::Base
     redirect "/#{params[:name]}/edit"
   end
 
+  get '/source/new' do
+    erb :'source/new'
+  end
+
+  post '/source/feed/create' do
+    Feed.create params.slice("name", "url", "image_url").merge({:has_summary => params["has_summary"].present? })
+
+    redirect "/source/new"
+  end
+
+  post '/source/twitter/create' do
+    TwitterSource.create params.slice("query").merge({:name => params["query"]})
+
+    redirect "/source/new"
+  end
+
+  post '/source/twitter/create' do
+    TwitterSource.create({"query" => params["query"], :name => params["query"]})
+
+    redirect "/source/new"
+  end
+
+  post '/source/flickr/create' do
+    Flickr.create({:name=> params["tags"], :tags => params["tags"]})
+
+    redirect "/source/new"
+  end
+
   post '/:channel_name/:source_id' do |channel_name, source_id|
     Channel.where(:name => channel_name).to_a[0].sources << Source.where(:id => source_id).to_a[0]
     nil

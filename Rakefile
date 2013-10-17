@@ -4,6 +4,13 @@ RSpec::Core::RakeTask.new(:spec)
 
 task :default => :spec
 
+namespace :spec do
+  desc 'For running on snap-ci, where imgkit is not available'
+  RSpec::Core::RakeTask.new(:ci) do |t|
+    t.rspec_opts = "--tag ~imgkit"
+  end
+end
+
 namespace :db do
   desc 'Load the seed data from db/seeds.rb'
   task :seed do

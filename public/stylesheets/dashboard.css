@@ -55,6 +55,7 @@ body {
 
 .summary {
     font-size: 30px;
+    font-family: Verdana;
     padding-top: 3%;
     word-wrap: break-word;
     text-align: left

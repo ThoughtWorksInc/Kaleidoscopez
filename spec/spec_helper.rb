@@ -3,7 +3,7 @@ SimpleCov.start do
   add_filter '/spec/'
 end
 
-ENV['RACK_ENV'] = 'test'
+ENV['RACK_ENV'] ||= 'test'
 
 require File.expand_path(File.dirname(__FILE__) + "/../app/app")
 

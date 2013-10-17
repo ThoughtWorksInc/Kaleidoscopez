@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe FeedParser do
 
-  before do
+  before(:all) do
     @feed_entry = Feedzirra::Parser::AtomEntry.new
     @feed_entry.title = "First Post"
     @feed_entry.url = "test.url"
@@ -13,9 +13,17 @@ describe FeedParser do
     @source = Source.new(:has_summary=>true)
   end
 
+  before(:each) do
+    WebpagePreviewGenerator.any_instance.stub(:generate).and_return("image")
+  end
+
+  subject do
+    FeedParser.new
+  end
+
   it "should create item object from a valid feed entry" do
 
-    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
+    item = subject.create_item(@feed_entry, @source , @source_image)
 
     item.title.should == "First Post"
     item.url.should == "test.url"
@@ -29,7 +37,7 @@ describe FeedParser do
     @feed_entry.summary = "<img src='www.test.com/image.jpg'/>"
     FastImage.should_receive(:size).with("www.test.com/image.jpg").and_return([200, 205])
 
-    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
+    item = subject.create_item(@feed_entry, @source , @source_image)
 
     item.image.should == "www.test.com/image.jpg"
   end
@@ -38,7 +46,7 @@ describe FeedParser do
     @feed_entry.summary = "<img src='www.test.com/image.jpg'/>"
     FastImage.should_receive(:size).with("www.test.com/image.jpg").and_return([10, 10])
 
-    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
+    item = subject.create_item(@feed_entry, @source , @source_image)
 
     item.image.should == nil
   end
@@ -47,7 +55,7 @@ describe FeedParser do
     @feed_entry.summary = "<img src='www.test.com/test image.jpg'/>"
     FastImage.should_receive(:size).with("www.test.com/test%20image.jpg").and_return([200, 205])
 
-    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
+    item = subject.create_item(@feed_entry, @source , @source_image)
 
     item.image.should == "www.test.com/test image.jpg"
   end
@@ -57,7 +65,7 @@ describe FeedParser do
     FastImage.should_receive(:size).with("www.test.com/image_one.jpg").and_return([200, 205])
     FastImage.should_receive(:size).with("www.test.com/image_two.jpg").and_return([200, 210])
 
-    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
+    item = subject.create_item(@feed_entry, @source , @source_image)
 
     item.image.should == "www.test.com/image_two.jpg"
   end
@@ -66,7 +74,7 @@ describe FeedParser do
     @feed_entry.summary = "<img src='some_image' />"
     FastImage.should_receive(:size).with("some_image").and_return([100,110])
 
-    item = FeedParser.new.create_item @feed_entry, @source , @source_image
+    item = subject.create_item @feed_entry, @source , @source_image
 
     item.webpage_preview.should be nil
   end
@@ -75,7 +83,7 @@ describe FeedParser do
   it "should return item without image_url if the content of feed_entry has a image tag without src attribute" do
     @feed_entry.summary = "<img alt='oops! I dont have a source!'/>"
 
-    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
+    item = subject.create_item(@feed_entry, @source , @source_image)
 
     item.image.should be_nil
   end
@@ -83,7 +91,7 @@ describe FeedParser do
   it "should return item with summary without HTML tags and new lines" do
     @feed_entry.summary = "<p>This is a test.</p>\n<a href=\"abcd.com\">Test is also code</a>"
 
-    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
+    item = subject.create_item(@feed_entry, @source , @source_image)
 
     item.summary.should == "This is a test. Test is also code..."
   end
@@ -91,7 +99,7 @@ describe FeedParser do
   it "should return item without summary when has_summary is false" do
     @source = Source.new(:has_summary=>false)
 
-    item = FeedParser.new.create_item(@feed_entry, @source , @source_image)
+    item = subject.create_item(@feed_entry, @source , @source_image)
 
     item.title.should == "First Post"
     item.url.should == "test.url"
@@ -100,35 +108,12 @@ describe FeedParser do
     item.image.should == nil
     item.summary.should == nil
     item.source.should == @source
-
   end
 
+  it "should generate webpage preview" do
+    WebpagePreviewGenerator.any_instance.should_receive(:generate).with("First290912060348.jpg", "test.url")
 
-  it "should return item with webpage preview" do
-    mock_imgkit = "mock imgkit"
-    mock_image = "Mock jpg Image"
-    mock_file_handle = "mock file handle"
-
-    IMGKit.should_receive(:new).with("test.url",quality: 50, width: 600).and_return(mock_imgkit)
-    mock_imgkit.should_receive(:to_jpg).and_return(mock_image)
-    File.should_receive(:new).with("public/images/preview/First290912060348.jpg","w").and_return(mock_file_handle)
-    mock_file_handle.should_receive(:write).with(mock_image)
-    mock_file_handle.should_receive(:flush)
-    mock_file_handle.should_receive(:close)
-
-    item = FeedParser.new.create_item(@feed_entry,@source,@source_image)
-
-    item.webpage_preview.should == "/images/preview/First290912060348.jpg"
-  end
-
-
-  it "should not crash when IMGKit can't produce webpage preview" do
-    mock_imgkit = "mock imgkit"
-    IMGKit.should_receive(:new).with("test.url",quality: 50, width: 600).and_return(mock_imgkit)
-    mock_imgkit.should_receive(:to_jpg).and_raise(RuntimeError.new("Test Exception"))
-
-    item = FeedParser.new.create_item(@feed_entry,@source,@source_image)
-    item.webpage_preview.should be nil
+    subject.create_item(@feed_entry,@source,@source_image)
   end
 
   it "should not crash when image url contains more than 255 character" do

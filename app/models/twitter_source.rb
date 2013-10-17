@@ -18,6 +18,4 @@ class TwitterSource < Source
       parser.create_item(tweet, self , image_url)
     end
   end
-
-
 end
